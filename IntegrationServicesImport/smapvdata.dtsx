@@ -1,0 +1,1424 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="1/4/2015 9:31:58 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="PNC-DEV06"
+  DTS:CreatorName="WEB\markusn"
+  DTS:DTSID="{FD53C25F-D0D8-48DF-8206-1171D4B373FE}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="12.0.2430.0"
+  DTS:LocaleID="1031"
+  DTS:ObjectName="smapvdata"
+  DTS:PackageType="5"
+  DTS:VersionBuild="10"
+  DTS:VersionGUID="{23DD476B-8228-42A9-BA7B-E8D8DE27BFBF}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[PNC-DEV06\MSSQL2014.PV-TestImport]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{9AD72D8C-E0E5-4370-B530-3DEB554CE809}"
+      DTS:ObjectName="PNC-DEV06\MSSQL2014.PV-TestImport">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=PNC-DEV06\MSSQL2014;Initial Catalog=PV-TestImport;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{C907218D-AF2E-4352-9420-D498C119C1AB}"
+      DTS:ObjectName="DataFlowTask_XMLSourceXMLData">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">C:\Users\markusn\Documents\PV-Testdata\wb150056091.20141222-095020\Mean.20141222_094515.xml\Mean.20141222_094515.xml</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow Task"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{831DDDD3-C387-4F6D-9C01-E2FB4927FB2C}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:PropertyExpression
+        DTS:Name="[XML test].[XMLData]">@[$Package::DataFlowTask_XMLSourceXMLData]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task\Data Conversion"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[First]"
+                      cachedDataType="decimal"
+                      cachedName="First"
+                      cachedScale="10"
+                      lineageId="Package\Data Flow Task\XML test.Outputs[MeanPublic].Columns[First]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[Last]"
+                      cachedDataType="decimal"
+                      cachedName="Last"
+                      cachedScale="10"
+                      lineageId="Package\Data Flow Task\XML test.Outputs[MeanPublic].Columns[Last]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[Min]"
+                      cachedDataType="decimal"
+                      cachedName="Min"
+                      cachedScale="10"
+                      lineageId="Package\Data Flow Task\XML test.Outputs[MeanPublic].Columns[Min]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[Max]"
+                      cachedDataType="decimal"
+                      cachedName="Max"
+                      cachedScale="10"
+                      lineageId="Package\Data Flow Task\XML test.Outputs[MeanPublic].Columns[Max]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[Mean]"
+                      cachedDataType="decimal"
+                      cachedName="Mean"
+                      cachedScale="10"
+                      lineageId="Package\Data Flow Task\XML test.Outputs[MeanPublic].Columns[Mean]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[Base]"
+                      cachedDataType="ui1"
+                      cachedName="Base"
+                      lineageId="Package\Data Flow Task\XML test.Outputs[MeanPublic].Columns[Base]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[Period]"
+                      cachedDataType="ui2"
+                      cachedName="Period"
+                      lineageId="Package\Data Flow Task\XML test.Outputs[MeanPublic].Columns[Period]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of First]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of First]"
+                      name="Copy of First"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\XML test.Outputs[MeanPublic].Columns[First]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Last]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Last]"
+                      name="Copy of Last"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\XML test.Outputs[MeanPublic].Columns[Last]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Min]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Min]"
+                      name="Copy of Min"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\XML test.Outputs[MeanPublic].Columns[Min]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Max]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Max]"
+                      name="Copy of Max"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\XML test.Outputs[MeanPublic].Columns[Max]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Mean]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Mean]"
+                      name="Copy of Mean"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\XML test.Outputs[MeanPublic].Columns[Mean]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Base]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Base]"
+                      name="Copy of Base"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\XML test.Outputs[MeanPublic].Columns[Base]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Period]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Period]"
+                      name="Copy of Period"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\XML test.Outputs[MeanPublic].Columns[Period]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\Data Conversion 1"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion 1"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Data Conversion 1.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Data Conversion 1.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Data Flow Task\Data Conversion 1.Inputs[Data Conversion Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Data Conversion 1.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Data Flow Task\Data Conversion 1.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion 1.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Data Conversion 1.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion 1.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Data Conversion 1.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\Derived Column"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\SQL Server Destination"
+              componentClassID="Microsoft.SQLServerDestination"
+              contactInfo="SQL Server Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;5"
+              description="SQL Server Destination"
+              name="SQL Server Destination"
+              version="5">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.String"
+                  description="The name of the database object to copy data into."
+                  expressionType="Notify"
+                  name="BulkInsertTableName">[dbo].[BulkImport_Info]</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies that any constraints on the destination object are checked during the data copy operation. Corresponds to the bulk insert CHECK_CONSTRAINTS option."
+                  name="BulkInsertCheckConstraints">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the number of the first row to copy. Corresponds to the bulk insert FIRSTROW option."
+                  expressionType="Notify"
+                  name="BulkInsertFirstRow">-1</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies that any insert triggers defined on the destination object will execute during the data copy. Corresponds to the bulk insert FIRE_TRIGGERS option."
+                  name="BulkInsertFireTriggers">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Corresponds to the bulk insert KEEPIDENTITY option."
+                  name="BulkInsertKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null copied to the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="BulkInsertKeepNulls">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the number of the last row to copy. Corresponds to the bulk insert LASTROW option."
+                  expressionType="Notify"
+                  name="BulkInsertLastRow">-1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the maximum number of syntax errors and compilation errors that can occur before the data copy operation is canceled. Each row that cannot be copied is ignored and counted as one error. Corresponds to the bulk insert MAXERRORS option."
+                  name="BulkInsertMaxErrors">-1</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies how the data to be copied is sorted. Corresponds to the bulk insert ORDER option."
+                  expressionType="Notify"
+                  name="BulkInsertOrder"></property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies that a table-level lock is acquired for the duration of the data copy operation. Corresponds to the bulk insert TABLOCK option."
+                  name="BulkInsertTablock">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies in seconds the amount of time the SQL Destination adapter will wait before terminating if there is no data available for insertion.  A timeout value of 0 means the SQL Destination adapter will not time out."
+                  expressionType="Notify"
+                  name="Timeout">30</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion."
+                  name="MaxInsertCommitSize">0</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\SQL Server Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[PNC-DEV06\MSSQL2014.PV-TestImport]"
+                  connectionManagerRefId="Package.ConnectionManagers[PNC-DEV06\MSSQL2014.PV-TestImport]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input]"
+                  hasSideEffects="true"
+                  name="SQL Server Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[Created]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="Created"
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[Created]"
+                      lineageId="Package\Data Flow Task\XML test.Outputs[Info].Columns[Created]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[Culture]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Culture"
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[culture]"
+                      lineageId="Package\Data Flow Task\XML test.Outputs[Info].Columns[Culture]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[DSIDSYS]"
+                      dataType="i8"
+                      name="DSIDSYS" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[Created]"
+                      dataType="dbTimeStamp"
+                      name="Created" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[culture]"
+                      dataType="wstr"
+                      length="50"
+                      name="culture" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\TV-Test SQL"
+              componentClassID="Microsoft.SQLServerDestination"
+              contactInfo="SQL Server Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;5"
+              description="SQL Server Destination"
+              name="TV-Test SQL"
+              version="5">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.String"
+                  description="The name of the database object to copy data into."
+                  expressionType="Notify"
+                  name="BulkInsertTableName">[dbo].[BulkImport]</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies that any constraints on the destination object are checked during the data copy operation. Corresponds to the bulk insert CHECK_CONSTRAINTS option."
+                  name="BulkInsertCheckConstraints">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the number of the first row to copy. Corresponds to the bulk insert FIRSTROW option."
+                  expressionType="Notify"
+                  name="BulkInsertFirstRow">-1</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies that any insert triggers defined on the destination object will execute during the data copy. Corresponds to the bulk insert FIRE_TRIGGERS option."
+                  name="BulkInsertFireTriggers">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Corresponds to the bulk insert KEEPIDENTITY option."
+                  name="BulkInsertKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null copied to the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="BulkInsertKeepNulls">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the number of the last row to copy. Corresponds to the bulk insert LASTROW option."
+                  expressionType="Notify"
+                  name="BulkInsertLastRow">-1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the maximum number of syntax errors and compilation errors that can occur before the data copy operation is canceled. Each row that cannot be copied is ignored and counted as one error. Corresponds to the bulk insert MAXERRORS option."
+                  name="BulkInsertMaxErrors">-1</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies how the data to be copied is sorted. Corresponds to the bulk insert ORDER option."
+                  expressionType="Notify"
+                  name="BulkInsertOrder"></property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies that a table-level lock is acquired for the duration of the data copy operation. Corresponds to the bulk insert TABLOCK option."
+                  name="BulkInsertTablock">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies in seconds the amount of time the SQL Destination adapter will wait before terminating if there is no data available for insertion.  A timeout value of 0 means the SQL Destination adapter will not time out."
+                  expressionType="Notify"
+                  name="Timeout">30</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion."
+                  name="MaxInsertCommitSize">0</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\TV-Test SQL.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[PNC-DEV06\MSSQL2014.PV-TestImport]"
+                  connectionManagerRefId="Package.ConnectionManagers[PNC-DEV06\MSSQL2014.PV-TestImport]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\TV-Test SQL.Inputs[SQL Server Destination Input]"
+                  hasSideEffects="true"
+                  name="SQL Server Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\TV-Test SQL.Inputs[SQL Server Destination Input].Columns[Key]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Key"
+                      externalMetadataColumnId="Package\Data Flow Task\TV-Test SQL.Inputs[SQL Server Destination Input].ExternalColumns[Key]"
+                      lineageId="Package\Data Flow Task\XML test.Outputs[MeanPublic].Columns[Key]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\TV-Test SQL.Inputs[SQL Server Destination Input].Columns[TimeStamp]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="TimeStamp"
+                      externalMetadataColumnId="Package\Data Flow Task\TV-Test SQL.Inputs[SQL Server Destination Input].ExternalColumns[TimeStamp]"
+                      lineageId="Package\Data Flow Task\XML test.Outputs[MeanPublic].Columns[TimeStamp]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\TV-Test SQL.Inputs[SQL Server Destination Input].Columns[Copy of First]"
+                      cachedDataType="r8"
+                      cachedName="Copy of First"
+                      externalMetadataColumnId="Package\Data Flow Task\TV-Test SQL.Inputs[SQL Server Destination Input].ExternalColumns[First]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of First]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\TV-Test SQL.Inputs[SQL Server Destination Input].Columns[Copy of Last]"
+                      cachedDataType="r8"
+                      cachedName="Copy of Last"
+                      externalMetadataColumnId="Package\Data Flow Task\TV-Test SQL.Inputs[SQL Server Destination Input].ExternalColumns[Last]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Last]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\TV-Test SQL.Inputs[SQL Server Destination Input].Columns[Copy of Min]"
+                      cachedDataType="r8"
+                      cachedName="Copy of Min"
+                      externalMetadataColumnId="Package\Data Flow Task\TV-Test SQL.Inputs[SQL Server Destination Input].ExternalColumns[Min]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Min]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\TV-Test SQL.Inputs[SQL Server Destination Input].Columns[Copy of Max]"
+                      cachedDataType="r8"
+                      cachedName="Copy of Max"
+                      externalMetadataColumnId="Package\Data Flow Task\TV-Test SQL.Inputs[SQL Server Destination Input].ExternalColumns[Max]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Max]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\TV-Test SQL.Inputs[SQL Server Destination Input].Columns[Copy of Base]"
+                      cachedDataType="i4"
+                      cachedName="Copy of Base"
+                      externalMetadataColumnId="Package\Data Flow Task\TV-Test SQL.Inputs[SQL Server Destination Input].ExternalColumns[Base]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Base]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\TV-Test SQL.Inputs[SQL Server Destination Input].Columns[Copy of Period]"
+                      cachedDataType="i4"
+                      cachedName="Copy of Period"
+                      externalMetadataColumnId="Package\Data Flow Task\TV-Test SQL.Inputs[SQL Server Destination Input].ExternalColumns[Period]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Period]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\TV-Test SQL.Inputs[SQL Server Destination Input].Columns[Copy of Mean]"
+                      cachedDataType="r8"
+                      cachedName="Copy of Mean"
+                      externalMetadataColumnId="Package\Data Flow Task\TV-Test SQL.Inputs[SQL Server Destination Input].ExternalColumns[Mean]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Mean]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\TV-Test SQL.Inputs[SQL Server Destination Input].ExternalColumns[DSIDSYS]"
+                      dataType="i8"
+                      name="DSIDSYS" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\TV-Test SQL.Inputs[SQL Server Destination Input].ExternalColumns[TimeStamp]"
+                      dataType="dbTimeStamp"
+                      name="TimeStamp" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\TV-Test SQL.Inputs[SQL Server Destination Input].ExternalColumns[Key]"
+                      dataType="wstr"
+                      length="50"
+                      name="Key" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\TV-Test SQL.Inputs[SQL Server Destination Input].ExternalColumns[First]"
+                      dataType="r8"
+                      name="First" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\TV-Test SQL.Inputs[SQL Server Destination Input].ExternalColumns[Last]"
+                      dataType="r8"
+                      name="Last" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\TV-Test SQL.Inputs[SQL Server Destination Input].ExternalColumns[Min]"
+                      dataType="r8"
+                      name="Min" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\TV-Test SQL.Inputs[SQL Server Destination Input].ExternalColumns[Max]"
+                      dataType="r8"
+                      name="Max" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\TV-Test SQL.Inputs[SQL Server Destination Input].ExternalColumns[Base]"
+                      dataType="i4"
+                      name="Base" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\TV-Test SQL.Inputs[SQL Server Destination Input].ExternalColumns[Period]"
+                      dataType="i4"
+                      name="Period" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\TV-Test SQL.Inputs[SQL Server Destination Input].ExternalColumns[Mean]"
+                      dataType="r8"
+                      name="Mean" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\XML test"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Extracts data from an XML file. For example, extract catalog data from an XML file that represents catalogs and catalog items. Before using, specify the schema and generate an output for each XML element.;Microsoft Corporation;Microsoft SQL Server; Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Extracts data from an XML file. For example, extract catalog data from an XML file that represents catalogs and catalog items. Before using, specify the schema and generate an output for each XML element."
+              name="XML test"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.XmlSourceAdapter</property>
+                <property
+                  dataType="System.String"
+                  description="The XML data used by the XML source adapter."
+                  expressionType="Notify"
+                  name="XMLData">C:\Users\markusn\Documents\PV-Testdata\wb150056091.20141222-095020\Mean.20141222_094515.xml\Mean.20141222_094515.xml</property>
+                <property
+                  dataType="System.String"
+                  description="The variable used by the XML source adapter to specify XML data."
+                  name="XMLDataVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Defines how the XML source adapter gets XML data."
+                  name="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The XML schema definition used by the XML source adapter."
+                  expressionType="Notify"
+                  name="XMLSchemaDefinition">C:\Users\markusn\Documents\PV-Testdata\wb150056091.20141222-095020\Mean.20141222_094515.xml\Mean.20141222_094515.xsd</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Identifies whether or not to use inline schema."
+                  name="UseInlineSchema">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Defines how XML integer types are mapped."
+                  name="XMLIntegerMapping"
+                  typeConverter="Microsoft.SqlServer.Dts.Pipeline.XmlSourceAdapter+XMLIntegerMappingConverter">0</property>
+              </properties>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\XML test.Outputs[Info]"
+                  name="Info">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Identifies the rowset associated with the output."
+                      name="RowsetID">Info</property>
+                  </properties>
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\XML test.Outputs[Info].Columns[Created]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\XML test.Outputs[Info].ExternalColumns[Created]"
+                      lineageId="Package\Data Flow Task\XML test.Outputs[Info].Columns[Created]"
+                      name="Created"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\XML test.Outputs[Info].Columns[Culture]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\XML test.Outputs[Info].ExternalColumns[Culture]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\XML test.Outputs[Info].Columns[Culture]"
+                      name="Culture"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\XML test.Outputs[Info].ExternalColumns[Created]"
+                      dataType="dbTimeStamp"
+                      name="Created">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CLRType">System.DateTime</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\XML test.Outputs[Info].ExternalColumns[Culture]"
+                      dataType="wstr"
+                      length="255"
+                      name="Culture">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CLRType">System.String</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task\XML test.Outputs[Info Error Output]"
+                  isErrorOut="true"
+                  name="Info Error Output">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Identifies the rowset associated with the output."
+                      name="RowsetID">Info</property>
+                  </properties>
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\XML test.Outputs[Info Error Output].Columns[Created]"
+                      dataType="nText"
+                      externalMetadataColumnId="Package\Data Flow Task\XML test.Outputs[Info Error Output].ExternalColumns[Created]"
+                      lineageId="Package\Data Flow Task\XML test.Outputs[Info Error Output].Columns[Created]"
+                      name="Created" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\XML test.Outputs[Info Error Output].Columns[Culture]"
+                      dataType="nText"
+                      externalMetadataColumnId="Package\Data Flow Task\XML test.Outputs[Info Error Output].ExternalColumns[Culture]"
+                      lineageId="Package\Data Flow Task\XML test.Outputs[Info Error Output].Columns[Culture]"
+                      name="Culture" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\XML test.Outputs[Info Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\XML test.Outputs[Info Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\XML test.Outputs[Info Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\XML test.Outputs[Info Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\XML test.Outputs[Info Error Output].ExternalColumns[Created]"
+                      dataType="nText"
+                      name="Created" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\XML test.Outputs[Info Error Output].ExternalColumns[Culture]"
+                      dataType="nText"
+                      name="Culture" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task\XML test.Outputs[MeanPublic]"
+                  name="MeanPublic">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Identifies the rowset associated with the output."
+                      name="RowsetID">MeanPublic</property>
+                  </properties>
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\XML test.Outputs[MeanPublic].Columns[Key]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\XML test.Outputs[MeanPublic].ExternalColumns[Key]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\XML test.Outputs[MeanPublic].Columns[Key]"
+                      name="Key"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\XML test.Outputs[MeanPublic].Columns[First]"
+                      dataType="decimal"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\XML test.Outputs[MeanPublic].ExternalColumns[First]"
+                      lineageId="Package\Data Flow Task\XML test.Outputs[MeanPublic].Columns[First]"
+                      name="First"
+                      scale="10"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\XML test.Outputs[MeanPublic].Columns[Last]"
+                      dataType="decimal"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\XML test.Outputs[MeanPublic].ExternalColumns[Last]"
+                      lineageId="Package\Data Flow Task\XML test.Outputs[MeanPublic].Columns[Last]"
+                      name="Last"
+                      scale="10"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\XML test.Outputs[MeanPublic].Columns[Min]"
+                      dataType="decimal"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\XML test.Outputs[MeanPublic].ExternalColumns[Min]"
+                      lineageId="Package\Data Flow Task\XML test.Outputs[MeanPublic].Columns[Min]"
+                      name="Min"
+                      scale="10"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\XML test.Outputs[MeanPublic].Columns[Max]"
+                      dataType="decimal"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\XML test.Outputs[MeanPublic].ExternalColumns[Max]"
+                      lineageId="Package\Data Flow Task\XML test.Outputs[MeanPublic].Columns[Max]"
+                      name="Max"
+                      scale="10"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\XML test.Outputs[MeanPublic].Columns[Mean]"
+                      dataType="decimal"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\XML test.Outputs[MeanPublic].ExternalColumns[Mean]"
+                      lineageId="Package\Data Flow Task\XML test.Outputs[MeanPublic].Columns[Mean]"
+                      name="Mean"
+                      scale="10"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\XML test.Outputs[MeanPublic].Columns[Base]"
+                      dataType="ui1"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\XML test.Outputs[MeanPublic].ExternalColumns[Base]"
+                      lineageId="Package\Data Flow Task\XML test.Outputs[MeanPublic].Columns[Base]"
+                      name="Base"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\XML test.Outputs[MeanPublic].Columns[Period]"
+                      dataType="ui2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\XML test.Outputs[MeanPublic].ExternalColumns[Period]"
+                      lineageId="Package\Data Flow Task\XML test.Outputs[MeanPublic].Columns[Period]"
+                      name="Period"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\XML test.Outputs[MeanPublic].Columns[TimeStamp]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\XML test.Outputs[MeanPublic].ExternalColumns[TimeStamp]"
+                      lineageId="Package\Data Flow Task\XML test.Outputs[MeanPublic].Columns[TimeStamp]"
+                      name="TimeStamp"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\XML test.Outputs[MeanPublic].ExternalColumns[Key]"
+                      dataType="wstr"
+                      length="255"
+                      name="Key">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CLRType">System.String</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\XML test.Outputs[MeanPublic].ExternalColumns[First]"
+                      dataType="decimal"
+                      name="First"
+                      scale="10">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CLRType">System.Decimal</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\XML test.Outputs[MeanPublic].ExternalColumns[Last]"
+                      dataType="decimal"
+                      name="Last"
+                      scale="10">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CLRType">System.Decimal</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\XML test.Outputs[MeanPublic].ExternalColumns[Min]"
+                      dataType="decimal"
+                      name="Min"
+                      scale="10">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CLRType">System.Decimal</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\XML test.Outputs[MeanPublic].ExternalColumns[Max]"
+                      dataType="decimal"
+                      name="Max"
+                      scale="10">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CLRType">System.Decimal</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\XML test.Outputs[MeanPublic].ExternalColumns[Mean]"
+                      dataType="decimal"
+                      name="Mean"
+                      scale="10">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CLRType">System.Decimal</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\XML test.Outputs[MeanPublic].ExternalColumns[Base]"
+                      dataType="ui1"
+                      name="Base">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CLRType">System.Byte</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\XML test.Outputs[MeanPublic].ExternalColumns[Period]"
+                      dataType="ui2"
+                      name="Period">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CLRType">System.UInt16</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\XML test.Outputs[MeanPublic].ExternalColumns[TimeStamp]"
+                      dataType="dbTimeStamp"
+                      name="TimeStamp">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CLRType">System.DateTime</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task\XML test.Outputs[MeanPublic Error Output]"
+                  isErrorOut="true"
+                  name="MeanPublic Error Output">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Identifies the rowset associated with the output."
+                      name="RowsetID">MeanPublic</property>
+                  </properties>
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\XML test.Outputs[MeanPublic Error Output].Columns[Key]"
+                      dataType="nText"
+                      externalMetadataColumnId="Package\Data Flow Task\XML test.Outputs[MeanPublic Error Output].ExternalColumns[Key]"
+                      lineageId="Package\Data Flow Task\XML test.Outputs[MeanPublic Error Output].Columns[Key]"
+                      name="Key" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\XML test.Outputs[MeanPublic Error Output].Columns[First]"
+                      dataType="nText"
+                      externalMetadataColumnId="Package\Data Flow Task\XML test.Outputs[MeanPublic Error Output].ExternalColumns[First]"
+                      lineageId="Package\Data Flow Task\XML test.Outputs[MeanPublic Error Output].Columns[First]"
+                      name="First" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\XML test.Outputs[MeanPublic Error Output].Columns[Last]"
+                      dataType="nText"
+                      externalMetadataColumnId="Package\Data Flow Task\XML test.Outputs[MeanPublic Error Output].ExternalColumns[Last]"
+                      lineageId="Package\Data Flow Task\XML test.Outputs[MeanPublic Error Output].Columns[Last]"
+                      name="Last" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\XML test.Outputs[MeanPublic Error Output].Columns[Min]"
+                      dataType="nText"
+                      externalMetadataColumnId="Package\Data Flow Task\XML test.Outputs[MeanPublic Error Output].ExternalColumns[Min]"
+                      lineageId="Package\Data Flow Task\XML test.Outputs[MeanPublic Error Output].Columns[Min]"
+                      name="Min" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\XML test.Outputs[MeanPublic Error Output].Columns[Max]"
+                      dataType="nText"
+                      externalMetadataColumnId="Package\Data Flow Task\XML test.Outputs[MeanPublic Error Output].ExternalColumns[Max]"
+                      lineageId="Package\Data Flow Task\XML test.Outputs[MeanPublic Error Output].Columns[Max]"
+                      name="Max" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\XML test.Outputs[MeanPublic Error Output].Columns[Mean]"
+                      dataType="nText"
+                      externalMetadataColumnId="Package\Data Flow Task\XML test.Outputs[MeanPublic Error Output].ExternalColumns[Mean]"
+                      lineageId="Package\Data Flow Task\XML test.Outputs[MeanPublic Error Output].Columns[Mean]"
+                      name="Mean" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\XML test.Outputs[MeanPublic Error Output].Columns[Base]"
+                      dataType="nText"
+                      externalMetadataColumnId="Package\Data Flow Task\XML test.Outputs[MeanPublic Error Output].ExternalColumns[Base]"
+                      lineageId="Package\Data Flow Task\XML test.Outputs[MeanPublic Error Output].Columns[Base]"
+                      name="Base" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\XML test.Outputs[MeanPublic Error Output].Columns[Period]"
+                      dataType="nText"
+                      externalMetadataColumnId="Package\Data Flow Task\XML test.Outputs[MeanPublic Error Output].ExternalColumns[Period]"
+                      lineageId="Package\Data Flow Task\XML test.Outputs[MeanPublic Error Output].Columns[Period]"
+                      name="Period" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\XML test.Outputs[MeanPublic Error Output].Columns[TimeStamp]"
+                      dataType="nText"
+                      externalMetadataColumnId="Package\Data Flow Task\XML test.Outputs[MeanPublic Error Output].ExternalColumns[TimeStamp]"
+                      lineageId="Package\Data Flow Task\XML test.Outputs[MeanPublic Error Output].Columns[TimeStamp]"
+                      name="TimeStamp" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\XML test.Outputs[MeanPublic Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\XML test.Outputs[MeanPublic Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\XML test.Outputs[MeanPublic Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\XML test.Outputs[MeanPublic Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\XML test.Outputs[MeanPublic Error Output].ExternalColumns[Key]"
+                      dataType="nText"
+                      name="Key" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\XML test.Outputs[MeanPublic Error Output].ExternalColumns[First]"
+                      dataType="nText"
+                      name="First" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\XML test.Outputs[MeanPublic Error Output].ExternalColumns[Last]"
+                      dataType="nText"
+                      name="Last" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\XML test.Outputs[MeanPublic Error Output].ExternalColumns[Min]"
+                      dataType="nText"
+                      name="Min" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\XML test.Outputs[MeanPublic Error Output].ExternalColumns[Max]"
+                      dataType="nText"
+                      name="Max" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\XML test.Outputs[MeanPublic Error Output].ExternalColumns[Mean]"
+                      dataType="nText"
+                      name="Mean" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\XML test.Outputs[MeanPublic Error Output].ExternalColumns[Base]"
+                      dataType="nText"
+                      name="Base" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\XML test.Outputs[MeanPublic Error Output].ExternalColumns[Period]"
+                      dataType="nText"
+                      name="Period" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\XML test.Outputs[MeanPublic Error Output].ExternalColumns[TimeStamp]"
+                      dataType="nText"
+                      name="TimeStamp" />
+                  </externalMetadataColumns>
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task.Paths[Data Conversion Output]"
+              endId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input]"
+              name="Data Conversion Output"
+              startId="Package\Data Flow Task\Data Conversion 1.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\Data Flow Task.Paths[Data Conversion Output1]"
+              endId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input]"
+              name="Data Conversion Output"
+              startId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\Data Flow Task.Paths[Derived Column Output]"
+              endId="Package\Data Flow Task\TV-Test SQL.Inputs[SQL Server Destination Input]"
+              name="Derived Column Output"
+              startId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Data Flow Task.Paths[Info]"
+              endId="Package\Data Flow Task\Data Conversion 1.Inputs[Data Conversion Input]"
+              name="Info"
+              startId="Package\Data Flow Task\XML test.Outputs[Info]" />
+            <path
+              refId="Package\Data Flow Task.Paths[MeanPublic]"
+              endId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input]"
+              name="MeanPublic"
+              startId="Package\Data Flow Task\XML test.Outputs[MeanPublic]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql12">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="153,42"
+          Id="Package\Data Flow Task"
+          TopLeft="182.5,133.5" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="122,42"
+          Id="Package\Data Flow Task\XML test"
+          TopLeft="311,183" />
+        <NodeLayout
+          Size="140,42"
+          Id="Package\Data Flow Task\TV-Test SQL"
+          TopLeft="287,542" />
+        <NodeLayout
+          Size="190,42"
+          Id="Package\Data Flow Task\SQL Server Destination"
+          TopLeft="520,545" />
+        <NodeLayout
+          Size="158,42"
+          Id="Package\Data Flow Task\Data Conversion"
+          TopLeft="236,334" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[MeanPublic]"
+          TopLeft="353,225">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-38,109"
+              Start="0,0"
+              End="-38,101.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,40.4466019417476" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,40.4466019417476"
+                    Point2="0,44.4466019417476"
+                    Point3="-4,44.4466019417476" />
+                  <mssgle:LineSegment
+                    End="-34,44.4466019417476" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-34,44.4466019417476"
+                    Point2="-38,44.4466019417476"
+                    Point3="-38,48.4466019417476" />
+                  <mssgle:LineSegment
+                    End="-38,101.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-44.35302734375,49.4466019417476,50.7060546875,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="167,42"
+          Id="Package\Data Flow Task\Data Conversion 1"
+          TopLeft="575,315" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Info]"
+          TopLeft="391,225">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="267.5,90"
+              Start="0,0"
+              End="267.5,82.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.6990291262136" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,32.6990291262136"
+                    Point2="0,36.6990291262136"
+                    Point3="4,36.6990291262136" />
+                  <mssgle:LineSegment
+                    End="263.5,36.6990291262136" />
+                  <mssgle:CubicBezierSegment
+                    Point1="263.5,36.6990291262136"
+                    Point2="267.5,36.6990291262136"
+                    Point3="267.5,40.6990291262136" />
+                  <mssgle:LineSegment
+                    End="267.5,82.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="124.1563671875,41.6990291262136,19.187265625,9.7978515625"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Data Conversion Output]"
+          TopLeft="658.5,357">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-43.5,188"
+              Start="0,0"
+              End="-43.5,180.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,90" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,90"
+                    Point2="0,94"
+                    Point3="-4,94" />
+                  <mssgle:LineSegment
+                    End="-39.5,94" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-39.5,94"
+                    Point2="-43.5,94"
+                    Point3="-43.5,98" />
+                  <mssgle:LineSegment
+                    End="-43.5,180.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Data Flow Task\Derived Column"
+          TopLeft="365,433" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Data Conversion Output1]"
+          TopLeft="315,376">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="128,57"
+              Start="0,0"
+              End="128,49.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,24.5"
+                    Point2="0,28.5"
+                    Point3="4,28.5" />
+                  <mssgle:LineSegment
+                    End="124,28.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="124,28.5"
+                    Point2="128,28.5"
+                    Point3="128,32.5" />
+                  <mssgle:LineSegment
+                    End="128,49.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Derived Column Output]"
+          TopLeft="443,475">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-86,67"
+              Start="0,0"
+              End="-86,59.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,29.5"
+                    Point2="0,33.5"
+                    Point3="-4,33.5" />
+                  <mssgle:LineSegment
+                    End="-82,33.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-82,33.5"
+                    Point2="-86,33.5"
+                    Point3="-86,37.5" />
+                  <mssgle:LineSegment
+                    End="-86,59.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\TV-Test SQL">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\SQL Server Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
