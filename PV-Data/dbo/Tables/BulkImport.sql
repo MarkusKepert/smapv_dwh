@@ -9,6 +9,9 @@
     [Base]      INT           NULL,
     [Period]    INT           NULL,
     [Mean]      FLOAT (53)    NULL,
+    [Location] NCHAR(10) NULL, 
+    [ValueKey] NCHAR(50) NULL, 
+    [InverterKey] NCHAR(20) NULL, 
     CONSTRAINT [PK_BulkImport] PRIMARY KEY CLUSTERED ([DSIDSYS] ASC)
 );
 
