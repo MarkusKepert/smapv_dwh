@@ -65,5 +65,10 @@
   <ItemGroup>
     <Build Include="dbo\Tables\BulkImport_Info.sql" />
     <Build Include="dbo\Tables\BulkImport.sql" />
+    <Build Include="dbo\Tables\BulkImportLog.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PV-Data.publish.xml" />
+    <None Include="PV-Data_1.publish.xml" />
   </ItemGroup>
 </Project>

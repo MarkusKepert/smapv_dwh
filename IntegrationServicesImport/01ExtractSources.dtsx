@@ -11,8 +11,8 @@
   DTS:LocaleID="1031"
   DTS:ObjectName="01ExtractSources"
   DTS:PackageType="5"
-  DTS:VersionBuild="15"
-  DTS:VersionGUID="{63066B84-4B9D-4D3A-965A-54AAB5BEDEBC}">
+  DTS:VersionBuild="32"
+  DTS:VersionGUID="{81A92D81-D913-4D01-8209-AF0A4027F872}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -28,10 +28,10 @@
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[done]"
+      DTS:refId="Package.ConnectionManagers[doneFolder]"
       DTS:CreationName="FILE"
       DTS:DTSID="{530B86D3-A1C4-4503-BB54-C0A3ECD5D520}"
-      DTS:ObjectName="done">
+      DTS:ObjectName="doneFolder">
       <DTS:ObjectData>
         <DTS:ConnectionManager
           DTS:FileUsageType="2"
@@ -47,6 +47,16 @@
         <DTS:ConnectionManager
           DTS:FileUsageType="2"
           DTS:ConnectionString="C:\PVDATA\new" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[PNC-DEV06\MSSQL2014.PV-TestImport]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{82ACA70F-ECDD-4678-9F12-41EF550BE2C7}"
+      DTS:ObjectName="PNC-DEV06\MSSQL2014.PV-TestImport">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=PNC-DEV06\MSSQL2014;Initial Catalog=PV-TestImport;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -84,10 +94,29 @@
   <DTS:Variables>
     <DTS:Variable
       DTS:CreationName=""
+      DTS:DTSID="{8A57CDA9-1928-4172-BD45-A252792A080A}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="currentLogID">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
       DTS:DTSID="{CCE02D18-5203-4D63-9EA0-FC33A0FDB508}"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="currentSourceFile">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{913C468C-E759-4E94-87DF-E59CD5B34148}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="currentTempDir">
       <DTS:VariableValue
         DTS:DataType="8"
         xml:space="preserve"></DTS:VariableValue>
@@ -119,80 +148,122 @@
           </ForEachFileEnumeratorProperties>
         </DTS:ObjectData>
       </DTS:ForEachEnumerator>
-      <DTS:Variables>
-        <DTS:Variable
-          DTS:CreationName=""
-          DTS:DTSID="{37D56020-B4EE-45AF-B6E8-976B16B591DC}"
-          DTS:IncludeInDebugDump="2345"
-          DTS:Namespace="User"
-          DTS:ObjectName="currentTempDir">
-          <DTS:VariableValue
-            DTS:DataType="8"
-            xml:space="preserve"></DTS:VariableValue>
-        </DTS:Variable>
-      </DTS:Variables>
+      <DTS:Variables />
       <DTS:Executables>
         <DTS:Executable
-          DTS:refId="Package\foreach source zip\Expression Task"
-          DTS:CreationName="Microsoft.ExpressionTask"
-          DTS:Description="Expression Task"
-          DTS:DTSID="{99E7D0EC-1C92-4177-85B4-DA2447153857}"
-          DTS:ExecutableType="Microsoft.ExpressionTask"
-          DTS:LocaleID="-1"
-          DTS:ObjectName="Expression Task"
-          DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="0">
-          <DTS:Variables />
-          <DTS:ObjectData>
-            <ExpressionTask
-              Expression="" />
-          </DTS:ObjectData>
-        </DTS:Executable>
-        <DTS:Executable
-          DTS:refId="Package\foreach source zip\File System Task"
+          DTS:refId="Package\foreach source zip\create temp dir"
           DTS:CreationName="Microsoft.FileSystemTask"
           DTS:DelayValidation="True"
           DTS:Description="File System Task"
           DTS:DTSID="{8014555E-E81C-464A-85BA-F6655D04E35E}"
           DTS:ExecutableType="Microsoft.FileSystemTask"
           DTS:LocaleID="-1"
-          DTS:ObjectName="File System Task"
+          DTS:ObjectName="create temp dir"
           DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
           DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <FileSystemData
               TaskOperationType="CreateDirectory"
-              TaskSourcePath="User::currentSourceFile"
+              TaskSourcePath="User::currentTempDir"
               TaskIsSourceVariable="True" />
           </DTS:ObjectData>
         </DTS:Executable>
         <DTS:Executable
-          DTS:refId="Package\foreach source zip\File System Task 1"
+          DTS:refId="Package\foreach source zip\extract temp dir name from zip file in variable"
+          DTS:CreationName="Microsoft.ExpressionTask"
+          DTS:Description="Expression Task"
+          DTS:DTSID="{99E7D0EC-1C92-4177-85B4-DA2447153857}"
+          DTS:ExecutableType="Microsoft.ExpressionTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="extract temp dir name from zip file in variable"
+          DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExpressionTask
+              Expression="@[User::currentTempDir]= LEFT( @[User::currentSourceFile] , LEN( @[User::currentSourceFile]  )   -FINDSTRING(REVERSE( @[User::currentSourceFile]  ), &quot;.&quot;, 1))" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\foreach source zip\log end"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{9ab4c7a2-91ef-44f4-867f-74b5560beb31}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="log end"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{82ACA70F-ECDD-4678-9F12-41EF550BE2C7}"
+              SQLTask:SqlStatementSource="update BulkImportLog set dtImportEnd=getdate() where id=?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::currentLogID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\foreach source zip\log start"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{8874B433-0D47-4ADE-920B-3639DD76B31C}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="log start"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{82ACA70F-ECDD-4678-9F12-41EF550BE2C7}"
+              SQLTask:SqlStatementSource="Insert into BulkImportLog (SourceFileName,dtImportStart) Values (?,getdate())&#xA;&#xA;SELECT SCOPE_IDENTITY() As LastID"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="LastID"
+                SQLTask:DtsVariableName="User::currentLogID" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::currentSourceFile"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\foreach source zip\move zip in processsed dir"
           DTS:CreationName="Microsoft.FileSystemTask"
           DTS:Description="File System Task"
           DTS:DTSID="{FCBF6D80-E48E-4CB9-84FC-17E40ADCE817}"
           DTS:ExecutableType="Microsoft.FileSystemTask"
           DTS:LocaleID="-1"
-          DTS:ObjectName="File System Task 1"
+          DTS:ObjectName="move zip in processsed dir"
           DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
           DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <FileSystemData
+              TaskOperationType="MoveFile"
               TaskSourcePath="{49D10D9A-7C37-4FF3-AB23-7744411620F9}"
               TaskDestinationPath="{530B86D3-A1C4-4503-BB54-C0A3ECD5D520}" />
           </DTS:ObjectData>
         </DTS:Executable>
         <DTS:Executable
-          DTS:refId="Package\foreach source zip\Unzip Task"
+          DTS:refId="Package\foreach source zip\Unzip in tempdir"
           DTS:CreationName="ilionx.SSIS.Tasks.UnZip, ilionx.SSIS.Tasks.UnZip, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e0ae07b0fa049276"
           DTS:DelayValidation="True"
           DTS:Description="Unzip Task"
           DTS:DTSID="{d6a6d18b-3cc7-4f55-bd35-6d5592ba6cd4}"
           DTS:ExecutableType="ilionx.SSIS.Tasks.UnZip, ilionx.SSIS.Tasks.UnZip, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e0ae07b0fa049276"
           DTS:LocaleID="-1"
-          DTS:ObjectName="Unzip Task"
+          DTS:ObjectName="Unzip in tempdir"
           DTS:TaskContact="Marc Potters and Joost van Rossum, Ilionx Noord Nederland."
           DTS:ThreadHint="0">
           <DTS:Variables />
@@ -208,10 +279,10 @@
               SelectedConnectionManagerIDSource=""
               SelectedVariableIDSource="{CCE02D18-5203-4D63-9EA0-FC33A0FDB508}"
               FilePathDestination="C:\PVDATA\processing"
-              HasConnectionmanagerDestination="True"
-              HasVariableDestination="False"
-              SelectedConnectionManagerIDDestination="{999419D2-6B59-4F23-9E19-2C3E3B3E2D3C}"
-              SelectedVariableIDDestination=""
+              HasConnectionmanagerDestination="False"
+              HasVariableDestination="True"
+              SelectedConnectionManagerIDDestination=""
+              SelectedVariableIDDestination="{913C468C-E759-4E94-87DF-E59CD5B34148}"
               Filter="*.*"
               RegexFilter="^.*\.zip$"
               TraverseSubfolder="True"
@@ -228,27 +299,43 @@
         <DTS:PrecedenceConstraint
           DTS:refId="Package\foreach source zip.PrecedenceConstraints[Constraint]"
           DTS:CreationName=""
-          DTS:DTSID="{6795FEE5-D983-4CF8-BE43-B93B52E4F503}"
-          DTS:From="Package\foreach source zip\Unzip Task"
+          DTS:DTSID="{39C70365-C6C8-4C62-B957-6C927C726DDD}"
+          DTS:From="Package\foreach source zip\Unzip in tempdir"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint"
-          DTS:To="Package\foreach source zip\File System Task 1" />
+          DTS:To="Package\foreach source zip\move zip in processsed dir" />
         <DTS:PrecedenceConstraint
           DTS:refId="Package\foreach source zip.PrecedenceConstraints[Constraint 1]"
           DTS:CreationName=""
           DTS:DTSID="{EEC8F3EB-AC30-4DCB-B4A9-4E579FF2BC14}"
-          DTS:From="Package\foreach source zip\Expression Task"
+          DTS:From="Package\foreach source zip\extract temp dir name from zip file in variable"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 1"
-          DTS:To="Package\foreach source zip\File System Task" />
+          DTS:To="Package\foreach source zip\create temp dir" />
         <DTS:PrecedenceConstraint
           DTS:refId="Package\foreach source zip.PrecedenceConstraints[Constraint 2]"
           DTS:CreationName=""
           DTS:DTSID="{8C9830FD-16D2-4920-8097-318150A01CA6}"
-          DTS:From="Package\foreach source zip\File System Task"
+          DTS:From="Package\foreach source zip\create temp dir"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 2"
-          DTS:To="Package\foreach source zip\Unzip Task" />
+          DTS:To="Package\foreach source zip\Unzip in tempdir" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\foreach source zip.PrecedenceConstraints[Constraint 3]"
+          DTS:CreationName=""
+          DTS:DTSID="{84DFF1F5-6C18-45E8-8E84-8F14CFCC6A0E}"
+          DTS:From="Package\foreach source zip\move zip in processsed dir"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 3"
+          DTS:To="Package\foreach source zip\log end" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\foreach source zip.PrecedenceConstraints[Constraint 5]"
+          DTS:CreationName=""
+          DTS:DTSID="{DE5E4D10-0F9A-40F6-A139-433502306585}"
+          DTS:From="Package\foreach source zip\log start"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 5"
+          DTS:To="Package\foreach source zip\extract temp dir name from zip file in variable" />
       </DTS:PrecedenceConstraints>
       <DTS:ForEachVariableMappings>
         <DTS:ForEachVariableMapping
@@ -271,37 +358,37 @@
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="132,42"
-          Id="Package\foreach source zip\Unzip Task"
-          TopLeft="176,215.5" />
+          Size="153,42"
+          Id="Package\foreach source zip\create temp dir"
+          TopLeft="121,149" />
         <NodeLayout
-          Size="160,42"
-          Id="Package\foreach source zip\File System Task"
-          TopLeft="119,124" />
+          Size="296,42"
+          Id="Package\foreach source zip\extract temp dir name from zip file in variable"
+          TopLeft="57,83.5" />
         <NodeLayout
-          Size="169,42"
-          Id="Package\foreach source zip\File System Task 1"
-          TopLeft="110,353" />
+          Size="206,42"
+          Id="Package\foreach source zip\move zip in processsed dir"
+          TopLeft="101,362" />
         <NodeLayout
-          Size="157,42"
-          Id="Package\foreach source zip\Expression Task"
-          TopLeft="116,5.5" />
+          Size="158,42"
+          Id="Package\foreach source zip\Unzip in tempdir"
+          TopLeft="127,236.5" />
         <EdgeLayout
           Id="Package\foreach source zip.PrecedenceConstraints[Constraint 1]"
-          TopLeft="196.75,47.5">
+          TopLeft="201.25,125.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,76.5"
+              EndConnector="0,23.5"
               Start="0,0"
-              End="0,69">
+              End="0,16">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,69" />
+                    End="0,16" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -312,30 +399,68 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package\foreach source zip.PrecedenceConstraints[Constraint 2]"
-          TopLeft="199,166">
+          TopLeft="197.5,191">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="43,49.5"
+              EndConnector="8.5,45.5"
               Start="0,0"
-              End="43,42">
+              End="8.5,38">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,20.75" />
+                    End="0,18.75" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,20.75"
-                    Point2="0,24.75"
-                    Point3="4,24.75" />
+                    Point1="0,18.75"
+                    Point2="0,22.75"
+                    Point3="4,22.75" />
                   <mssgle:LineSegment
-                    End="39,24.75" />
+                    End="4.5,22.75" />
                   <mssgle:CubicBezierSegment
-                    Point1="39,24.75"
-                    Point2="43,24.75"
-                    Point3="43,28.75" />
+                    Point1="4.5,22.75"
+                    Point2="8.5,22.75"
+                    Point3="8.5,26.75" />
                   <mssgle:LineSegment
-                    End="43,42" />
+                    End="8.5,38" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="120,42"
+          Id="Package\foreach source zip\log start"
+          TopLeft="260,13" />
+        <EdgeLayout
+          Id="Package\foreach source zip.PrecedenceConstraints[Constraint 5]"
+          TopLeft="320,55">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-115,28.5"
+              Start="0,0"
+              End="-115,21">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,10.25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,10.25"
+                    Point2="0,14.25"
+                    Point3="-4,14.25" />
+                  <mssgle:LineSegment
+                    End="-111,14.25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-111,14.25"
+                    Point2="-115,14.25"
+                    Point3="-115,18.25" />
+                  <mssgle:LineSegment
+                    End="-115,21" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -346,30 +471,56 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package\foreach source zip.PrecedenceConstraints[Constraint]"
-          TopLeft="242,257.5">
+          TopLeft="205,278.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-47.5,95.5"
+              EndConnector="0,83.5"
               Start="0,0"
-              End="-47.5,88">
+              End="0,76">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,43.75" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,43.75"
-                    Point2="0,47.75"
-                    Point3="-4,47.75" />
+                    End="0,76" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="116,42"
+          Id="Package\foreach source zip\log end"
+          TopLeft="109,458" />
+        <EdgeLayout
+          Id="Package\foreach source zip.PrecedenceConstraints[Constraint 3]"
+          TopLeft="204,404">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-37,54"
+              Start="0,0"
+              End="-37,46.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
                   <mssgle:LineSegment
-                    End="-43.5,47.75" />
+                    End="0,23" />
                   <mssgle:CubicBezierSegment
-                    Point1="-43.5,47.75"
-                    Point2="-47.5,47.75"
-                    Point3="-47.5,51.75" />
+                    Point1="0,23"
+                    Point2="0,27"
+                    Point3="-4,27" />
                   <mssgle:LineSegment
-                    End="-47.5,88" />
+                    End="-33,27" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-33,27"
+                    Point2="-37,27"
+                    Point3="-37,31" />
+                  <mssgle:LineSegment
+                    End="-37,46.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -381,8 +532,8 @@
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="535,462"
-          Size="535,505"
+          PanelSize="623,609"
+          Size="623,652"
           Id="Package\foreach source zip"
           TopLeft="104,40" />
       </GraphLayout>
