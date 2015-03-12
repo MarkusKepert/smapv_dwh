@@ -1,0 +1,392 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="3/12/2015 4:16:31 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="PNC-DEV06"
+  DTS:CreatorName="WEB\markusn"
+  DTS:DTSID="{CC136D32-6E00-4048-B3EB-FB74935A1536}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="12.0.2430.0"
+  DTS:LocaleID="1031"
+  DTS:ObjectName="01ExtractSources"
+  DTS:PackageType="5"
+  DTS:VersionBuild="15"
+  DTS:VersionGUID="{63066B84-4B9D-4D3A-965A-54AAB5BEDEBC}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[currentSourceFile]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{49D10D9A-7C37-4FF3-AB23-7744411620F9}"
+      DTS:ObjectName="currentSourceFile">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::currentSourceFile]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[done]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{530B86D3-A1C4-4503-BB54-C0A3ECD5D520}"
+      DTS:ObjectName="done">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="2"
+          DTS:ConnectionString="C:\PVDATA\done" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[newSourcesFolder]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{6BF38E72-39C4-4B31-BD55-A3744E1A8EAB}"
+      DTS:ObjectName="newSourcesFolder">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="2"
+          DTS:ConnectionString="C:\PVDATA\new" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[processing]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{999419D2-6B59-4F23-9E19-2C3E3B3E2D3C}"
+      DTS:ObjectName="processing">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="2"
+          DTS:ConnectionString="C:\PVDATA\processing" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="11"
+      DTS:DTSID="{385AF776-AF46-4A69-9075-D7333CBAE935}"
+      DTS:ObjectName="UnzipTask_DelayValidation">
+      <DTS:Property
+        DTS:DataType="11"
+        DTS:Name="ParameterValue">0</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="11"
+      DTS:DTSID="{53A10140-9B71-4119-B4AA-F68EE6919B27}"
+      DTS:ObjectName="UnzipTask_DelayValidation1">
+      <DTS:Property
+        DTS:DataType="11"
+        DTS:Name="ParameterValue">-1</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{CCE02D18-5203-4D63-9EA0-FC33A0FDB508}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="currentSourceFile">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\foreach source zip"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:Description="Foreach Loop Container"
+      DTS:DTSID="{EA3337E6-12B0-48E6-8A96-44D32726DA10}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="foreach source zip">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.ForEachFileEnumerator"
+        DTS:DTSID="{E02736EA-9D00-41E5-A336-4E5AEFC5C6A1}"
+        DTS:ObjectName="{E02736EA-9D00-41E5-A336-4E5AEFC5C6A1}">
+        <DTS:ObjectData>
+          <ForEachFileEnumeratorProperties>
+            <FEFEProperty
+              Folder="C:\PVDATA\new" />
+            <FEFEProperty
+              FileSpec="*.zip" />
+            <FEFEProperty
+              FileNameRetrievalType="0" />
+            <FEFEProperty
+              Recurse="0" />
+          </ForEachFileEnumeratorProperties>
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables>
+        <DTS:Variable
+          DTS:CreationName=""
+          DTS:DTSID="{37D56020-B4EE-45AF-B6E8-976B16B591DC}"
+          DTS:IncludeInDebugDump="2345"
+          DTS:Namespace="User"
+          DTS:ObjectName="currentTempDir">
+          <DTS:VariableValue
+            DTS:DataType="8"
+            xml:space="preserve"></DTS:VariableValue>
+        </DTS:Variable>
+      </DTS:Variables>
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\foreach source zip\Expression Task"
+          DTS:CreationName="Microsoft.ExpressionTask"
+          DTS:Description="Expression Task"
+          DTS:DTSID="{99E7D0EC-1C92-4177-85B4-DA2447153857}"
+          DTS:ExecutableType="Microsoft.ExpressionTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Expression Task"
+          DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExpressionTask
+              Expression="" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\foreach source zip\File System Task"
+          DTS:CreationName="Microsoft.FileSystemTask"
+          DTS:DelayValidation="True"
+          DTS:Description="File System Task"
+          DTS:DTSID="{8014555E-E81C-464A-85BA-F6655D04E35E}"
+          DTS:ExecutableType="Microsoft.FileSystemTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="File System Task"
+          DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <FileSystemData
+              TaskOperationType="CreateDirectory"
+              TaskSourcePath="User::currentSourceFile"
+              TaskIsSourceVariable="True" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\foreach source zip\File System Task 1"
+          DTS:CreationName="Microsoft.FileSystemTask"
+          DTS:Description="File System Task"
+          DTS:DTSID="{FCBF6D80-E48E-4CB9-84FC-17E40ADCE817}"
+          DTS:ExecutableType="Microsoft.FileSystemTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="File System Task 1"
+          DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <FileSystemData
+              TaskSourcePath="{49D10D9A-7C37-4FF3-AB23-7744411620F9}"
+              TaskDestinationPath="{530B86D3-A1C4-4503-BB54-C0A3ECD5D520}" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\foreach source zip\Unzip Task"
+          DTS:CreationName="ilionx.SSIS.Tasks.UnZip, ilionx.SSIS.Tasks.UnZip, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e0ae07b0fa049276"
+          DTS:DelayValidation="True"
+          DTS:Description="Unzip Task"
+          DTS:DTSID="{d6a6d18b-3cc7-4f55-bd35-6d5592ba6cd4}"
+          DTS:ExecutableType="ilionx.SSIS.Tasks.UnZip, ilionx.SSIS.Tasks.UnZip, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e0ae07b0fa049276"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Unzip Task"
+          DTS:TaskContact="Marc Potters and Joost van Rossum, Ilionx Noord Nederland."
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:PropertyExpression
+            DTS:Name="DelayValidation">@[$Package::UnzipTask_DelayValidation1]</DTS:PropertyExpression>
+          <DTS:ObjectData>
+            <UnzipTask
+              FireInformationMessages="False"
+              DeleteSource="False"
+              FilePathSource=""
+              HasConnectionmanagerSource="False"
+              HasVariableSource="True"
+              SelectedConnectionManagerIDSource=""
+              SelectedVariableIDSource="{CCE02D18-5203-4D63-9EA0-FC33A0FDB508}"
+              FilePathDestination="C:\PVDATA\processing"
+              HasConnectionmanagerDestination="True"
+              HasVariableDestination="False"
+              SelectedConnectionManagerIDDestination="{999419D2-6B59-4F23-9E19-2C3E3B3E2D3C}"
+              SelectedVariableIDDestination=""
+              Filter="*.*"
+              RegexFilter="^.*\.zip$"
+              TraverseSubfolder="True"
+              WildcardSelected="True"
+              IgnoreCase="True"
+              OverwriteFile="True"
+              ZipPassword=""
+              SelectedVariableIDZipPassword=""
+              SelectedVariableIDUnZippedFile="" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\foreach source zip.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{6795FEE5-D983-4CF8-BE43-B93B52E4F503}"
+          DTS:From="Package\foreach source zip\Unzip Task"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\foreach source zip\File System Task 1" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\foreach source zip.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{EEC8F3EB-AC30-4DCB-B4A9-4E579FF2BC14}"
+          DTS:From="Package\foreach source zip\Expression Task"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\foreach source zip\File System Task" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\foreach source zip.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{8C9830FD-16D2-4920-8097-318150A01CA6}"
+          DTS:From="Package\foreach source zip\File System Task"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\foreach source zip\Unzip Task" />
+      </DTS:PrecedenceConstraints>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{1007897C-D8FE-425A-9146-70484ACD03CB}"
+          DTS:ObjectName="{1007897C-D8FE-425A-9146-70484ACD03CB}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::currentSourceFile" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql12">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="132,42"
+          Id="Package\foreach source zip\Unzip Task"
+          TopLeft="176,215.5" />
+        <NodeLayout
+          Size="160,42"
+          Id="Package\foreach source zip\File System Task"
+          TopLeft="119,124" />
+        <NodeLayout
+          Size="169,42"
+          Id="Package\foreach source zip\File System Task 1"
+          TopLeft="110,353" />
+        <NodeLayout
+          Size="157,42"
+          Id="Package\foreach source zip\Expression Task"
+          TopLeft="116,5.5" />
+        <EdgeLayout
+          Id="Package\foreach source zip.PrecedenceConstraints[Constraint 1]"
+          TopLeft="196.75,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,76.5"
+              Start="0,0"
+              End="0,69">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,69" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\foreach source zip.PrecedenceConstraints[Constraint 2]"
+          TopLeft="199,166">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="43,49.5"
+              Start="0,0"
+              End="43,42">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.75" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.75"
+                    Point2="0,24.75"
+                    Point3="4,24.75" />
+                  <mssgle:LineSegment
+                    End="39,24.75" />
+                  <mssgle:CubicBezierSegment
+                    Point1="39,24.75"
+                    Point2="43,24.75"
+                    Point3="43,28.75" />
+                  <mssgle:LineSegment
+                    End="43,42" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\foreach source zip.PrecedenceConstraints[Constraint]"
+          TopLeft="242,257.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-47.5,95.5"
+              Start="0,0"
+              End="-47.5,88">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,43.75" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,43.75"
+                    Point2="0,47.75"
+                    Point3="-4,47.75" />
+                  <mssgle:LineSegment
+                    End="-43.5,47.75" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-43.5,47.75"
+                    Point2="-47.5,47.75"
+                    Point3="-47.5,51.75" />
+                  <mssgle:LineSegment
+                    End="-47.5,88" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="535,462"
+          Size="535,505"
+          Id="Package\foreach source zip"
+          TopLeft="104,40" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

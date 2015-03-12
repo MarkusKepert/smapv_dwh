@@ -5,14 +5,14 @@
   DTS:CreationName="Microsoft.Package"
   DTS:CreatorComputerName="PNC-DEV06"
   DTS:CreatorName="WEB\markusn"
-  DTS:DTSID="{FD53C25F-D0D8-48DF-8206-1171D4B373FE}"
+  DTS:DTSID="{2173BB68-61E7-4819-8833-5EA051C51222}"
   DTS:ExecutableType="Microsoft.Package"
   DTS:LastModifiedProductVersion="12.0.2430.0"
   DTS:LocaleID="1031"
-  DTS:ObjectName="smapvdata"
+  DTS:ObjectName="02smapvdataimport"
   DTS:PackageType="5"
-  DTS:VersionBuild="10"
-  DTS:VersionGUID="{23DD476B-8228-42A9-BA7B-E8D8DE27BFBF}">
+  DTS:VersionBuild="18"
+  DTS:VersionGUID="{6C7D4342-4205-420F-AADB-D099FE0F7E46}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -1194,7 +1194,7 @@
         <NodeLayout
           Size="153,42"
           Id="Package\Data Flow Task"
-          TopLeft="182.5,133.5" />
+          TopLeft="595.5,329.5" />
       </GraphLayout>
     </LayoutInfo>
   </Package>
@@ -1204,14 +1204,6 @@
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="122,42"
-          Id="Package\Data Flow Task\XML test"
-          TopLeft="311,183" />
-        <NodeLayout
-          Size="140,42"
-          Id="Package\Data Flow Task\TV-Test SQL"
-          TopLeft="287,542" />
-        <NodeLayout
           Size="190,42"
           Id="Package\Data Flow Task\SQL Server Destination"
           TopLeft="520,545" />
@@ -1219,6 +1211,22 @@
           Size="158,42"
           Id="Package\Data Flow Task\Data Conversion"
           TopLeft="236,334" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Data Flow Task\Derived Column"
+          TopLeft="365,433" />
+        <NodeLayout
+          Size="122,42"
+          Id="Package\Data Flow Task\XML test"
+          TopLeft="311,183" />
+        <NodeLayout
+          Size="167,42"
+          Id="Package\Data Flow Task\Data Conversion 1"
+          TopLeft="575,315" />
+        <NodeLayout
+          Size="140,42"
+          Id="Package\Data Flow Task\TV-Test SQL"
+          TopLeft="287,542" />
         <EdgeLayout
           Id="Package\Data Flow Task.Paths[MeanPublic]"
           TopLeft="353,225">
@@ -1255,10 +1263,6 @@
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="167,42"
-          Id="Package\Data Flow Task\Data Conversion 1"
-          TopLeft="575,315" />
         <EdgeLayout
           Id="Package\Data Flow Task.Paths[Info]"
           TopLeft="391,225">
@@ -1296,43 +1300,41 @@
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Data Conversion Output]"
-          TopLeft="658.5,357">
+          Id="Package\Data Flow Task.Paths[Derived Column Output]"
+          TopLeft="443,475">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-43.5,188"
+              EndConnector="-86,67"
               Start="0,0"
-              End="-43.5,180.5">
+              End="-86,59.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,90" />
+                    End="0,29.5" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,90"
-                    Point2="0,94"
-                    Point3="-4,94" />
+                    Point1="0,29.5"
+                    Point2="0,33.5"
+                    Point3="-4,33.5" />
                   <mssgle:LineSegment
-                    End="-39.5,94" />
+                    End="-82,33.5" />
                   <mssgle:CubicBezierSegment
-                    Point1="-39.5,94"
-                    Point2="-43.5,94"
-                    Point3="-43.5,98" />
+                    Point1="-82,33.5"
+                    Point2="-86,33.5"
+                    Point3="-86,37.5" />
                   <mssgle:LineSegment
-                    End="-43.5,180.5" />
+                    End="-86,59.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="156,42"
-          Id="Package\Data Flow Task\Derived Column"
-          TopLeft="365,433" />
         <EdgeLayout
           Id="Package\Data Flow Task.Paths[Data Conversion Output1]"
           TopLeft="315,376">
@@ -1364,48 +1366,52 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Derived Column Output]"
-          TopLeft="443,475">
+          Id="Package\Data Flow Task.Paths[Data Conversion Output]"
+          TopLeft="658.5,357">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-86,67"
+              EndConnector="-43.5,188"
               Start="0,0"
-              End="-86,59.5">
+              End="-43.5,180.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,29.5" />
+                    End="0,90" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,29.5"
-                    Point2="0,33.5"
-                    Point3="-4,33.5" />
+                    Point1="0,90"
+                    Point2="0,94"
+                    Point3="-4,94" />
                   <mssgle:LineSegment
-                    End="-82,33.5" />
+                    End="-39.5,94" />
                   <mssgle:CubicBezierSegment
-                    Point1="-82,33.5"
-                    Point2="-86,33.5"
-                    Point3="-86,37.5" />
+                    Point1="-39.5,94"
+                    Point2="-43.5,94"
+                    Point3="-43.5,98" />
                   <mssgle:LineSegment
-                    End="-86,59.5" />
+                    End="-43.5,180.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Data Flow Task\TV-Test SQL">
+    design-time-name="Package\Data Flow Task\SQL Server Destination">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -1413,7 +1419,7 @@
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Data Flow Task\SQL Server Destination">
+    design-time-name="Package\Data Flow Task\TV-Test SQL">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
