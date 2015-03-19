@@ -11,8 +11,8 @@
   DTS:LocaleID="1031"
   DTS:ObjectName="01ExtractSources"
   DTS:PackageType="5"
-  DTS:VersionBuild="32"
-  DTS:VersionGUID="{81A92D81-D913-4D01-8209-AF0A4027F872}">
+  DTS:VersionBuild="37"
+  DTS:VersionGUID="{80463BDF-15F0-4C59-B6AD-EDED4F0870EE}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -170,6 +170,42 @@
           </DTS:ObjectData>
         </DTS:Executable>
         <DTS:Executable
+          DTS:refId="Package\foreach source zip\delete temp dir"
+          DTS:CreationName="Microsoft.FileSystemTask"
+          DTS:DelayValidation="True"
+          DTS:Description="File System Task"
+          DTS:DTSID="{682BD305-1C54-4893-B530-9C390A1596F2}"
+          DTS:ExecutableType="Microsoft.FileSystemTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="delete temp dir"
+          DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <FileSystemData
+              TaskOperationType="DeleteDirectory"
+              TaskSourcePath="User::currentTempDir"
+              TaskIsSourceVariable="True" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\foreach source zip\Execute Package 02"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{07FEE948-4A55-438D-BF60-AF2EFDC7429B}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Execute Package 02"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>02ProcessSourceContent.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
           DTS:refId="Package\foreach source zip\extract temp dir name from zip file in variable"
           DTS:CreationName="Microsoft.ExpressionTask"
           DTS:Description="Expression Task"
@@ -299,11 +335,11 @@
         <DTS:PrecedenceConstraint
           DTS:refId="Package\foreach source zip.PrecedenceConstraints[Constraint]"
           DTS:CreationName=""
-          DTS:DTSID="{39C70365-C6C8-4C62-B957-6C927C726DDD}"
+          DTS:DTSID="{E20301B1-CC63-406B-A982-9907631F3A5F}"
           DTS:From="Package\foreach source zip\Unzip in tempdir"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint"
-          DTS:To="Package\foreach source zip\move zip in processsed dir" />
+          DTS:To="Package\foreach source zip\Execute Package 02" />
         <DTS:PrecedenceConstraint
           DTS:refId="Package\foreach source zip.PrecedenceConstraints[Constraint 1]"
           DTS:CreationName=""
@@ -323,11 +359,19 @@
         <DTS:PrecedenceConstraint
           DTS:refId="Package\foreach source zip.PrecedenceConstraints[Constraint 3]"
           DTS:CreationName=""
-          DTS:DTSID="{84DFF1F5-6C18-45E8-8E84-8F14CFCC6A0E}"
-          DTS:From="Package\foreach source zip\move zip in processsed dir"
+          DTS:DTSID="{4911AF0C-5DB0-4342-BFFD-17D8F6871C91}"
+          DTS:From="Package\foreach source zip\Execute Package 02"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 3"
-          DTS:To="Package\foreach source zip\log end" />
+          DTS:To="Package\foreach source zip\move zip in processsed dir" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\foreach source zip.PrecedenceConstraints[Constraint 4]"
+          DTS:CreationName=""
+          DTS:DTSID="{8FAE47C0-1B6D-4D76-A6A9-ED8846D481AE}"
+          DTS:From="Package\foreach source zip\move zip in processsed dir"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 4"
+          DTS:To="Package\foreach source zip\delete temp dir" />
         <DTS:PrecedenceConstraint
           DTS:refId="Package\foreach source zip.PrecedenceConstraints[Constraint 5]"
           DTS:CreationName=""
@@ -336,6 +380,14 @@
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 5"
           DTS:To="Package\foreach source zip\extract temp dir name from zip file in variable" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\foreach source zip.PrecedenceConstraints[Constraint 6]"
+          DTS:CreationName=""
+          DTS:DTSID="{80738825-831D-4392-BF94-B0D073AD78F0}"
+          DTS:From="Package\foreach source zip\delete temp dir"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 6"
+          DTS:To="Package\foreach source zip\log end" />
       </DTS:PrecedenceConstraints>
       <DTS:ForEachVariableMappings>
         <DTS:ForEachVariableMapping
@@ -370,7 +422,7 @@
         <NodeLayout
           Size="206,42"
           Id="Package\foreach source zip\move zip in processsed dir"
-          TopLeft="101,362" />
+          TopLeft="93,344" />
         <NodeLayout
           Size="158,42"
           Id="Package\foreach source zip\Unzip in tempdir"
@@ -469,20 +521,74 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <NodeLayout
+          Size="116,42"
+          Id="Package\foreach source zip\log end"
+          TopLeft="141,515" />
+        <NodeLayout
+          Size="153,42"
+          Id="Package\foreach source zip\delete temp dir"
+          TopLeft="192,431" />
         <EdgeLayout
-          Id="Package\foreach source zip.PrecedenceConstraints[Constraint]"
-          TopLeft="205,278.5">
+          Id="Package\foreach source zip.PrecedenceConstraints[Constraint 4]"
+          TopLeft="196,386">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,83.5"
+              EndConnector="72.5,45"
               Start="0,0"
-              End="0,76">
+              End="72.5,37.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,76" />
+                    End="0,18.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,18.5"
+                    Point2="0,22.5"
+                    Point3="4,22.5" />
+                  <mssgle:LineSegment
+                    End="68.5,22.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="68.5,22.5"
+                    Point2="72.5,22.5"
+                    Point3="72.5,26.5" />
+                  <mssgle:LineSegment
+                    End="72.5,37.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\foreach source zip.PrecedenceConstraints[Constraint 6]"
+          TopLeft="268.5,473">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-69.5,42"
+              Start="0,0"
+              End="-69.5,34.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,17"
+                    Point2="0,21"
+                    Point3="-4,21" />
+                  <mssgle:LineSegment
+                    End="-65.5,21" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-65.5,21"
+                    Point2="-69.5,21"
+                    Point3="-69.5,25" />
+                  <mssgle:LineSegment
+                    End="-69.5,34.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -492,35 +598,69 @@
           </EdgeLayout.Labels>
         </EdgeLayout>
         <NodeLayout
-          Size="116,42"
-          Id="Package\foreach source zip\log end"
-          TopLeft="109,458" />
+          Size="175,42"
+          Id="Package\foreach source zip\Execute Package 02"
+          TopLeft="375,292" />
         <EdgeLayout
-          Id="Package\foreach source zip.PrecedenceConstraints[Constraint 3]"
-          TopLeft="204,404">
+          Id="Package\foreach source zip.PrecedenceConstraints[Constraint]"
+          TopLeft="285,257.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-37,54"
+              EndConnector="90,49.8333333333333"
               Start="0,0"
-              End="-37,46.5">
+              End="82.5,49.8333333333333">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,23" />
+                    End="48.0183486238532,0" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,23"
-                    Point2="0,27"
-                    Point3="-4,27" />
+                    Point1="48.0183486238532,0"
+                    Point2="52.0183486238532,0"
+                    Point3="52.0183486238532,4" />
                   <mssgle:LineSegment
-                    End="-33,27" />
+                    End="52.0183486238532,45.8333333333333" />
                   <mssgle:CubicBezierSegment
-                    Point1="-33,27"
-                    Point2="-37,27"
-                    Point3="-37,31" />
+                    Point1="52.0183486238532,45.8333333333333"
+                    Point2="52.0183486238532,49.8333333333333"
+                    Point3="56.0183486238532,49.8333333333333" />
                   <mssgle:LineSegment
-                    End="-37,46.5" />
+                    End="82.5,49.8333333333333" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\foreach source zip.PrecedenceConstraints[Constraint 3]"
+          TopLeft="375,318.666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-76,46.3333333333333"
+              Start="0,0"
+              End="-68.5,46.3333333333333">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-28.0733944954128,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-28.0733944954128,0"
+                    Point2="-32.0733944954128,0"
+                    Point3="-32.0733944954128,4" />
+                  <mssgle:LineSegment
+                    End="-32.0733944954128,42.3333333333333" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-32.0733944954128,42.3333333333333"
+                    Point2="-32.0733944954128,46.3333333333333"
+                    Point3="-36.0733944954128,46.3333333333333" />
+                  <mssgle:LineSegment
+                    End="-68.5,46.3333333333333" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>

@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="70670c08-8090-4895-98b6-cb894647c496" ChangeDateTime="03/13/2015 12:40:30">
+    <Property Name="ElementName" Value="[dbo].[BulkImportPackageInfo].[Created]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[BulkImportPackageInfo]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="dtCreated" />
+  </Operation>
+</Operations>
