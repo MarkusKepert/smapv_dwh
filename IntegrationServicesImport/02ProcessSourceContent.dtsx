@@ -11,8 +11,8 @@
   DTS:LocaleID="1031"
   DTS:ObjectName="02ProcessSourceContent"
   DTS:PackageType="5"
-  DTS:VersionBuild="4"
-  DTS:VersionGUID="{1DF19B67-5804-4D2D-8F74-99C8587CE58D}">
+  DTS:VersionBuild="8"
+  DTS:VersionGUID="{69279507-C9B2-472C-ADBB-6AEB8E95EF17}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -40,12 +40,23 @@
         xml:space="preserve"></DTS:Property>
     </DTS:PackageParameter>
   </DTS:PackageParameters>
-  <DTS:Variables />
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{916916A9-1B58-436C-A84F-6D67790AA45E}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FolderInfoFile">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
   <DTS:Executables>
     <DTS:Executable
       DTS:refId="Package\Expression Task"
       DTS:CreationName="Microsoft.ExpressionTask"
-      DTS:Description="Expression Task"
+      DTS:Description="Expression XML Info Path"
       DTS:DTSID="{1B4B0DD5-2C20-4DF8-91A2-C0258B567B5E}"
       DTS:ExecutableType="Microsoft.ExpressionTask"
       DTS:LocaleID="-1"
@@ -55,7 +66,7 @@
       <DTS:Variables />
       <DTS:ObjectData>
         <ExpressionTask
-          Expression="@[$Package::SourceDir]+&quot;\\info.xml&quot;" />
+          Expression="@[User::FolderInfoFile]  = @[$Package::SourceDir]+&quot;\\info.xml&quot;" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -96,48 +107,33 @@
                   dataType="System.String"
                   name="UserComponentTypeName">Microsoft.XmlSourceAdapter</property>
                 <property
-                  dataType="System.Null"
+                  dataType="System.String"
                   description="The XML data used by the XML source adapter."
                   expressionType="Notify"
-                  name="XMLData" />
+                  name="XMLData"></property>
                 <property
-                  dataType="System.Null"
+                  dataType="System.String"
                   description="The variable used by the XML source adapter to specify XML data."
-                  name="XMLDataVariable" />
+                  name="XMLDataVariable">User::FolderInfoFile</property>
                 <property
                   dataType="System.Int32"
                   description="Defines how the XML source adapter gets XML data."
-                  name="AccessMode">0</property>
+                  name="AccessMode">1</property>
                 <property
-                  dataType="System.Null"
+                  dataType="System.String"
                   description="The XML schema definition used by the XML source adapter."
                   expressionType="Notify"
-                  name="XMLSchemaDefinition" />
+                  name="XMLSchemaDefinition">C:\PVDATA\xsd\info.xsd</property>
                 <property
-                  dataType="System.Null"
+                  dataType="System.Boolean"
                   description="Identifies whether or not to use inline schema."
-                  name="UseInlineSchema" />
+                  name="UseInlineSchema">false</property>
                 <property
                   dataType="System.Int32"
                   description="Defines how XML integer types are mapped."
                   name="XMLIntegerMapping"
                   typeConverter="Microsoft.SqlServer.Dts.Pipeline.XmlSourceAdapter+XMLIntegerMappingConverter">0</property>
               </properties>
-              <outputs>
-                <output
-                  refId="Package\import info file from package\info xml.Outputs[XML Source Output]"
-                  dangling="true"
-                  name="XML Source Output">
-                  <properties>
-                    <property
-                      dataType="System.Null"
-                      description="Identifies the rowset associated with the output."
-                      name="RowsetID" />
-                  </properties>
-                  <externalMetadataColumns
-                    isUsed="True" />
-                </output>
-              </outputs>
             </component>
             <component
               refId="Package\import info file from package\SQL Server Destination"
@@ -159,7 +155,7 @@
                   dataType="System.String"
                   description="The name of the database object to copy data into."
                   expressionType="Notify"
-                  name="BulkInsertTableName"></property>
+                  name="BulkInsertTableName">[dbo].[BulkImport_Info]</property>
                 <property
                   dataType="System.Boolean"
                   description="Specifies that any constraints on the destination object are checked during the data copy operation. Corresponds to the bulk insert CHECK_CONSTRAINTS option."
@@ -212,6 +208,8 @@
               <connections>
                 <connection
                   refId="Package\import info file from package\SQL Server Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[PNC-DEV06\MSSQL2014.PV-TestImport]"
+                  connectionManagerRefId="Package.ConnectionManagers[PNC-DEV06\MSSQL2014.PV-TestImport]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -221,7 +219,21 @@
                   hasSideEffects="true"
                   name="SQL Server Destination Input">
                   <externalMetadataColumns
-                    isUsed="True" />
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\import info file from package\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[DSIDSYS]"
+                      dataType="i8"
+                      name="DSIDSYS" />
+                    <externalMetadataColumn
+                      refId="Package\import info file from package\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[Created]"
+                      dataType="dbTimeStamp"
+                      name="Created" />
+                    <externalMetadataColumn
+                      refId="Package\import info file from package\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[culture]"
+                      dataType="wstr"
+                      length="50"
+                      name="culture" />
+                  </externalMetadataColumns>
                 </input>
               </inputs>
             </component>
@@ -261,30 +273,46 @@
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="217,42"
-          Id="Package\import info file from package"
-          TopLeft="72,111" />
+          Size="157,42"
+          Id="Package\Expression Task"
+          TopLeft="98,21" />
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
           PanelSize="205,55"
-          Size="205,98"
+          Size="215,98"
           Id="Package\Foreach Loop Container"
           TopLeft="81,252" />
+        <NodeLayout
+          Size="217,42"
+          Id="Package\import info file from package"
+          TopLeft="72,111" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="182,153">
+          TopLeft="180.5,153">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,99"
+              EndConnector="8,99"
               Start="0,0"
-              End="0,91.5">
+              End="8,91.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,91.5" />
+                    End="0,45.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,45.5"
+                    Point2="0,49.5"
+                    Point3="4,49.5" />
+                  <mssgle:LineSegment
+                    End="4,49.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="4,49.5"
+                    Point2="8,49.5"
+                    Point3="8,53.5" />
+                  <mssgle:LineSegment
+                    End="8,91.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -293,10 +321,6 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="157,42"
-          Id="Package\Expression Task"
-          TopLeft="98,21" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
           TopLeft="178.5,63">
@@ -328,15 +352,23 @@
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
         <NodeLayout
-          Size="119,42"
-          Id="Package\import info file from package\info xml"
-          TopLeft="129,74" />
-        <NodeLayout
           Size="190,42"
           Id="Package\import info file from package\SQL Server Destination"
           TopLeft="109,220" />
+        <NodeLayout
+          Size="119,42"
+          Id="Package\import info file from package\info xml"
+          TopLeft="129,74" />
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\import info file from package\SQL Server Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
 </Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>

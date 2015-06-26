@@ -7,4 +7,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="dtCreated" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="23d050eb-b517-4166-9a8d-a728815d3d19" ChangeDateTime="06/26/2015 20:58:50">
+    <Property Name="ElementName" Value="[dbo].[BulkImport_Info].[Created]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[BulkImport_Info]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="dtCreate" />
+  </Operation>
 </Operations>
