@@ -14,4 +14,18 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="dtCreate" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="64a8978b-af29-42ad-ba85-673502ba8e92" ChangeDateTime="06/27/2015 20:49:02">
+    <Property Name="ElementName" Value="[dbo].[BulkImport_Log].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[BulkImport_Log]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DSIDSYS" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="f4d45fee-148b-48ef-a09f-c95286258c0c" ChangeDateTime="06/27/2015 20:52:25">
+    <Property Name="ElementName" Value="[dbo].[BulkImportLog].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[BulkImportLog]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DSIDSYS" />
+  </Operation>
 </Operations>
