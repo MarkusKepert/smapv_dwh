@@ -11,8 +11,8 @@
   DTS:LocaleID="1031"
   DTS:ObjectName="03pvdataimport"
   DTS:PackageType="5"
-  DTS:VersionBuild="21"
-  DTS:VersionGUID="{AEA8517B-EC8E-4555-9BFE-9401A88C0600}">
+  DTS:VersionBuild="23"
+  DTS:VersionGUID="{2C79AFAB-F99F-4A1F-AE6F-E24EAE187CC9}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -471,13 +471,6 @@
                       cachedName="Created"
                       externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[Created]"
                       lineageId="Package\Data Flow Task\XML test.Outputs[Info].Columns[Created]" />
-                    <inputColumn
-                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[Culture]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="Culture"
-                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[culture]"
-                      lineageId="Package\Data Flow Task\XML test.Outputs[Info].Columns[Culture]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -490,10 +483,28 @@
                       dataType="dbTimeStamp"
                       name="Created" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[culture]"
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[dtCreate]"
+                      dataType="dbTimeStamp"
+                      name="dtCreate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[SerialNumber]"
+                      dataType="i4"
+                      name="SerialNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[MacAddress]"
                       dataType="wstr"
-                      length="50"
-                      name="culture" />
+                      length="255"
+                      name="MacAddress" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[Version]"
+                      dataType="wstr"
+                      length="255"
+                      name="Version" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[OSVersion]"
+                      dataType="wstr"
+                      length="255"
+                      name="OSVersion" />
                   </externalMetadataColumns>
                 </input>
               </inputs>

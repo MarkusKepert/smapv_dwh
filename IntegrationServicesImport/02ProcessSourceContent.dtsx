@@ -11,11 +11,21 @@
   DTS:LocaleID="1031"
   DTS:ObjectName="02ProcessSourceContent"
   DTS:PackageType="5"
-  DTS:VersionBuild="8"
-  DTS:VersionGUID="{69279507-C9B2-472C-ADBB-6AEB8E95EF17}">
+  DTS:VersionBuild="22"
+  DTS:VersionGUID="{75AFE7E6-FAD8-47B8-B7A6-6F96191D7EB9}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[package-info.xslt]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{E136C3C6-9F19-4587-9424-28B92A50955F}"
+      DTS:ObjectName="package-info.xslt">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="C:\PVDATA\xsd\package-info.xslt" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[PNC-DEV06\MSSQL2014.PV-TestImport]"
       DTS:CreationName="OLEDB"
@@ -24,6 +34,17 @@
       <DTS:ObjectData>
         <DTS:ConnectionManager
           DTS:ConnectionString="Data Source=PNC-DEV06\MSSQL2014;Initial Catalog=PV-TestImport;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[text.xml]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{85A4CB03-5E73-4DE0-8F26-B5F7FBB67A87}"
+      DTS:ObjectName="text.xml">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="1"
+          DTS:ConnectionString="C:\PVDATA\new\text.xml" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -51,16 +72,36 @@
         DTS:DataType="8"
         xml:space="preserve"></DTS:VariableValue>
     </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{7777D65E-843B-4A52-975C-1F8625ADAA6D}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="PackageInfoXMLRaw">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{9110C3FD-FECC-4DD5-B932-E878C44E13DA}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="PackageInfoXMLTranformed">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
   </DTS:Variables>
   <DTS:Executables>
     <DTS:Executable
-      DTS:refId="Package\Expression Task"
+      DTS:refId="Package\Expression Task InfoXML Path"
       DTS:CreationName="Microsoft.ExpressionTask"
       DTS:Description="Expression XML Info Path"
       DTS:DTSID="{1B4B0DD5-2C20-4DF8-91A2-C0258B567B5E}"
       DTS:ExecutableType="Microsoft.ExpressionTask"
       DTS:LocaleID="-1"
-      DTS:ObjectName="Expression Task"
+      DTS:ObjectName="Expression Task InfoXML Path"
       DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
       DTS:ThreadHint="0">
       <DTS:Variables />
@@ -95,45 +136,79 @@
           version="1">
           <components>
             <component
-              refId="Package\import info file from package\info xml"
-              componentClassID="Microsoft.ManagedComponentHost"
-              contactInfo="Extracts data from an XML file. For example, extract catalog data from an XML file that represents catalogs and catalog items. Before using, specify the schema and generate an output for each XML element.;Microsoft Corporation;Microsoft SQL Server; Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
-              description="Extracts data from an XML file. For example, extract catalog data from an XML file that represents catalogs and catalog items. Before using, specify the schema and generate an output for each XML element."
-              name="info xml"
-              usesDispositions="true"
-              version="2">
-              <properties>
-                <property
-                  dataType="System.String"
-                  name="UserComponentTypeName">Microsoft.XmlSourceAdapter</property>
-                <property
-                  dataType="System.String"
-                  description="The XML data used by the XML source adapter."
-                  expressionType="Notify"
-                  name="XMLData"></property>
-                <property
-                  dataType="System.String"
-                  description="The variable used by the XML source adapter to specify XML data."
-                  name="XMLDataVariable">User::FolderInfoFile</property>
-                <property
-                  dataType="System.Int32"
-                  description="Defines how the XML source adapter gets XML data."
-                  name="AccessMode">1</property>
-                <property
-                  dataType="System.String"
-                  description="The XML schema definition used by the XML source adapter."
-                  expressionType="Notify"
-                  name="XMLSchemaDefinition">C:\PVDATA\xsd\info.xsd</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Identifies whether or not to use inline schema."
-                  name="UseInlineSchema">false</property>
-                <property
-                  dataType="System.Int32"
-                  description="Defines how XML integer types are mapped."
-                  name="XMLIntegerMapping"
-                  typeConverter="Microsoft.SqlServer.Dts.Pipeline.XmlSourceAdapter+XMLIntegerMappingConverter">0</property>
-              </properties>
+              refId="Package\import info file from package\Data Conversion"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\import info file from package\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\import info file from package\Data Conversion.Inputs[Data Conversion Input].Columns[SerialNumber]"
+                      cachedDataType="ui4"
+                      cachedName="SerialNumber"
+                      lineageId="Package\import info file from package\XML Source.Outputs[Info].Columns[SerialNumber]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\import info file from package\Data Conversion.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\import info file from package\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\import info file from package\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SerialNumber]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\import info file from package\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SerialNumber]"
+                      name="Copy of SerialNumber"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\import info file from package\XML Source.Outputs[Info].Columns[SerialNumber]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\import info file from package\Data Conversion.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\import info file from package\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\import info file from package\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\import info file from package\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\import info file from package\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\import info file from package\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
             </component>
             <component
               refId="Package\import info file from package\SQL Server Destination"
@@ -218,6 +293,41 @@
                   refId="Package\import info file from package\SQL Server Destination.Inputs[SQL Server Destination Input]"
                   hasSideEffects="true"
                   name="SQL Server Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\import info file from package\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[MacAddress]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="MacAddress"
+                      externalMetadataColumnId="Package\import info file from package\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[MacAddress]"
+                      lineageId="Package\import info file from package\XML Source.Outputs[Info].Columns[MacAddress]" />
+                    <inputColumn
+                      refId="Package\import info file from package\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[Created]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="Created"
+                      externalMetadataColumnId="Package\import info file from package\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[Created]"
+                      lineageId="Package\import info file from package\XML Source.Outputs[Info].Columns[Created]" />
+                    <inputColumn
+                      refId="Package\import info file from package\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[Version]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Version"
+                      externalMetadataColumnId="Package\import info file from package\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[Version]"
+                      lineageId="Package\import info file from package\XML Source.Outputs[Info].Columns[Version]" />
+                    <inputColumn
+                      refId="Package\import info file from package\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[OSVersion]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="OSVersion"
+                      externalMetadataColumnId="Package\import info file from package\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[OSVersion]"
+                      lineageId="Package\import info file from package\XML Source.Outputs[Info].Columns[OSVersion]" />
+                    <inputColumn
+                      refId="Package\import info file from package\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[Copy of SerialNumber]"
+                      cachedDataType="i4"
+                      cachedName="Copy of SerialNumber"
+                      externalMetadataColumnId="Package\import info file from package\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[SerialNumber]"
+                      lineageId="Package\import info file from package\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SerialNumber]" />
+                  </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
@@ -229,16 +339,1014 @@
                       dataType="dbTimeStamp"
                       name="Created" />
                     <externalMetadataColumn
-                      refId="Package\import info file from package\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[culture]"
+                      refId="Package\import info file from package\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[dtCreate]"
+                      dataType="dbTimeStamp"
+                      name="dtCreate" />
+                    <externalMetadataColumn
+                      refId="Package\import info file from package\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[SerialNumber]"
+                      dataType="i4"
+                      name="SerialNumber" />
+                    <externalMetadataColumn
+                      refId="Package\import info file from package\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[MacAddress]"
                       dataType="wstr"
-                      length="50"
-                      name="culture" />
+                      length="255"
+                      name="MacAddress" />
+                    <externalMetadataColumn
+                      refId="Package\import info file from package\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[Version]"
+                      dataType="wstr"
+                      length="255"
+                      name="Version" />
+                    <externalMetadataColumn
+                      refId="Package\import info file from package\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[OSVersion]"
+                      dataType="wstr"
+                      length="255"
+                      name="OSVersion" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
             </component>
+            <component
+              refId="Package\import info file from package\XML Source"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Extracts data from an XML file. For example, extract catalog data from an XML file that represents catalogs and catalog items. Before using, specify the schema and generate an output for each XML element.;Microsoft Corporation;Microsoft SQL Server; Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Extracts data from an XML file. For example, extract catalog data from an XML file that represents catalogs and catalog items. Before using, specify the schema and generate an output for each XML element."
+              name="XML Source"
+              usesDispositions="true"
+              validateExternalMetadata="False"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.XmlSourceAdapter</property>
+                <property
+                  dataType="System.String"
+                  description="The XML data used by the XML source adapter."
+                  expressionType="Notify"
+                  name="XMLData"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable used by the XML source adapter to specify XML data."
+                  name="XMLDataVariable">User::PackageInfoXMLTranformed</property>
+                <property
+                  dataType="System.Int32"
+                  description="Defines how the XML source adapter gets XML data."
+                  name="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The XML schema definition used by the XML source adapter."
+                  expressionType="Notify"
+                  name="XMLSchemaDefinition">C:\PVDATA\xsd\package-info-transformed.xsd</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Identifies whether or not to use inline schema."
+                  name="UseInlineSchema">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Defines how XML integer types are mapped."
+                  name="XMLIntegerMapping"
+                  typeConverter="Microsoft.SqlServer.Dts.Pipeline.XmlSourceAdapter+XMLIntegerMappingConverter">0</property>
+              </properties>
+              <outputs>
+                <output
+                  refId="Package\import info file from package\XML Source.Outputs[Info]"
+                  name="Info">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Identifies the rowset associated with the output."
+                      name="RowsetID">Info</property>
+                  </properties>
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\import info file from package\XML Source.Outputs[Info].Columns[SerialNumber]"
+                      dataType="ui4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\import info file from package\XML Source.Outputs[Info].ExternalColumns[SerialNumber]"
+                      lineageId="Package\import info file from package\XML Source.Outputs[Info].Columns[SerialNumber]"
+                      name="SerialNumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\import info file from package\XML Source.Outputs[Info].Columns[MacAddress]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\import info file from package\XML Source.Outputs[Info].ExternalColumns[MacAddress]"
+                      length="255"
+                      lineageId="Package\import info file from package\XML Source.Outputs[Info].Columns[MacAddress]"
+                      name="MacAddress"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\import info file from package\XML Source.Outputs[Info].Columns[Created]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\import info file from package\XML Source.Outputs[Info].ExternalColumns[Created]"
+                      lineageId="Package\import info file from package\XML Source.Outputs[Info].Columns[Created]"
+                      name="Created"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\import info file from package\XML Source.Outputs[Info].Columns[Version]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\import info file from package\XML Source.Outputs[Info].ExternalColumns[Version]"
+                      length="255"
+                      lineageId="Package\import info file from package\XML Source.Outputs[Info].Columns[Version]"
+                      name="Version"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\import info file from package\XML Source.Outputs[Info].Columns[OSVersion]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\import info file from package\XML Source.Outputs[Info].ExternalColumns[OSVersion]"
+                      length="255"
+                      lineageId="Package\import info file from package\XML Source.Outputs[Info].Columns[OSVersion]"
+                      name="OSVersion"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\import info file from package\XML Source.Outputs[Info].ExternalColumns[SerialNumber]"
+                      dataType="ui4"
+                      name="SerialNumber">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CLRType">System.UInt32</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\import info file from package\XML Source.Outputs[Info].ExternalColumns[MacAddress]"
+                      dataType="wstr"
+                      length="255"
+                      name="MacAddress">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CLRType">System.String</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\import info file from package\XML Source.Outputs[Info].ExternalColumns[Created]"
+                      dataType="dbTimeStamp"
+                      name="Created">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CLRType">System.DateTime</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\import info file from package\XML Source.Outputs[Info].ExternalColumns[Version]"
+                      dataType="wstr"
+                      length="255"
+                      name="Version">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CLRType">System.String</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\import info file from package\XML Source.Outputs[Info].ExternalColumns[OSVersion]"
+                      dataType="wstr"
+                      length="255"
+                      name="OSVersion">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="CLRType">System.String</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\import info file from package\XML Source.Outputs[Info Error Output]"
+                  isErrorOut="true"
+                  name="Info Error Output">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Identifies the rowset associated with the output."
+                      name="RowsetID">Info</property>
+                  </properties>
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\import info file from package\XML Source.Outputs[Info Error Output].Columns[SerialNumber]"
+                      dataType="nText"
+                      externalMetadataColumnId="Package\import info file from package\XML Source.Outputs[Info Error Output].ExternalColumns[SerialNumber]"
+                      lineageId="Package\import info file from package\XML Source.Outputs[Info Error Output].Columns[SerialNumber]"
+                      name="SerialNumber" />
+                    <outputColumn
+                      refId="Package\import info file from package\XML Source.Outputs[Info Error Output].Columns[MacAddress]"
+                      dataType="nText"
+                      externalMetadataColumnId="Package\import info file from package\XML Source.Outputs[Info Error Output].ExternalColumns[MacAddress]"
+                      lineageId="Package\import info file from package\XML Source.Outputs[Info Error Output].Columns[MacAddress]"
+                      name="MacAddress" />
+                    <outputColumn
+                      refId="Package\import info file from package\XML Source.Outputs[Info Error Output].Columns[Created]"
+                      dataType="nText"
+                      externalMetadataColumnId="Package\import info file from package\XML Source.Outputs[Info Error Output].ExternalColumns[Created]"
+                      lineageId="Package\import info file from package\XML Source.Outputs[Info Error Output].Columns[Created]"
+                      name="Created" />
+                    <outputColumn
+                      refId="Package\import info file from package\XML Source.Outputs[Info Error Output].Columns[Version]"
+                      dataType="nText"
+                      externalMetadataColumnId="Package\import info file from package\XML Source.Outputs[Info Error Output].ExternalColumns[Version]"
+                      lineageId="Package\import info file from package\XML Source.Outputs[Info Error Output].Columns[Version]"
+                      name="Version" />
+                    <outputColumn
+                      refId="Package\import info file from package\XML Source.Outputs[Info Error Output].Columns[OSVersion]"
+                      dataType="nText"
+                      externalMetadataColumnId="Package\import info file from package\XML Source.Outputs[Info Error Output].ExternalColumns[OSVersion]"
+                      lineageId="Package\import info file from package\XML Source.Outputs[Info Error Output].Columns[OSVersion]"
+                      name="OSVersion" />
+                    <outputColumn
+                      refId="Package\import info file from package\XML Source.Outputs[Info Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\import info file from package\XML Source.Outputs[Info Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\import info file from package\XML Source.Outputs[Info Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\import info file from package\XML Source.Outputs[Info Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\import info file from package\XML Source.Outputs[Info Error Output].ExternalColumns[SerialNumber]"
+                      dataType="nText"
+                      name="SerialNumber" />
+                    <externalMetadataColumn
+                      refId="Package\import info file from package\XML Source.Outputs[Info Error Output].ExternalColumns[MacAddress]"
+                      dataType="nText"
+                      name="MacAddress" />
+                    <externalMetadataColumn
+                      refId="Package\import info file from package\XML Source.Outputs[Info Error Output].ExternalColumns[Created]"
+                      dataType="nText"
+                      name="Created" />
+                    <externalMetadataColumn
+                      refId="Package\import info file from package\XML Source.Outputs[Info Error Output].ExternalColumns[Version]"
+                      dataType="nText"
+                      name="Version" />
+                    <externalMetadataColumn
+                      refId="Package\import info file from package\XML Source.Outputs[Info Error Output].ExternalColumns[OSVersion]"
+                      dataType="nText"
+                      name="OSVersion" />
+                  </externalMetadataColumns>
+                </output>
+              </outputs>
+            </component>
           </components>
+          <paths>
+            <path
+              refId="Package\import info file from package.Paths[Data Conversion Output]"
+              endId="Package\import info file from package\SQL Server Destination.Inputs[SQL Server Destination Input]"
+              name="Data Conversion Output"
+              startId="Package\import info file from package\Data Conversion.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\import info file from package.Paths[Info]"
+              endId="Package\import info file from package\Data Conversion.Inputs[Data Conversion Input]"
+              name="Info"
+              startId="Package\import info file from package\XML Source.Outputs[Info]" />
+          </paths>
         </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Script Task Read InfoXML"
+      DTS:CreationName="Microsoft.ScriptTask"
+      DTS:Description="Script Task"
+      DTS:DTSID="{CB1E5E9E-1A30-4BD5-870C-914ED84ECC4C}"
+      DTS:ExecutableType="Microsoft.ScriptTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Script Task Read InfoXML"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ScriptProject
+          Name="ST_d22231c2390b4b129678ccf19d325daa"
+          VSTAMajorVersion="3"
+          VSTAMinorVersion="0"
+          Language="VisualBasic"
+          ReadOnlyVariables="User::FolderInfoFile"
+          ReadWriteVariables="User::PackageInfoXMLRaw">
+          <ProjectItem
+            Name="My Project\Settings.Designer.vb"
+            Encoding="UTF8"><![CDATA['------------------------------------------------------------------------------
+' <autogenerated>
+'     This code was generated by a tool.
+'
+'     Changes to this file may cause incorrect behavior and will be lost if
+'     the code is regenerated.
+' </autogenerated>
+'------------------------------------------------------------------------------
+
+Option Strict Off
+Option Explicit On
+
+
+
+Partial Friend NotInheritable Class MySettings
+    Inherits System.Configuration.ApplicationSettingsBase
+
+    Private Shared m_Value As MySettings
+
+    Private Shared m_SyncObject As Object = New Object
+
+    <System.Diagnostics.DebuggerNonUserCode()> _
+    Public Shared ReadOnly Property Value() As MySettings
+        Get
+            If (MySettings.m_Value Is Nothing) Then
+                System.Threading.Monitor.Enter(MySettings.m_SyncObject)
+                If (MySettings.m_Value Is Nothing) Then
+                    Try
+                        MySettings.m_Value = New MySettings
+                    Finally
+                        System.Threading.Monitor.Exit(MySettings.m_SyncObject)
+                    End Try
+                End If
+            End If
+            Return MySettings.m_Value
+        End Get
+    End Property
+End Class]]></ProjectItem>
+          <ProjectItem
+            Name="ScriptMain.vb"
+            Encoding="UTF8"><![CDATA[#Region "Help:  Introduction to the script task"
+'The Script Task allows you to perform virtually any operation that can be accomplished in
+'a .Net application within the context of an Integration Services control flow. 
+
+'Expand the other regions which have "Help" prefixes for examples of specific ways to use
+'Integration Services features within this script task.
+#End Region
+
+
+#Region "Imports"
+Imports System
+Imports System.Data
+Imports System.Math
+Imports Microsoft.SqlServer.Dts.Runtime
+Imports System.IO
+
+#End Region
+
+'ScriptMain is the entry point class of the script.  Do not change the name, attributes,
+'or parent of this class.
+<Microsoft.SqlServer.Dts.Tasks.ScriptTask.SSISScriptTaskEntryPointAttribute()> _
+<System.CLSCompliantAttribute(False)> _
+Partial Public Class ScriptMain
+    Inherits Microsoft.SqlServer.Dts.Tasks.ScriptTask.VSTARTScriptObjectModelBase
+
+#Region "Help:  Using Integration Services variables and parameters in a script"
+    'To use a variable in this script, first ensure that the variable has been added to 
+    'either the list contained in the ReadOnlyVariables property or the list contained in 
+    'the ReadWriteVariables property of this script task, according to whether or not your
+    'code needs to write to the variable.  To add the variable, save this script, close this instance of
+    'Visual Studio, and update the ReadOnlyVariables and 
+    'ReadWriteVariables properties in the Script Transformation Editor window.
+    'To use a parameter in this script, follow the same steps. Parameters are always read-only.
+
+    'Example of reading from a variable:
+    ' startTime = Dts.Variables("System::StartTime").Value
+
+    'Example of writing to a variable:
+    ' Dts.Variables("User::myStringVariable").Value = "new value"
+
+    'Example of reading from a package parameter:
+    ' batchId = Dts.Variables("$Package::batchId").Value
+
+    'Example of reading from a project parameter:
+    ' batchId = Dts.Variables("$Project::batchId").Value
+
+    'Example of reading from a sensitive project parameter:
+    ' batchId = Dts.Variables("$Project::batchId").GetSensitiveValue()
+#End Region
+
+#Region "Help:  Firing Integration Services events from a script"
+    'This script task can fire events for logging purposes.
+
+    'Example of firing an error event:
+    ' Dts.Events.FireError(18, "Process Values", "Bad value", "", 0)
+
+    'Example of firing an information event:
+    ' Dts.Events.FireInformation(3, "Process Values", "Processing has started", "", 0, fireAgain)
+
+    'Example of firing a warning event:
+    ' Dts.Events.FireWarning(14, "Process Values", "No values received for input", "", 0)
+#End Region
+
+#Region "Help:  Using Integration Services connection managers in a script"
+    'Some types of connection managers can be used in this script task.  See the topic 
+    '"Working with Connection Managers Programatically" for details.
+
+    'Example of using an ADO.Net connection manager:
+    ' Dim rawConnection As Object = Dts.Connections("Sales DB").AcquireConnection(Dts.Transaction)
+    ' Dim myADONETConnection As SqlConnection = CType(rawConnection, SqlConnection)
+    ' <Use the connection in some code here, then release the connection>
+    ' Dts.Connections("Sales DB").ReleaseConnection(rawConnection)
+
+    'Example of using a File connection manager
+    ' Dim rawConnection As Object = Dts.Connections("Prices.zip").AcquireConnection(Dts.Transaction)
+    ' Dim filePath As String = CType(rawConnection, String)
+    ' <Use the connection in some code here, then release the connection>
+    ' Dts.Connections("Prices.zip").ReleaseConnection(rawConnection)
+#End Region
+
+    'This method is called when this script task executes in the control flow.
+    'Before returning from this method, set the value of Dts.TaskResult to indicate success or failure.
+    'To open Help, press F1.
+
+    Public Sub Main()
+        '
+        ' Add your code here
+        '
+        'initialize StreamReader class for text file
+        Dim streamReader As New StreamReader(Me.Dts.Variables("FolderInfoFile").Value.ToString)
+        ' Read the StreamReader To End and assign to local variable
+        Dim StreamText As String = streamReader.ReadToEnd()
+        ' assign SSIS variable with value of StreamText local variable.
+        Me.Dts.Variables("PackageInfoXMLRaw").Value = StreamText
+
+        ''To test, I�ll add another script task. This task will show a message box with the contents of our variable. Following is the script i use for message box:
+
+        MsgBox(Dts.Variables("PackageInfoXMLRaw").Value.ToString)
+
+        Dts.TaskResult = ScriptResults.Success
+    End Sub
+
+#Region "ScriptResults declaration"
+    'This enum provides a convenient shorthand within the scope of this class for setting the
+    'result of the script.
+
+    'This code was generated automatically.
+    Enum ScriptResults
+        Success = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Success
+        Failure = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Failure
+    End Enum
+
+#End Region
+
+End Class]]></ProjectItem>
+          <ProjectItem
+            Name="My Project\Settings.settings"
+            Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)" GeneratedClassNamespace="$safeprojectname" GeneratedClassName="MySettings">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></ProjectItem>
+          <ProjectItem
+            Name="My Project\AssemblyInfo.vb"
+            Encoding="UTF8"><![CDATA[Imports System
+Imports System.Reflection
+Imports System.Runtime.InteropServices
+
+' General Information about an assembly is controlled through the following 
+' set of attributes. Change these attribute values to modify the information
+' associated with an assembly.
+
+' Review the values of the assembly attributes
+
+<Assembly: AssemblyTitle("ST_d22231c2390b4b129678ccf19d325daa")> 
+<Assembly: AssemblyDescription("")> 
+<Assembly: AssemblyCompany("")> 
+<Assembly: AssemblyProduct("ST_d22231c2390b4b129678ccf19d325daa")> 
+<Assembly: AssemblyCopyright("Copyright @  2015")> 
+<Assembly: AssemblyTrademark("")> 
+<Assembly: CLSCompliant(True)> 
+
+<Assembly: ComVisible(False)> 
+
+'The following GUID is for the ID of the typelib if this project is exposed to COM
+<Assembly: Guid("e4f3eda9-32fc-4796-941f-dab3546eb22f")> 
+
+' Version information for an assembly consists of the following four values:
+'
+'      Major Version
+'      Minor Version 
+'      Build Number
+'      Revision
+'
+' You can specify all the values or you can default the Build and Revision Numbers 
+' by using the '*' as shown below:
+' <Assembly: AssemblyVersion("1.0.*")>
+
+<Assembly: AssemblyVersion("1.0.0.0")> 
+<Assembly: AssemblyFileVersion("1.0.0.0")> ]]></ProjectItem>
+          <ProjectItem
+            Name="ST_d22231c2390b4b129678ccf19d325daa.vbproj"
+            Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectTypeGuids>{30D016F9-3734-4E33-A861-5E7D899E18F3};{F184B08F-C81C-45F6-A57F-5ABD9991F28F}</ProjectTypeGuids>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{b0c5c3c9-e06e-4545-8c82-d1f610c82d4e}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>My Project</AppDesignerFolder>
+    <RootNamespace>ST_d22231c2390b4b129678ccf19d325daa</RootNamespace>
+    <AssemblyName>ST_d22231c2390b4b129678ccf19d325daa</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>true</ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>.\bin\Debug\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>.\bin\Release\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.SqlServer.ManagedDTS, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.ScriptTask, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AppDesigner Include="My Project\" />
+    <Compile Include="My Project\AssemblyInfo.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ScriptMain.vb">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <!-- Include the build rules for a VB project.-->
+  <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{30D016F9-3734-4E33-A861-5E7D899E18F3}">
+        <ProjectProperties HostName="ScriptTask"
+                           HostPackage="{B3A685AA-7EAF-4BC6-9940-57959FA5AC07}"
+                           ApplicationType="usd"
+                           Language="vb"
+                           TemplatesPath=""
+                           DebugInfoExeName="#HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\VisualStudio\10.0\InstallDir#\devenv.exe"
+                           DebugInfoCommandLine=""
+                           DebugInfoWorkingDir=""
+                           IconImageList=""/>
+
+        <Host Name="ScriptTask" IconIndex="">
+        </Host>
+        <ProjectClient>
+          <HostIdentifier>SSIS_ST120</HostIdentifier>
+        </ProjectClient>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>]]></ProjectItem>
+          <ProjectItem
+            Name="Project"
+            Encoding="UTF16LE"><![CDATA[<?xml version="1.0" encoding="UTF-16" standalone="yes"?>
+<c:Project xmlns:c="http://schemas.microsoft.com/codeprojectml/2010/08/main" xmlns:msb="http://schemas.microsoft.com/developer/msbuild/2003" runtimeVersion="3.0" schemaVersion="1.0">
+	<msb:PropertyGroup>
+		<msb:Language>msBuild</msb:Language>
+		<msb:CodeName>ST_d22231c2390b4b129678ccf19d325daa</msb:CodeName>
+		<msb:DisplayName>ST_d22231c2390b4b129678ccf19d325daa</msb:DisplayName>
+		<msb:ProjectId>{EACBF93A-5A77-4949-B902-105B121C0D16}</msb:ProjectId>
+	</msb:PropertyGroup>
+	<msb:ItemGroup>
+		<msb:Project Include="ST_d22231c2390b4b129678ccf19d325daa.vbproj"/>
+		<msb:File Include="My Project\AssemblyInfo.vb"/>
+		<msb:File Include="ScriptMain.vb"/>
+		<msb:File Include="My Project\Resources.resx"/>
+		<msb:File Include="My Project\Resources.Designer.vb"/>
+		<msb:File Include="My Project\Settings.settings"/>
+		<msb:File Include="My Project\Settings.Designer.vb"/>
+	</msb:ItemGroup>
+</c:Project>]]></ProjectItem>
+          <ProjectItem
+            Name="My Project\Resources.resx"
+            Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+</root>]]></ProjectItem>
+          <ProjectItem
+            Name="My Project\Resources.Designer.vb"
+            Encoding="UTF8"><![CDATA['------------------------------------------------------------------------------
+' <autogenerated>
+'     This code was generated by a tool.
+'
+'     Changes to this file may cause incorrect behavior and will be lost if
+'     the code is regenerated.
+' </autogenerated>
+'------------------------------------------------------------------------------
+
+Option Strict Off
+Option Explicit On
+
+
+Namespace My.Resources
+    
+    '''<summary>
+    '''   A strongly-typed resource class, for looking up localized strings, etc.
+    '''</summary>
+    'This class was auto-generated by the Strongly Typed Resource Builder
+    'class via a tool like ResGen or Visual Studio.NET.
+    'To add or remove a member, edit your .ResX file then rerun ResGen
+    'with the /str option, or rebuild your VS project.
+    Class MyResources
+        
+        Private Shared _resMgr As System.Resources.ResourceManager
+        
+        Private Shared _resCulture As System.Globalization.CultureInfo
+        
+        Friend Sub New()
+            MyBase.New
+        End Sub
+        
+        '''<summary>
+        '''   Returns the cached ResourceManager instance used by this class.
+        '''</summary>
+        <System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)>  _
+        Public Shared ReadOnly Property ResourceManager() As System.Resources.ResourceManager
+            Get
+                If (_resMgr Is Nothing) Then
+                    Dim temp As System.Resources.ResourceManager = New System.Resources.ResourceManager("My.Resources.MyResources", GetType(MyResources).Assembly)
+                    _resMgr = temp
+                End If
+                Return _resMgr
+            End Get
+        End Property
+        
+        '''<summary>
+        '''   Overrides the current thread's CurrentUICulture property for all
+        '''   resource lookups using this strongly typed resource class.
+        '''</summary>
+        <System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)>  _
+        Public Shared Property Culture() As System.Globalization.CultureInfo
+            Get
+                Return _resCulture
+            End Get
+            Set
+                _resCulture = value
+            End Set
+        End Property
+    End Class
+End Namespace]]></ProjectItem>
+          <BinaryItem
+            Name="ST_d22231c2390b4b129678ccf19d325daa.dll">TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAgAAAAA4fug4AtAnNIbgBTM0hVGhpcyBwcm9ncmFtIGNhbm5vdCBiZSBydW4gaW4gRE9TIG1v
+ZGUuDQ0KJAAAAAAAAABQRQAATAEDAGOZjlUAAAAAAAAAAOAAAiELAQsAABwAAAAGAAAAAAAALjoA
+AAAgAAAAQAAAAAAAEAAgAAAAAgAABAAAAAAAAAAEAAAAAAAAAACAAAAAAgAAAAAAAAIAQIUAABAA
+ABAAAAAAEAAAEAAAAAAAABAAAAAAAAAAAAAAANw5AABPAAAAAEAAANgDAAAAAAAAAAAAAAAAAAAA
+AAAAAGAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAIAAACAAAAAAAAAAAAAAACCAAAEgAAAAAAAAAAAAAAC50ZXh0AAAANBoAAAAgAAAAHAAAAAIA
+AAAAAAAAAAAAAAAAACAAAGAucnNyYwAAANgDAAAAQAAAAAQAAAAeAAAAAAAAAAAAAAAAAABAAABA
+LnJlbG9jAAAMAAAAAGAAAAACAAAAIgAAAAAAAAAAAAAAAAAAQAAAQgAAAAAAAAAAAAAAAAAAAAAQ
+OgAAAAAAAEgAAAACAAUA8CMAAOwVAAABAAAAAAAAADcjAAC4AAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4CKAEAAAoqHgIoBAAACiqmcwYAAAqAAQAABHMHAAAKgAIA
+AARzCAAACoADAAAEcwkAAAqABAAABCoAABMwAQALAAAAAQAAEX4BAAAEbwoAAAoqABMwAQALAAAA
+AgAAEX4CAAAEbwsAAAoqABMwAQALAAAAAwAAEX4DAAAEbwwAAAoqABMwAQALAAAABAAAEX4EAAAE
+bw0AAAoqABMwAgANAAAABQAAEQIDKBEAAAooEgAACioAAAATMAEABwAAAAYAABECKBMAAAoqABMw
+AQALAAAABwAAEdAFAAACKBQAAAoqABMwAQAHAAAACAAAEQIoFQAACioAEzABABAAAAAJAAARAowB
+AAAbLQYoAQAAKyoCKhMwAgAQAAAACgAAEQMSAP4VAgAAGwaBAgAAGyoeAigXAAAKKhMwAgAoAAAA
+CwAAEQJ7GQAACm8aAAAKCweMAwAAGy0SKAIAACsLAnsZAAAKB28bAAAKBypKAigXAAAKAnMcAAAK
+fRkAAAoqAB4CKBcAAAoqEzACAC0AAAAMAAARfgYAAAQtIHIBAABw0AcAAAIoFAAACm8eAAAKcx8A
+AAoLB4AGAAAEfgYAAAQqAAAAEzABAAYAAAANAAARfgcAAAQqAAAeAoAHAAAEKkJzFwAACigRAAAK
+gAkAAAQqAAAAHgIoIAAACiobMAEAPwAAAA4AABF+CAAABC0yfgkAAAQoEQAACighAAAKfggAAAQt
+HHMWAAAGgAgAAATeEH4JAAAEKBEAAAooIgAACtx+CAAABCoAARAAAAIAHQAMKQAQAAAAAB4CKCQA
+AAoqEzADAHsAAAAPAAARAm8lAAAKbyYAAApyMwAAcG8nAAAKbygAAApvFQAACnMpAAAKCgZvKgAA
+CgsCbyUAAApvJgAACnJRAABwbycAAAoHbysAAAoCbyUAAApvJgAACnJRAABwbycAAApvKAAACm8V
+AAAKFhQoLAAACiYCbyUAAAoWby0AAAoqtAAAAM7K774BAAAAkQAAAGxTeXN0ZW0uUmVzb3VyY2Vz
+LlJlc291cmNlUmVhZGVyLCBtc2NvcmxpYiwgVmVyc2lvbj00LjAuMC4wLCBDdWx0dXJlPW5ldXRy
+YWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkjU3lzdGVtLlJlc291cmNlcy5SdW50
+aW1lUmVzb3VyY2VTZXQCAAAAAAAAAAAAAABQQURQQURQtAAAAABCU0pCAQABAAAAAAAMAAAAdjQu
+MC4zMDMxOQAAAAAFAGwAAADYBwAAI34AAEQIAACACQAAI1N0cmluZ3MAAAAAxBEAAHgAAAAjVVMA
+PBIAABAAAAAjR1VJRAAAAEwSAACgAwAAI0Jsb2IAAAAAAAAAAgAAAVcdogkJDwAAAPolMwAWAAAB
+AAAALgAAAAoAAAAMAAAAGQAAAAQAAAA6AAAAAgAAADYAAAAPAAAABAAAAAgAAAAJAAAACQAAAAEA
+AAAFAAAAAQAAAAMAAAADAAAAAgAAAAAAWAkBAAAAAAAKAEsBIQEKAH8BYQEGAI8BiAEKAOcBIQEG
+AGUCiAEKAOcCvQIGAB0DDAMGAEoDNQMOALEDnAMSADAEBwQGAFEEiAEOAIQEbgQOAJ0EbgQOAMoE
+sgQGAPQE4QQKADMFDAUKAEsFEwAOAIAFYwUGALUFlQUGANMFiAEGAPcFiAEKABAGEwAGAFQGNQYG
+AHoGaAYGAKEGkAYGALQG4QQGANsG0QYSAOgGBwQWAEEHIQcWAFkHIQcKAHUHEwAKAIEHEwAKAI4H
+EwAGALAHiAESAMYHBwQGACAIlQUGAEAIlQUGAHgIXggGAJEIaAYGAK4INQYGALwIaAYGANcIaAYG
+APIIaAYGAAsJaAYGACQJaAYGAEEJaAYAAAAAAQAAAAAAAQABAAAAAAApADcABQABAAEAAAAAAF4A
+NwAJAAEAAgAAARAAaQA3AA0AAQADAAUBAABzAAAADQAFAAgABQEAAIEAAAANAAUADwAAAAAAnACo
+AA0ABgARAAABEADZAOQAJQAIABUAAQAAAAgB5AApAAoAGAACAQAAEwEAAC0ACgAaADEAqgEgADEA
+0wEtADEA9QE6ADEAGgJHACEA9gKQABEALQOdABEAVgOhABEAyQO/ABEA0QPDAAYGVgTZAFaAXgTc
+AFaAZgTcAFAgAAAAAAYYWwETAAEAWCAAAAAABhhbARMAAQBgIAAAAAARGJYBFwABAIwgAAAAABMI
+nQEbAAEApCAAAAAAEwjDASgAAQC8IAAAAAATCOwBNQABANQgAAAAABMICgJCAAEA7CAAAAAARgJQ
+AmMAAQAIIQAAAABGAlkCaAACABwhAAAAAIMAagJsAAIANCEAAAAARgJyAnEAAgBIIQAAAAARAHsC
+eAACAGQhAAAAAAEAmQKAAAMAgCEAAAAABhhbARMABACIIQAAAAADCK0CiwAEALwhAAAAAAYYWwET
+AAQA0CEAAAAAAxhbARMABADYIQAAAAAWCGIDpQAEABQiAAAAABYIdgOqAAQAKCIAAAAAFgiCA68A
+BAAwIgAAAAARGJYBFwAFAEQiAAAAAAYYWwETAAUATCIAAAAAFgjeA8YABQCoIgAAAAAGGFsBEwAF
+ALAiAAAAAAYATAQTAAUAAAABAFcCAAABAJACAAABAJACAAABAI4DCQBbARMAYQBbAeoAcQBbAfkA
+EQBbARMAeQBbARMAJABbARMALABbARMANABbARMAPABbARMAJACtAosALACtAosANACtAosAPACt
+AosAgQBbARMAiQBbARMAkQBbAUgBmQDEBZMBGQBQAmMAGQBZAmgAKQDlBaABGQByAnEAqQABBrAB
+GQBbARMAsQBbAcABRAD2ApAATADeA4sATAArBj0CTABbARMAuQBbAUwCKQCDBlcCOQBbAVwCSQBb
+ARMAyQCpBngCyQCvBngC0QBbARMAUQBbARMAUQD6BoIC4QBLB4cC6QBiB4wC8QDeA5IC2QBbAUgB
+2QBrB3EA8QArBpYC+QCaB5sC4QChB6YCEQFbAUwCGQFbARMAIQFbAaYCKQFbARMAMQFbAUgBOQFb
+AUgBQQFbAUgBSQFbAUgBUQFbAUgBWQFbAUgBYQFbAUgBaQFbAUgBcQFbAUgBCAAsAOAACAAwAOUA
+KQCDAHUBLgC7AXUDLgDTAXUDLgCzAV4DLgCLAboCLgCTAdkCLgCrAVECLgDLAVECLgCDAbECLgDD
+AVECLgCbASEDLgCjAS4DLgDrAFECLgBzAVgDQAArAOUAQAATAPAAQwATAPAAQwAbAP8ASQCDAE0B
+YwATAPAAYwAbAP8AaQCDAIYBgAArAOUAgwB7AOUAgwBzAOUAgwAbAP8AiQCDAGEBoAArAOUAowDD
+AMgBowATAPAAwAArAOUAwwATAPAAwwDrAFECyQATAG8C4AArAOUA6QATAG8CAAErAOUAAAETAPAA
+CQEbAeUAIAErAOUAIAETAPAAIwF7AeUAIwFzAVECQAErAOUAQAETAPAAYAETAPAAYAErAOUAgAEr
+AOUAoAErAOUAwAErAOUAwAETAPAA4AErAOUAAAITAPAAAAIrAOUANAE5AT4BQwGYAZwBpwGsAbsB
+uwFDAmMCagJ9AqsCBAABAAYABQAHAAYACAAIAAAAfwFPAAAAOAJUAAAA5wFZAAAARAJeAAAAAAOY
+AAAAHQO1AAAAlAO6AAAAjgPLAAIABAADAAIABQAFAAIABgAHAAIABwAJAAIADwALAAIAEgANAAIA
+EwAPAAEAFAAPAAIAFwARAHUAdQCIABgBHwEmAS0BKgIxAgSAAAABAAAAAAAAAAAAAAAAAOQAAAAE
+AAAAAAAAAAAAAAABAAoAAAAAAAoAAAAAAAAAAAAAAAoAEwAAAAAABAAAAAAAAAAAAAAAAQCIAQAA
+AAAMAAAAAAAAAAAAAADQAOgDAAAAAAwAAAAAAAAAAAAAANAAAgcAAAAAAAAAAAEAAADoBwAABQAE
+AAYABAAKAAkAAAAQAAwAjgIAABAAGQCOAgAAAAAbAI4CLQC2AS0AOAIAAAAAADxNb2R1bGU+AG1z
+Y29ybGliAE1pY3Jvc29mdC5WaXN1YWxCYXNpYwBNeUFwcGxpY2F0aW9uAFNUX2QyMjIzMWMyMzkw
+YjRiMTI5Njc4Y2NmMTlkMzI1ZGFhLk15AE15Q29tcHV0ZXIATXlQcm9qZWN0AE15V2ViU2Vydmlj
+ZXMAVGhyZWFkU2FmZU9iamVjdFByb3ZpZGVyYDEATXlSZXNvdXJjZXMAU1RfZDIyMjMxYzIzOTBi
+NGIxMjk2NzhjY2YxOWQzMjVkYWEuTXkuUmVzb3VyY2VzAE15U2V0dGluZ3MAU1RfZDIyMjMxYzIz
+OTBiNGIxMjk2NzhjY2YxOWQzMjVkYWEAU2NyaXB0TWFpbgBTY3JpcHRSZXN1bHRzAE1pY3Jvc29m
+dC5WaXN1YWxCYXNpYy5BcHBsaWNhdGlvblNlcnZpY2VzAEFwcGxpY2F0aW9uQmFzZQAuY3RvcgBN
+aWNyb3NvZnQuVmlzdWFsQmFzaWMuRGV2aWNlcwBDb21wdXRlcgBTeXN0ZW0AT2JqZWN0AC5jY3Rv
+cgBnZXRfQ29tcHV0ZXIAbV9Db21wdXRlck9iamVjdFByb3ZpZGVyAGdldF9BcHBsaWNhdGlvbgBt
+X0FwcE9iamVjdFByb3ZpZGVyAFVzZXIAZ2V0X1VzZXIAbV9Vc2VyT2JqZWN0UHJvdmlkZXIAZ2V0
+X1dlYlNlcnZpY2VzAG1fTXlXZWJTZXJ2aWNlc09iamVjdFByb3ZpZGVyAEFwcGxpY2F0aW9uAFdl
+YlNlcnZpY2VzAEVxdWFscwBvAEdldEhhc2hDb2RlAFR5cGUAR2V0VHlwZQBUb1N0cmluZwBDcmVh
+dGVfX0luc3RhbmNlX18AVABpbnN0YW5jZQBEaXNwb3NlX19JbnN0YW5jZV9fAGdldF9HZXRJbnN0
+YW5jZQBNaWNyb3NvZnQuVmlzdWFsQmFzaWMuTXlTZXJ2aWNlcy5JbnRlcm5hbABDb250ZXh0VmFs
+dWVgMQBtX0NvbnRleHQAR2V0SW5zdGFuY2UAU3lzdGVtLlJlc291cmNlcwBSZXNvdXJjZU1hbmFn
+ZXIAX3Jlc01ncgBTeXN0ZW0uR2xvYmFsaXphdGlvbgBDdWx0dXJlSW5mbwBfcmVzQ3VsdHVyZQBn
+ZXRfUmVzb3VyY2VNYW5hZ2VyAGdldF9DdWx0dXJlAHNldF9DdWx0dXJlAFZhbHVlAEN1bHR1cmUA
+U3lzdGVtLkNvbmZpZ3VyYXRpb24AQXBwbGljYXRpb25TZXR0aW5nc0Jhc2UAbV9WYWx1ZQBtX1N5
+bmNPYmplY3QAZ2V0X1ZhbHVlAE1pY3Jvc29mdC5TcWxTZXJ2ZXIuU2NyaXB0VGFzawBNaWNyb3Nv
+ZnQuU3FsU2VydmVyLkR0cy5UYXNrcy5TY3JpcHRUYXNrAFZTVEFSVFNjcmlwdE9iamVjdE1vZGVs
+QmFzZQBNYWluAEVudW0AdmFsdWVfXwBTdWNjZXNzAEZhaWx1cmUAU3lzdGVtLkNvbXBvbmVudE1v
+ZGVsAEVkaXRvckJyb3dzYWJsZUF0dHJpYnV0ZQBFZGl0b3JCcm93c2FibGVTdGF0ZQBTeXN0ZW0u
+Q29kZURvbS5Db21waWxlcgBHZW5lcmF0ZWRDb2RlQXR0cmlidXRlAFN5c3RlbS5EaWFnbm9zdGlj
+cwBEZWJ1Z2dlckhpZGRlbkF0dHJpYnV0ZQBNaWNyb3NvZnQuVmlzdWFsQmFzaWMuQ29tcGlsZXJT
+ZXJ2aWNlcwBTdGFuZGFyZE1vZHVsZUF0dHJpYnV0ZQBIaWRlTW9kdWxlTmFtZUF0dHJpYnV0ZQBT
+eXN0ZW0uQ29tcG9uZW50TW9kZWwuRGVzaWduAEhlbHBLZXl3b3JkQXR0cmlidXRlAFN5c3RlbS5S
+dW50aW1lLkNvbXBpbGVyU2VydmljZXMAUnVudGltZUhlbHBlcnMAR2V0T2JqZWN0VmFsdWUAUnVu
+dGltZVR5cGVIYW5kbGUAR2V0VHlwZUZyb21IYW5kbGUAQWN0aXZhdG9yAENyZWF0ZUluc3RhbmNl
+AE15R3JvdXBDb2xsZWN0aW9uQXR0cmlidXRlAHNldF9WYWx1ZQBTeXN0ZW0uUnVudGltZS5JbnRl
+cm9wU2VydmljZXMAQ29tVmlzaWJsZUF0dHJpYnV0ZQBTeXN0ZW0uUmVmbGVjdGlvbgBBc3NlbWJs
+eQBnZXRfQXNzZW1ibHkAU3lzdGVtLlRocmVhZGluZwBNb25pdG9yAEVudGVyAEV4aXQARGVidWdn
+ZXJOb25Vc2VyQ29kZUF0dHJpYnV0ZQBTeXN0ZW0uSU8AU3RyZWFtUmVhZGVyAFNjcmlwdE9iamVj
+dE1vZGVsAGdldF9EdHMATWljcm9zb2Z0LlNxbFNlcnZlci5NYW5hZ2VkRFRTAE1pY3Jvc29mdC5T
+cWxTZXJ2ZXIuRHRzLlJ1bnRpbWUAVmFyaWFibGVzAGdldF9WYXJpYWJsZXMAVmFyaWFibGUAZ2V0
+X0l0ZW0AUmVhZFRvRW5kAEludGVyYWN0aW9uAE1zZ0JveFJlc3VsdABNc2dCb3hTdHlsZQBNc2dC
+b3gAc2V0X1Rhc2tSZXN1bHQAQ0xTQ29tcGxpYW50QXR0cmlidXRlAFNTSVNTY3JpcHRUYXNrRW50
+cnlQb2ludEF0dHJpYnV0ZQBTVF9kMjIyMzFjMjM5MGI0YjEyOTY3OGNjZjE5ZDMyNWRhYS5SZXNv
+dXJjZXMucmVzb3VyY2VzAENvbXBpbGF0aW9uUmVsYXhhdGlvbnNBdHRyaWJ1dGUAUnVudGltZUNv
+bXBhdGliaWxpdHlBdHRyaWJ1dGUAU3lzdGVtLlJ1bnRpbWUuVmVyc2lvbmluZwBUYXJnZXRGcmFt
+ZXdvcmtBdHRyaWJ1dGUAQXNzZW1ibHlGaWxlVmVyc2lvbkF0dHJpYnV0ZQBHdWlkQXR0cmlidXRl
+AEFzc2VtYmx5VHJhZGVtYXJrQXR0cmlidXRlAEFzc2VtYmx5Q29weXJpZ2h0QXR0cmlidXRlAEFz
+c2VtYmx5UHJvZHVjdEF0dHJpYnV0ZQBBc3NlbWJseUNvbXBhbnlBdHRyaWJ1dGUAQXNzZW1ibHlE
+ZXNjcmlwdGlvbkF0dHJpYnV0ZQBBc3NlbWJseVRpdGxlQXR0cmlidXRlAFNUX2QyMjIzMWMyMzkw
+YjRiMTI5Njc4Y2NmMTlkMzI1ZGFhLmRsbAAAMU0AeQAuAFIAZQBzAG8AdQByAGMAZQBzAC4ATQB5
+AFIAZQBzAG8AdQByAGMAZQBzAAAdRgBvAGwAZABlAHIASQBuAGYAbwBGAGkAbABlAAAjUABhAGMA
+awBhAGcAZQBJAG4AZgBvAFgATQBMAFIAYQB3AAAAAACvE72Hba8tRokAtSnLYpV8AAi3elxWGTTg
+iQiwP19/EdUKOgMgAAEDAAABBAAAEgwHBhUSGAESDAQAABIIBwYVEhgBEggEAAASEQcGFRIYARIR
+BAAAEhQHBhUSGAESFAQIABIMBAgAEggECAASEQQIABIUBCABAhwDIAAIBCAAEhUDIAAOAh4ABxAB
+AR4AHgAHMAEBARAeAAITAAQgABMABwYVEhkBEwAEKAATAAMGEh0DBhIhBAAAEh0EAAASIQUAAQES
+IQQIABIdBAgAEiEDBhIgAgYcBAAAEiAECAASIAiJhF3NgIDMkQIGCAMGESgEAAAAAAQBAAAABSAB
+ARE1CAEAAQAAAAAABSACAQ4OGAEACk15VGVtcGxhdGUIMTAuMC4wLjAAAAYVEhgBEgwGFRIYARII
+BhUSGAESEQYVEhgBEhQEBwESDAQHARIIBAcBEhEEBwESFAQgAQEOEwEADk15LkFwcGxpY2F0aW9u
+AAATAQAOTXkuV2ViU2VydmljZXMAABABAAtNeS5Db21wdXRlcgAADAEAB015LlVzZXIAAAQAARwc
+AwcBAgMHAQgGAAESFRFRBAcBEhUDBwEOBRABAB4ABAoBHgAEBwEeAAcgBAEODg4OYQEANFN5c3Rl
+bS5XZWIuU2VydmljZXMuUHJvdG9jb2xzLlNvYXBIdHRwQ2xpZW50UHJvdG9jb2wSQ3JlYXRlX19J
+bnN0YW5jZV9fE0Rpc3Bvc2VfX0luc3RhbmNlX18AAAAGFRIYARMABhUSGQETAAQKARMABSABARMA
+CAcDEwATABMABCABAQIFAQAAAAAEIAASYQYgAgEOEmEGBwISHRIdBAcBEiEIAQACAAAAAAAEAAEB
+HAQHARIgBCAAEnEEIAASdQUgARJ5HAMgABwEIAEBHAoAAxGAgRwRgIUcBCABAQgFBwISbQ4IAQAI
+AAAAAAAeAQABAFQCFldyYXBOb25FeGNlcHRpb25UaHJvd3MBRwEAGi5ORVRGcmFtZXdvcmssVmVy
+c2lvbj12NC4wAQBUDhRGcmFtZXdvcmtEaXNwbGF5TmFtZRAuTkVUIEZyYW1ld29yayA0DAEABzEu
+MC4wLjAAACkBACRlNGYzZWRhOS0zMmZjLTQ3OTYtOTQxZi1kYWIzNTQ2ZWIyMmYAAAUBAAEAABYB
+ABFDb3B5cmlnaHQgQCAgMjAxNQAAKAEAI1NUX2QyMjIzMWMyMzkwYjRiMTI5Njc4Y2NmMTlkMzI1
+ZGFhAAAAAAQ6AAAAAAAAAAAAAB46AAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQOgAAAAAAAAAA
+AAAAAF9Db3JEbGxNYWluAG1zY29yZWUuZGxsAAAAAAD/JQAgABAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB
+ABAAAAAYAACAAAAAAAAAAAAAAAAAAAABAAEAAAAwAACAAAAAAAAAAAAAAAAAAAABAAAAAABIAAAA
+WEAAAIADAAAAAAAAAAAAAIADNAAAAFYAUwBfAFYARQBSAFMASQBPAE4AXwBJAE4ARgBPAAAAAAC9
+BO/+AAABAAAAAQAAAAAAAAABAAAAAAA/AAAAAAAAAAQAAAACAAAAAAAAAAAAAAAAAAAARAAAAAEA
+VgBhAHIARgBpAGwAZQBJAG4AZgBvAAAAAAAkAAQAAABUAHIAYQBuAHMAbABhAHQAaQBvAG4AAAAA
+AAAAsATgAgAAAQBTAHQAcgBpAG4AZwBGAGkAbABlAEkAbgBmAG8AAAC8AgAAAQAwADAAMAAwADAA
+NABiADAAAABwACQAAQBGAGkAbABlAEQAZQBzAGMAcgBpAHAAdABpAG8AbgAAAAAAUwBUAF8AZAAy
+ADIAMgAzADEAYwAyADMAOQAwAGIANABiADEAMgA5ADYANwA4AGMAYwBmADEAOQBkADMAMgA1AGQA
+YQBhAAAAMAAIAAEARgBpAGwAZQBWAGUAcgBzAGkAbwBuAAAAAAAxAC4AMAAuADAALgAwAAAAcAAo
+AAEASQBuAHQAZQByAG4AYQBsAE4AYQBtAGUAAABTAFQAXwBkADIAMgAyADMAMQBjADIAMwA5ADAA
+YgA0AGIAMQAyADkANgA3ADgAYwBjAGYAMQA5AGQAMwAyADUAZABhAGEALgBkAGwAbAAAAEgAEgAB
+AEwAZQBnAGEAbABDAG8AcAB5AHIAaQBnAGgAdAAAAEMAbwBwAHkAcgBpAGcAaAB0ACAAQAAgACAA
+MgAwADEANQAAAHgAKAABAE8AcgBpAGcAaQBuAGEAbABGAGkAbABlAG4AYQBtAGUAAABTAFQAXwBk
+ADIAMgAyADMAMQBjADIAMwA5ADAAYgA0AGIAMQAyADkANgA3ADgAYwBjAGYAMQA5AGQAMwAyADUA
+ZABhAGEALgBkAGwAbAAAAGgAJAABAFAAcgBvAGQAdQBjAHQATgBhAG0AZQAAAAAAUwBUAF8AZAAy
+ADIAMgAzADEAYwAyADMAOQAwAGIANABiADEAMgA5ADYANwA4AGMAYwBmADEAOQBkADMAMgA1AGQA
+YQBhAAAANAAIAAEAUAByAG8AZAB1AGMAdABWAGUAcgBzAGkAbwBuAAAAMQAuADAALgAwAC4AMAAA
+ADgACAABAEEAcwBzAGUAbQBiAGwAeQAgAFYAZQByAHMAaQBvAG4AAAAxAC4AMAAuADAALgAwAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAMAAAAMDoAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
+        </ScriptProject>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\XML Task"
+      DTS:CreationName="Microsoft.XMLTask"
+      DTS:Description="XML Task"
+      DTS:DTSID="{B5496F5B-5C11-4AC6-BAF6-6E75DD9BF0B1}"
+      DTS:ExecutableType="Microsoft.XMLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="XML Task"
+      DTS:TaskContact="XML Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <XMLTaskData
+          OperationType="XSLT"
+          SourceType="Variable"
+          Source="User::PackageInfoXMLRaw"
+          SecondOperandType="FileConnection"
+          SecondOperand="package-info.xslt"
+          SaveOperationResult="True"
+          DestinationType="Variable"
+          Destination="User::PackageInfoXMLTranformed"
+          OverwriteDestination="True" />
       </DTS:ObjectData>
     </DTS:Executable>
   </DTS:Executables>
@@ -254,11 +1362,27 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
       DTS:CreationName=""
-      DTS:DTSID="{77525441-9E31-4BCE-9643-FD44CFFB0093}"
-      DTS:From="Package\Expression Task"
+      DTS:DTSID="{C29240CE-5F9C-4AD8-BC6A-8CD5E077500F}"
+      DTS:From="Package\Expression Task InfoXML Path"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Script Task Read InfoXML" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{BDB00B96-952D-4A04-8AEF-D45C62E74423}"
+      DTS:From="Package\XML Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
       DTS:To="Package\import info file from package" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{2AFDB96A-2648-4CA2-9C17-FF301FC670B8}"
+      DTS:From="Package\Script Task Read InfoXML"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\XML Task" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
@@ -271,48 +1395,112 @@
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="157,42"
-          Id="Package\Expression Task"
+          Id="Package\Expression Task InfoXML Path"
           TopLeft="98,21" />
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="205,55"
+          PanelSize="215,55"
           Size="215,98"
           Id="Package\Foreach Loop Container"
-          TopLeft="81,252" />
+          TopLeft="103,480" />
         <NodeLayout
           Size="217,42"
           Id="Package\import info file from package"
-          TopLeft="72,111" />
+          TopLeft="79,307" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="180.5,153">
+          TopLeft="187.5,349">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="8,99"
+              EndConnector="23,131"
               Start="0,0"
-              End="8,91.5">
+              End="23,123.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,45.5" />
+                    End="0,61.5" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,45.5"
-                    Point2="0,49.5"
-                    Point3="4,49.5" />
+                    Point1="0,61.5"
+                    Point2="0,65.5"
+                    Point3="4,65.5" />
                   <mssgle:LineSegment
-                    End="4,49.5" />
+                    End="19,65.5" />
                   <mssgle:CubicBezierSegment
-                    Point1="4,49.5"
-                    Point2="8,49.5"
-                    Point3="8,53.5" />
+                    Point1="19,65.5"
+                    Point2="23,65.5"
+                    Point3="23,69.5" />
                   <mssgle:LineSegment
-                    End="8,91.5" />
+                    End="23,123.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="126,42"
+          Id="Package\XML Task"
+          TopLeft="123,207" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="186.75,249">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,58"
+              Start="0,0"
+              End="0,50.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,50.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="202,42"
+          Id="Package\Script Task Read InfoXML"
+          TopLeft="135,116" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="176.5,63">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="59.5,53"
+              Start="0,0"
+              End="59.5,45.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,22.5"
+                    Point2="0,26.5"
+                    Point3="4,26.5" />
+                  <mssgle:LineSegment
+                    End="55.5,26.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="55.5,26.5"
+                    Point2="59.5,26.5"
+                    Point3="59.5,30.5" />
+                  <mssgle:LineSegment
+                    End="59.5,45.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -322,19 +1510,31 @@
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="178.5,63">
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="236,158">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,48"
+              EndConnector="-50,49"
               Start="0,0"
-              End="0,40.5">
+              End="-50,41.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,40.5" />
+                    End="0,20.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.5"
+                    Point2="0,24.5"
+                    Point3="-4,24.5" />
+                  <mssgle:LineSegment
+                    End="-46,24.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-46,24.5"
+                    Point2="-50,24.5"
+                    Point3="-50,28.5" />
+                  <mssgle:LineSegment
+                    End="-50,41.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -350,15 +1550,75 @@
     design-time-name="Package\import info file from package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="190,42"
           Id="Package\import info file from package\SQL Server Destination"
-          TopLeft="109,220" />
+          TopLeft="144,458" />
         <NodeLayout
-          Size="119,42"
-          Id="Package\import info file from package\info xml"
-          TopLeft="129,74" />
+          Size="136,42"
+          Id="Package\import info file from package\XML Source"
+          TopLeft="158,87" />
+        <NodeLayout
+          Size="158,42"
+          Id="Package\import info file from package\Data Conversion"
+          TopLeft="159,248" />
+        <EdgeLayout
+          Id="Package\import info file from package.Paths[Info]"
+          TopLeft="226,129">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="12,119"
+              Start="0,0"
+              End="12,111.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,55.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,55.5"
+                    Point2="0,59.5"
+                    Point3="4,59.5" />
+                  <mssgle:LineSegment
+                    End="8,59.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="8,59.5"
+                    Point2="12,59.5"
+                    Point3="12,63.5" />
+                  <mssgle:LineSegment
+                    End="12,111.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\import info file from package.Paths[Data Conversion Output]"
+          TopLeft="238.5,290">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,168"
+              Start="0,0"
+              End="0,160.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,160.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>

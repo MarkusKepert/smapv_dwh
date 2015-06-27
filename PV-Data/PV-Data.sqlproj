@@ -63,14 +63,14 @@
     <Folder Include="dbo\Tables\" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\Tables\BulkImport_Info.sql" />
+    <Build Include="dbo\Tables\BulkImport_PackageInfo.sql" />
     <Build Include="dbo\Tables\BulkImport.sql" />
     <Build Include="dbo\Tables\BulkImportLog.sql" />
-    <Build Include="dbo\Tables\BulkImportPackageInfo.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="PV-Data.publish.xml" />
     <None Include="PV-Data_1.publish.xml" />
+    <None Include="PV-Testimport.publish.xml" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="PV-Data.refactorlog" />

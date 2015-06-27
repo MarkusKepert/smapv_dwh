@@ -26,7 +26,7 @@
           <SSIS:Property SSIS:Name="CreatorComputerName">PNC-DEV06</SSIS:Property>
           <SSIS:Property SSIS:Name="Description">
           </SSIS:Property>
-          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAASgq5zSzqR0SEvmJXydjcigAAAAACAAAAAAADZgAAwAAAABAAAABkYooT7pkThuW0aNzLK8M7AAAAAASAAACgAAAAEAAAAB5uHtyoHcWpjjehaV1CvJGIAAAAUO5LLMzEXZzGRF4W19kp5hG40SiP2Fm8hRncqKEPPMmkjTyIJs08lG5iPRvYNgniYvTDUzFAlxMfyeAzy08x6yTUVVnoNLtHB6sQjn0YbHPZhygCOO/UteotTP99OSxYCeKz9jrVuKhJdBEC+rukZUe6XO87KChJQt3i3wMRsJVNCZsJMky7rBQAAACBwxUxew1pAYXDmbv7ekU7qM1VxQ==</SSIS:Property>
+          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAATbrXSzA2kkCD595gi2vRsQAAAAACAAAAAAADZgAAwAAAABAAAACsxCvf6P7un1nYMMqbC/1bAAAAAASAAACgAAAAEAAAAG4TvmRZFveFTH3/krUT/uSIAAAAMAjTBah5JFOWKg0KOjS9chO0D96AYNIU+p3jI+5/S3S3Ow4kz1UX8LfX/0+1yu8vzlJ5JXSLZBBsjX7yNiUN3JHpJ0NTP1c4aQHa9xtRmpO3BToAISpDBNvrOAtImMwk3JmdIcgivg6Lm5o3VeoXqbzGMu0scpJNABv7m0naeTrxJVG+UcBCDBQAAAAyGrFx3kD4H+3a6HcE7E0anRc0/w==</SSIS:Property>
           <SSIS:Property SSIS:Name="FormatVersion">1</SSIS:Property>
         </SSIS:Properties>
         <SSIS:Packages>
@@ -44,10 +44,10 @@
                 <SSIS:Property SSIS:Name="Name">01ExtractSources</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionBuild">37</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">39</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{80463BDF-15F0-4C59-B6AD-EDED4F0870EE}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{BB6272B1-AF01-4DA1-9F5C-F6A48CEE0968}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
@@ -223,10 +223,10 @@
                 <SSIS:Property SSIS:Name="Name">02ProcessSourceContent</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionBuild">4</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">12</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{1DF19B67-5804-4D2D-8F74-99C8587CE58D}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{4C41210A-04C9-4E58-8E14-4BE4EFB1A130}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
@@ -245,6 +245,21 @@
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Value">
                     </SSIS:Property>
+                    <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
+                  </SSIS:Properties>
+                </SSIS:Parameter>
+                <SSIS:Parameter SSIS:Name="CM.package-info.xslt.ConnectionString">
+                  <SSIS:Properties>
+                    <SSIS:Property SSIS:Name="ID">
+                    </SSIS:Property>
+                    <SSIS:Property SSIS:Name="CreationName">
+                    </SSIS:Property>
+                    <SSIS:Property SSIS:Name="Description">
+                    </SSIS:Property>
+                    <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">C:\PVDATA\xsd\package-info.xslt</SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
@@ -336,6 +351,21 @@
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
+                <SSIS:Parameter SSIS:Name="CM.text.xml.ConnectionString">
+                  <SSIS:Properties>
+                    <SSIS:Property SSIS:Name="ID">
+                    </SSIS:Property>
+                    <SSIS:Property SSIS:Name="CreationName">
+                    </SSIS:Property>
+                    <SSIS:Property SSIS:Name="Description">
+                    </SSIS:Property>
+                    <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">C:\PVDATA\new\text.xml</SSIS:Property>
+                    <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
+                  </SSIS:Properties>
+                </SSIS:Parameter>
               </SSIS:Parameters>
             </SSIS:PackageMetaData>
             <SSIS:PackageMetaData SSIS:Name="03pvdataimport.dtsx">
@@ -344,10 +374,10 @@
                 <SSIS:Property SSIS:Name="Name">03pvdataimport</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionBuild">21</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">23</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{AEA8517B-EC8E-4555-9BFE-9401A88C0600}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{2C79AFAB-F99F-4A1F-AE6F-E24EAE187CC9}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
