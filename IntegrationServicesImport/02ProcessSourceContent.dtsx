@@ -11,8 +11,8 @@
   DTS:LocaleID="1031"
   DTS:ObjectName="02ProcessSourceContent"
   DTS:PackageType="5"
-  DTS:VersionBuild="28"
-  DTS:VersionGUID="{0F0034BA-51ED-48B5-A308-2C260F35F934}">
+  DTS:VersionBuild="42"
+  DTS:VersionGUID="{33EBD0A9-5492-472E-BC53-044635EC47C6}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -74,6 +74,26 @@
   <DTS:Variables>
     <DTS:Variable
       DTS:CreationName=""
+      DTS:DTSID="{17A7BB83-51E2-4994-9799-EF7EDF7456B4}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="currentDataZipFile">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{38DAFC17-B446-4ED6-8172-2F929349E48F}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="currentTempDir">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
       DTS:DTSID="{916916A9-1B58-436C-A84F-6D67790AA45E}"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
@@ -81,6 +101,24 @@
       <DTS:VariableValue
         DTS:DataType="8"
         xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{DA246EEB-BA3C-46D9-B6E4-FC904E0D1130}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="PackageInfoSerialNumbers">
+      <DTS:VariableValue
+        DTS:DataSubType="ManagedSerializable"
+        DTS:DataType="13">
+        <SOAP-ENV:Envelope xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <SOAP-ENV:Body>
+            <xsd:anyType
+              id="ref-1"></xsd:anyType>
+          </SOAP-ENV:Body>
+        </SOAP-ENV:Envelope>
+      </DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
@@ -123,13 +161,134 @@
     <DTS:Executable
       DTS:refId="Package\Foreach zip in package"
       DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:DelayValidation="True"
       DTS:Description="Foreach Loop Container"
       DTS:DTSID="{E894A3E5-763C-4613-81DD-B69383465F92}"
       DTS:ExecutableType="STOCK:FOREACHLOOP"
       DTS:LocaleID="-1"
       DTS:ObjectName="Foreach zip in package">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.ForEachFileEnumerator"
+        DTS:DTSID="{E101EE36-7B3D-4D05-8B6A-5146D52B5922}"
+        DTS:ObjectName="{E101EE36-7B3D-4D05-8B6A-5146D52B5922}">
+        <DTS:PropertyExpression
+          DTS:Name="Directory">@[$Package::SourceDir]</DTS:PropertyExpression>
+        <DTS:PropertyExpression
+          DTS:Name="FileSpec">"*.zip"</DTS:PropertyExpression>
+        <DTS:ObjectData>
+          <ForEachFileEnumeratorProperties>
+            <FEFEProperty
+              Folder="" />
+            <FEFEProperty
+              FileSpec="*.zip" />
+            <FEFEProperty
+              FileNameRetrievalType="0" />
+            <FEFEProperty
+              Recurse="0" />
+          </ForEachFileEnumeratorProperties>
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
       <DTS:Variables />
-      <DTS:Executables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Foreach zip in package\create temp dir for current data zip"
+          DTS:CreationName="Microsoft.FileSystemTask"
+          DTS:DelayValidation="True"
+          DTS:Description="File System Task"
+          DTS:DTSID="{7BF3BD4B-592F-4E1A-AE67-86AC01C43349}"
+          DTS:ExecutableType="Microsoft.FileSystemTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="create temp dir for current data zip"
+          DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <FileSystemData
+              TaskOperationType="CreateDirectory"
+              TaskSourcePath="User::currentTempDir"
+              TaskIsSourceVariable="True" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Foreach zip in package\extract temp dir name from file"
+          DTS:CreationName="Microsoft.ExpressionTask"
+          DTS:Description="Expression Task"
+          DTS:DTSID="{39AE0994-6814-429C-A1A7-3BA7DDFF738E}"
+          DTS:ExecutableType="Microsoft.ExpressionTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="extract temp dir name from file"
+          DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExpressionTask
+              Expression="@[User::currentTempDir] = LEFT( @[User::currentDataZipFile] , LEN( @[User::currentDataZipFile]  )   -FINDSTRING(REVERSE( @[User::currentDataZipFile]  ), &quot;.&quot;, 1))" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Foreach zip in package\Unzip Task"
+          DTS:CreationName="ilionx.SSIS.Tasks.UnZip, ilionx.SSIS.Tasks.UnZip, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e0ae07b0fa049276"
+          DTS:DelayValidation="True"
+          DTS:Description="Unzip Task"
+          DTS:DTSID="{1D52C2B8-D7F5-4B57-BE59-CD3215834255}"
+          DTS:ExecutableType="ilionx.SSIS.Tasks.UnZip, ilionx.SSIS.Tasks.UnZip, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e0ae07b0fa049276"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Unzip Task"
+          DTS:TaskContact="Marc Potters and Joost van Rossum, Ilionx Noord Nederland."
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <UnzipTask
+              FireInformationMessages="False"
+              DeleteSource="False"
+              FilePathSource=""
+              HasConnectionmanagerSource="False"
+              HasVariableSource="True"
+              SelectedConnectionManagerIDSource=""
+              SelectedVariableIDSource="{17A7BB83-51E2-4994-9799-EF7EDF7456B4}"
+              FilePathDestination=""
+              HasConnectionmanagerDestination="False"
+              HasVariableDestination="True"
+              SelectedConnectionManagerIDDestination=""
+              SelectedVariableIDDestination="{38DAFC17-B446-4ED6-8172-2F929349E48F}"
+              Filter="*.*"
+              RegexFilter=".*\.*$"
+              TraverseSubfolder="True"
+              WildcardSelected="True"
+              IgnoreCase="False"
+              OverwriteFile="True"
+              ZipPassword=""
+              SelectedVariableIDZipPassword=""
+              SelectedVariableIDUnZippedFile="" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Foreach zip in package.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{AF7ADC52-17FD-4A10-8C02-FA2539F57F37}"
+          DTS:From="Package\Foreach zip in package\extract temp dir name from file"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Foreach zip in package\create temp dir for current data zip" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Foreach zip in package.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{8EFC511A-AF18-402A-9DDE-7F29D65392CB}"
+          DTS:From="Package\Foreach zip in package\create temp dir for current data zip"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Foreach zip in package\Unzip Task" />
+      </DTS:PrecedenceConstraints>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{8318E582-63A6-4DB9-AB26-30EB609D86C3}"
+          DTS:ObjectName="{8318E582-63A6-4DB9-AB26-30EB609D86C3}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::currentDataZipFile" />
+      </DTS:ForEachVariableMappings>
     </DTS:Executable>
     <DTS:Executable
       DTS:refId="Package\import info-xml from package"
@@ -314,6 +473,72 @@
                   <externalMetadataColumns />
                 </output>
               </outputs>
+            </component>
+            <component
+              refId="Package\import info-xml from package\Multicast"
+              componentClassID="Microsoft.Multicast"
+              contactInfo="Multicast;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Distributes every input row to every row in one or more outputs. For example, branch your data flow to make a copy of data so that some values can be masked before sharing with external partners."
+              name="Multicast">
+              <inputs>
+                <input
+                  refId="Package\import info-xml from package\Multicast.Inputs[Multicast Input 1]"
+                  name="Multicast Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\import info-xml from package\Multicast.Outputs[Multicast Output 1]"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 1"
+                  synchronousInputId="Package\import info-xml from package\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\import info-xml from package\Multicast.Outputs[Multicast Output 2]"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 2"
+                  synchronousInputId="Package\import info-xml from package\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\import info-xml from package\Multicast.Outputs[Multicast Output 3]"
+                  dangling="true"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 3"
+                  synchronousInputId="Package\import info-xml from package\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\import info-xml from package\Recordset Destination"
+              componentClassID="Microsoft.RecordsetDestination"
+              contactInfo="Recordset Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates and populates an in-memory ADO recordset that is available outside of the data flow. Scripts and other package elements can use the recordset. For example, use a recordset to store the names of files that will be loaded into the data warehouse."
+              name="Recordset Destination">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the recordset."
+                  name="VariableName">User::PackageInfoSerialNumbers</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\import info-xml from package\Recordset Destination.Inputs[Recordset Destination Input]"
+                  hasSideEffects="true"
+                  name="Recordset Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\import info-xml from package\Recordset Destination.Inputs[Recordset Destination Input].Columns[SerialNumber]"
+                      cachedDataType="ui4"
+                      cachedName="SerialNumber"
+                      lineageId="Package\import info-xml from package\XML Source.Outputs[Info].Columns[SerialNumber]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
             </component>
             <component
               refId="Package\import info-xml from package\SQL Server Destination"
@@ -733,7 +958,7 @@
               startId="Package\import info-xml from package\Data Conversion.Outputs[Data Conversion Output]" />
             <path
               refId="Package\import info-xml from package.Paths[Derived Column Output]"
-              endId="Package\import info-xml from package\SQL Server Destination.Inputs[SQL Server Destination Input]"
+              endId="Package\import info-xml from package\Multicast.Inputs[Multicast Input 1]"
               name="Derived Column Output"
               startId="Package\import info-xml from package\Derived Column.Outputs[Derived Column Output]" />
             <path
@@ -741,6 +966,16 @@
               endId="Package\import info-xml from package\Data Conversion.Inputs[Data Conversion Input]"
               name="Info"
               startId="Package\import info-xml from package\XML Source.Outputs[Info]" />
+            <path
+              refId="Package\import info-xml from package.Paths[Multicast Output 1]"
+              endId="Package\import info-xml from package\SQL Server Destination.Inputs[SQL Server Destination Input]"
+              name="Multicast Output 1"
+              startId="Package\import info-xml from package\Multicast.Outputs[Multicast Output 1]" />
+            <path
+              refId="Package\import info-xml from package.Paths[Multicast Output 2]"
+              endId="Package\import info-xml from package\Recordset Destination.Inputs[Recordset Destination Input]"
+              name="Multicast Output 2"
+              startId="Package\import info-xml from package\Multicast.Outputs[Multicast Output 2]" />
           </paths>
         </pipeline>
       </DTS:ObjectData>
@@ -902,7 +1137,7 @@ Partial Public Class ScriptMain
 
         ''To test, I�ll add another script task. This task will show a message box with the contents of our variable. Following is the script i use for message box:
 
-        MsgBox(Dts.Variables("PackageInfoXMLRaw").Value.ToString)
+        '' MsgBox(Dts.Variables("PackageInfoXMLRaw").Value.ToString)
 
         Dts.TaskResult = ScriptResults.Success
     End Sub
@@ -1088,16 +1323,16 @@ Imports System.Runtime.InteropServices
             Encoding="UTF16LE"><![CDATA[<?xml version="1.0" encoding="UTF-16" standalone="yes"?>
 <c:Project xmlns:c="http://schemas.microsoft.com/codeprojectml/2010/08/main" xmlns:msb="http://schemas.microsoft.com/developer/msbuild/2003" runtimeVersion="3.0" schemaVersion="1.0">
 	<msb:PropertyGroup>
-		<msb:Language>msBuild</msb:Language>
 		<msb:CodeName>ST_d22231c2390b4b129678ccf19d325daa</msb:CodeName>
+		<msb:Language>msBuild</msb:Language>
 		<msb:DisplayName>ST_d22231c2390b4b129678ccf19d325daa</msb:DisplayName>
 		<msb:ProjectId>{EACBF93A-5A77-4949-B902-105B121C0D16}</msb:ProjectId>
 	</msb:PropertyGroup>
 	<msb:ItemGroup>
 		<msb:Project Include="ST_d22231c2390b4b129678ccf19d325daa.vbproj"/>
 		<msb:File Include="My Project\AssemblyInfo.vb"/>
-		<msb:File Include="ScriptMain.vb"/>
 		<msb:File Include="My Project\Resources.resx"/>
+		<msb:File Include="ScriptMain.vb"/>
 		<msb:File Include="My Project\Resources.Designer.vb"/>
 		<msb:File Include="My Project\Settings.settings"/>
 		<msb:File Include="My Project\Settings.Designer.vb"/>
@@ -1288,14 +1523,14 @@ End Namespace]]></ProjectItem>
           <BinaryItem
             Name="ST_d22231c2390b4b129678ccf19d325daa.dll">TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAgAAAAA4fug4AtAnNIbgBTM0hVGhpcyBwcm9ncmFtIGNhbm5vdCBiZSBydW4gaW4gRE9TIG1v
-ZGUuDQ0KJAAAAAAAAABQRQAATAEDAGOZjlUAAAAAAAAAAOAAAiELAQsAABwAAAAGAAAAAAAALjoA
+ZGUuDQ0KJAAAAAAAAABQRQAATAEDACUZj1UAAAAAAAAAAOAAAiELAQsAABoAAAAGAAAAAAAAvjkA
 AAAgAAAAQAAAAAAAEAAgAAAAAgAABAAAAAAAAAAEAAAAAAAAAACAAAAAAgAAAAAAAAIAQIUAABAA
-ABAAAAAAEAAAEAAAAAAAABAAAAAAAAAAAAAAANw5AABPAAAAAEAAANgDAAAAAAAAAAAAAAAAAAAA
+ABAAAAAAEAAAEAAAAAAAABAAAAAAAAAAAAAAAGQ5AABXAAAAAEAAANgDAAAAAAAAAAAAAAAAAAAA
 AAAAAGAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAIAAACAAAAAAAAAAAAAAACCAAAEgAAAAAAAAAAAAAAC50ZXh0AAAANBoAAAAgAAAAHAAAAAIA
-AAAAAAAAAAAAAAAAACAAAGAucnNyYwAAANgDAAAAQAAAAAQAAAAeAAAAAAAAAAAAAAAAAABAAABA
-LnJlbG9jAAAMAAAAAGAAAAACAAAAIgAAAAAAAAAAAAAAAAAAQAAAQgAAAAAAAAAAAAAAAAAAAAAQ
-OgAAAAAAAEgAAAACAAUA8CMAAOwVAAABAAAAAAAAADcjAAC4AAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAIAAACAAAAAAAAAAAAAAACCAAAEgAAAAAAAAAAAAAAC50ZXh0AAAAxBkAAAAgAAAAGgAAAAIA
+AAAAAAAAAAAAAAAAACAAAGAucnNyYwAAANgDAAAAQAAAAAQAAAAcAAAAAAAAAAAAAAAAAABAAABA
+LnJlbG9jAAAMAAAAAGAAAAACAAAAIAAAAAAAAAAAAAAAAAAAQAAAQgAAAAAAAAAAAAAAAAAAAACg
+OQAAAAAAAEgAAAACAAUAyCMAAJwVAAABAAAAAAAAABAjAAC4AAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4CKAEAAAoqHgIoBAAACiqmcwYAAAqAAQAABHMHAAAKgAIA
 AARzCAAACoADAAAEcwkAAAqABAAABCoAABMwAQALAAAAAQAAEX4BAAAEbwoAAAoqABMwAQALAAAA
 AgAAEX4CAAAEbwsAAAoqABMwAQALAAAAAwAAEX4DAAAEbwwAAAoqABMwAQALAAAABAAAEX4EAAAE
@@ -1307,138 +1542,129 @@ fRkAAAoqAB4CKBcAAAoqEzACAC0AAAAMAAARfgYAAAQtIHIBAABw0AcAAAIoFAAACm8eAAAKcx8A
 AAoLB4AGAAAEfgYAAAQqAAAAEzABAAYAAAANAAARfgcAAAQqAAAeAoAHAAAEKkJzFwAACigRAAAK
 gAkAAAQqAAAAHgIoIAAACiobMAEAPwAAAA4AABF+CAAABC0yfgkAAAQoEQAACighAAAKfggAAAQt
 HHMWAAAGgAgAAATeEH4JAAAEKBEAAAooIgAACtx+CAAABCoAARAAAAIAHQAMKQAQAAAAAB4CKCQA
-AAoqEzADAHsAAAAPAAARAm8lAAAKbyYAAApyMwAAcG8nAAAKbygAAApvFQAACnMpAAAKCgZvKgAA
-CgsCbyUAAApvJgAACnJRAABwbycAAAoHbysAAAoCbyUAAApvJgAACnJRAABwbycAAApvKAAACm8V
-AAAKFhQoLAAACiYCbyUAAAoWby0AAAoqtAAAAM7K774BAAAAkQAAAGxTeXN0ZW0uUmVzb3VyY2Vz
-LlJlc291cmNlUmVhZGVyLCBtc2NvcmxpYiwgVmVyc2lvbj00LjAuMC4wLCBDdWx0dXJlPW5ldXRy
-YWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkjU3lzdGVtLlJlc291cmNlcy5SdW50
-aW1lUmVzb3VyY2VTZXQCAAAAAAAAAAAAAABQQURQQURQtAAAAABCU0pCAQABAAAAAAAMAAAAdjQu
-MC4zMDMxOQAAAAAFAGwAAADYBwAAI34AAEQIAACACQAAI1N0cmluZ3MAAAAAxBEAAHgAAAAjVVMA
-PBIAABAAAAAjR1VJRAAAAEwSAACgAwAAI0Jsb2IAAAAAAAAAAgAAAVcdogkJDwAAAPolMwAWAAAB
-AAAALgAAAAoAAAAMAAAAGQAAAAQAAAA6AAAAAgAAADYAAAAPAAAABAAAAAgAAAAJAAAACQAAAAEA
-AAAFAAAAAQAAAAMAAAADAAAAAgAAAAAAWAkBAAAAAAAKAEsBIQEKAH8BYQEGAI8BiAEKAOcBIQEG
-AGUCiAEKAOcCvQIGAB0DDAMGAEoDNQMOALEDnAMSADAEBwQGAFEEiAEOAIQEbgQOAJ0EbgQOAMoE
-sgQGAPQE4QQKADMFDAUKAEsFEwAOAIAFYwUGALUFlQUGANMFiAEGAPcFiAEKABAGEwAGAFQGNQYG
-AHoGaAYGAKEGkAYGALQG4QQGANsG0QYSAOgGBwQWAEEHIQcWAFkHIQcKAHUHEwAKAIEHEwAKAI4H
-EwAGALAHiAESAMYHBwQGACAIlQUGAEAIlQUGAHgIXggGAJEIaAYGAK4INQYGALwIaAYGANcIaAYG
-APIIaAYGAAsJaAYGACQJaAYGAEEJaAYAAAAAAQAAAAAAAQABAAAAAAApADcABQABAAEAAAAAAF4A
-NwAJAAEAAgAAARAAaQA3AA0AAQADAAUBAABzAAAADQAFAAgABQEAAIEAAAANAAUADwAAAAAAnACo
-AA0ABgARAAABEADZAOQAJQAIABUAAQAAAAgB5AApAAoAGAACAQAAEwEAAC0ACgAaADEAqgEgADEA
-0wEtADEA9QE6ADEAGgJHACEA9gKQABEALQOdABEAVgOhABEAyQO/ABEA0QPDAAYGVgTZAFaAXgTc
-AFaAZgTcAFAgAAAAAAYYWwETAAEAWCAAAAAABhhbARMAAQBgIAAAAAARGJYBFwABAIwgAAAAABMI
-nQEbAAEApCAAAAAAEwjDASgAAQC8IAAAAAATCOwBNQABANQgAAAAABMICgJCAAEA7CAAAAAARgJQ
-AmMAAQAIIQAAAABGAlkCaAACABwhAAAAAIMAagJsAAIANCEAAAAARgJyAnEAAgBIIQAAAAARAHsC
-eAACAGQhAAAAAAEAmQKAAAMAgCEAAAAABhhbARMABACIIQAAAAADCK0CiwAEALwhAAAAAAYYWwET
-AAQA0CEAAAAAAxhbARMABADYIQAAAAAWCGIDpQAEABQiAAAAABYIdgOqAAQAKCIAAAAAFgiCA68A
-BAAwIgAAAAARGJYBFwAFAEQiAAAAAAYYWwETAAUATCIAAAAAFgjeA8YABQCoIgAAAAAGGFsBEwAF
-ALAiAAAAAAYATAQTAAUAAAABAFcCAAABAJACAAABAJACAAABAI4DCQBbARMAYQBbAeoAcQBbAfkA
-EQBbARMAeQBbARMAJABbARMALABbARMANABbARMAPABbARMAJACtAosALACtAosANACtAosAPACt
-AosAgQBbARMAiQBbARMAkQBbAUgBmQDEBZMBGQBQAmMAGQBZAmgAKQDlBaABGQByAnEAqQABBrAB
-GQBbARMAsQBbAcABRAD2ApAATADeA4sATAArBj0CTABbARMAuQBbAUwCKQCDBlcCOQBbAVwCSQBb
-ARMAyQCpBngCyQCvBngC0QBbARMAUQBbARMAUQD6BoIC4QBLB4cC6QBiB4wC8QDeA5IC2QBbAUgB
-2QBrB3EA8QArBpYC+QCaB5sC4QChB6YCEQFbAUwCGQFbARMAIQFbAaYCKQFbARMAMQFbAUgBOQFb
-AUgBQQFbAUgBSQFbAUgBUQFbAUgBWQFbAUgBYQFbAUgBaQFbAUgBcQFbAUgBCAAsAOAACAAwAOUA
-KQCDAHUBLgC7AXUDLgDTAXUDLgCzAV4DLgCLAboCLgCTAdkCLgCrAVECLgDLAVECLgCDAbECLgDD
-AVECLgCbASEDLgCjAS4DLgDrAFECLgBzAVgDQAArAOUAQAATAPAAQwATAPAAQwAbAP8ASQCDAE0B
-YwATAPAAYwAbAP8AaQCDAIYBgAArAOUAgwB7AOUAgwBzAOUAgwAbAP8AiQCDAGEBoAArAOUAowDD
-AMgBowATAPAAwAArAOUAwwATAPAAwwDrAFECyQATAG8C4AArAOUA6QATAG8CAAErAOUAAAETAPAA
-CQEbAeUAIAErAOUAIAETAPAAIwF7AeUAIwFzAVECQAErAOUAQAETAPAAYAETAPAAYAErAOUAgAEr
-AOUAoAErAOUAwAErAOUAwAETAPAA4AErAOUAAAITAPAAAAIrAOUANAE5AT4BQwGYAZwBpwGsAbsB
-uwFDAmMCagJ9AqsCBAABAAYABQAHAAYACAAIAAAAfwFPAAAAOAJUAAAA5wFZAAAARAJeAAAAAAOY
-AAAAHQO1AAAAlAO6AAAAjgPLAAIABAADAAIABQAFAAIABgAHAAIABwAJAAIADwALAAIAEgANAAIA
-EwAPAAEAFAAPAAIAFwARAHUAdQCIABgBHwEmAS0BKgIxAgSAAAABAAAAAAAAAAAAAAAAAOQAAAAE
-AAAAAAAAAAAAAAABAAoAAAAAAAoAAAAAAAAAAAAAAAoAEwAAAAAABAAAAAAAAAAAAAAAAQCIAQAA
-AAAMAAAAAAAAAAAAAADQAOgDAAAAAAwAAAAAAAAAAAAAANAAAgcAAAAAAAAAAAEAAADoBwAABQAE
-AAYABAAKAAkAAAAQAAwAjgIAABAAGQCOAgAAAAAbAI4CLQC2AS0AOAIAAAAAADxNb2R1bGU+AG1z
-Y29ybGliAE1pY3Jvc29mdC5WaXN1YWxCYXNpYwBNeUFwcGxpY2F0aW9uAFNUX2QyMjIzMWMyMzkw
-YjRiMTI5Njc4Y2NmMTlkMzI1ZGFhLk15AE15Q29tcHV0ZXIATXlQcm9qZWN0AE15V2ViU2Vydmlj
-ZXMAVGhyZWFkU2FmZU9iamVjdFByb3ZpZGVyYDEATXlSZXNvdXJjZXMAU1RfZDIyMjMxYzIzOTBi
-NGIxMjk2NzhjY2YxOWQzMjVkYWEuTXkuUmVzb3VyY2VzAE15U2V0dGluZ3MAU1RfZDIyMjMxYzIz
-OTBiNGIxMjk2NzhjY2YxOWQzMjVkYWEAU2NyaXB0TWFpbgBTY3JpcHRSZXN1bHRzAE1pY3Jvc29m
-dC5WaXN1YWxCYXNpYy5BcHBsaWNhdGlvblNlcnZpY2VzAEFwcGxpY2F0aW9uQmFzZQAuY3RvcgBN
-aWNyb3NvZnQuVmlzdWFsQmFzaWMuRGV2aWNlcwBDb21wdXRlcgBTeXN0ZW0AT2JqZWN0AC5jY3Rv
-cgBnZXRfQ29tcHV0ZXIAbV9Db21wdXRlck9iamVjdFByb3ZpZGVyAGdldF9BcHBsaWNhdGlvbgBt
-X0FwcE9iamVjdFByb3ZpZGVyAFVzZXIAZ2V0X1VzZXIAbV9Vc2VyT2JqZWN0UHJvdmlkZXIAZ2V0
-X1dlYlNlcnZpY2VzAG1fTXlXZWJTZXJ2aWNlc09iamVjdFByb3ZpZGVyAEFwcGxpY2F0aW9uAFdl
-YlNlcnZpY2VzAEVxdWFscwBvAEdldEhhc2hDb2RlAFR5cGUAR2V0VHlwZQBUb1N0cmluZwBDcmVh
-dGVfX0luc3RhbmNlX18AVABpbnN0YW5jZQBEaXNwb3NlX19JbnN0YW5jZV9fAGdldF9HZXRJbnN0
-YW5jZQBNaWNyb3NvZnQuVmlzdWFsQmFzaWMuTXlTZXJ2aWNlcy5JbnRlcm5hbABDb250ZXh0VmFs
-dWVgMQBtX0NvbnRleHQAR2V0SW5zdGFuY2UAU3lzdGVtLlJlc291cmNlcwBSZXNvdXJjZU1hbmFn
-ZXIAX3Jlc01ncgBTeXN0ZW0uR2xvYmFsaXphdGlvbgBDdWx0dXJlSW5mbwBfcmVzQ3VsdHVyZQBn
-ZXRfUmVzb3VyY2VNYW5hZ2VyAGdldF9DdWx0dXJlAHNldF9DdWx0dXJlAFZhbHVlAEN1bHR1cmUA
-U3lzdGVtLkNvbmZpZ3VyYXRpb24AQXBwbGljYXRpb25TZXR0aW5nc0Jhc2UAbV9WYWx1ZQBtX1N5
-bmNPYmplY3QAZ2V0X1ZhbHVlAE1pY3Jvc29mdC5TcWxTZXJ2ZXIuU2NyaXB0VGFzawBNaWNyb3Nv
-ZnQuU3FsU2VydmVyLkR0cy5UYXNrcy5TY3JpcHRUYXNrAFZTVEFSVFNjcmlwdE9iamVjdE1vZGVs
-QmFzZQBNYWluAEVudW0AdmFsdWVfXwBTdWNjZXNzAEZhaWx1cmUAU3lzdGVtLkNvbXBvbmVudE1v
-ZGVsAEVkaXRvckJyb3dzYWJsZUF0dHJpYnV0ZQBFZGl0b3JCcm93c2FibGVTdGF0ZQBTeXN0ZW0u
-Q29kZURvbS5Db21waWxlcgBHZW5lcmF0ZWRDb2RlQXR0cmlidXRlAFN5c3RlbS5EaWFnbm9zdGlj
-cwBEZWJ1Z2dlckhpZGRlbkF0dHJpYnV0ZQBNaWNyb3NvZnQuVmlzdWFsQmFzaWMuQ29tcGlsZXJT
-ZXJ2aWNlcwBTdGFuZGFyZE1vZHVsZUF0dHJpYnV0ZQBIaWRlTW9kdWxlTmFtZUF0dHJpYnV0ZQBT
-eXN0ZW0uQ29tcG9uZW50TW9kZWwuRGVzaWduAEhlbHBLZXl3b3JkQXR0cmlidXRlAFN5c3RlbS5S
-dW50aW1lLkNvbXBpbGVyU2VydmljZXMAUnVudGltZUhlbHBlcnMAR2V0T2JqZWN0VmFsdWUAUnVu
-dGltZVR5cGVIYW5kbGUAR2V0VHlwZUZyb21IYW5kbGUAQWN0aXZhdG9yAENyZWF0ZUluc3RhbmNl
-AE15R3JvdXBDb2xsZWN0aW9uQXR0cmlidXRlAHNldF9WYWx1ZQBTeXN0ZW0uUnVudGltZS5JbnRl
-cm9wU2VydmljZXMAQ29tVmlzaWJsZUF0dHJpYnV0ZQBTeXN0ZW0uUmVmbGVjdGlvbgBBc3NlbWJs
-eQBnZXRfQXNzZW1ibHkAU3lzdGVtLlRocmVhZGluZwBNb25pdG9yAEVudGVyAEV4aXQARGVidWdn
-ZXJOb25Vc2VyQ29kZUF0dHJpYnV0ZQBTeXN0ZW0uSU8AU3RyZWFtUmVhZGVyAFNjcmlwdE9iamVj
-dE1vZGVsAGdldF9EdHMATWljcm9zb2Z0LlNxbFNlcnZlci5NYW5hZ2VkRFRTAE1pY3Jvc29mdC5T
-cWxTZXJ2ZXIuRHRzLlJ1bnRpbWUAVmFyaWFibGVzAGdldF9WYXJpYWJsZXMAVmFyaWFibGUAZ2V0
-X0l0ZW0AUmVhZFRvRW5kAEludGVyYWN0aW9uAE1zZ0JveFJlc3VsdABNc2dCb3hTdHlsZQBNc2dC
-b3gAc2V0X1Rhc2tSZXN1bHQAQ0xTQ29tcGxpYW50QXR0cmlidXRlAFNTSVNTY3JpcHRUYXNrRW50
-cnlQb2ludEF0dHJpYnV0ZQBTVF9kMjIyMzFjMjM5MGI0YjEyOTY3OGNjZjE5ZDMyNWRhYS5SZXNv
-dXJjZXMucmVzb3VyY2VzAENvbXBpbGF0aW9uUmVsYXhhdGlvbnNBdHRyaWJ1dGUAUnVudGltZUNv
-bXBhdGliaWxpdHlBdHRyaWJ1dGUAU3lzdGVtLlJ1bnRpbWUuVmVyc2lvbmluZwBUYXJnZXRGcmFt
-ZXdvcmtBdHRyaWJ1dGUAQXNzZW1ibHlGaWxlVmVyc2lvbkF0dHJpYnV0ZQBHdWlkQXR0cmlidXRl
-AEFzc2VtYmx5VHJhZGVtYXJrQXR0cmlidXRlAEFzc2VtYmx5Q29weXJpZ2h0QXR0cmlidXRlAEFz
-c2VtYmx5UHJvZHVjdEF0dHJpYnV0ZQBBc3NlbWJseUNvbXBhbnlBdHRyaWJ1dGUAQXNzZW1ibHlE
-ZXNjcmlwdGlvbkF0dHJpYnV0ZQBBc3NlbWJseVRpdGxlQXR0cmlidXRlAFNUX2QyMjIzMWMyMzkw
-YjRiMTI5Njc4Y2NmMTlkMzI1ZGFhLmRsbAAAMU0AeQAuAFIAZQBzAG8AdQByAGMAZQBzAC4ATQB5
-AFIAZQBzAG8AdQByAGMAZQBzAAAdRgBvAGwAZABlAHIASQBuAGYAbwBGAGkAbABlAAAjUABhAGMA
-awBhAGcAZQBJAG4AZgBvAFgATQBMAFIAYQB3AAAAAACvE72Hba8tRokAtSnLYpV8AAi3elxWGTTg
-iQiwP19/EdUKOgMgAAEDAAABBAAAEgwHBhUSGAESDAQAABIIBwYVEhgBEggEAAASEQcGFRIYARIR
-BAAAEhQHBhUSGAESFAQIABIMBAgAEggECAASEQQIABIUBCABAhwDIAAIBCAAEhUDIAAOAh4ABxAB
-AR4AHgAHMAEBARAeAAITAAQgABMABwYVEhkBEwAEKAATAAMGEh0DBhIhBAAAEh0EAAASIQUAAQES
-IQQIABIdBAgAEiEDBhIgAgYcBAAAEiAECAASIAiJhF3NgIDMkQIGCAMGESgEAAAAAAQBAAAABSAB
-ARE1CAEAAQAAAAAABSACAQ4OGAEACk15VGVtcGxhdGUIMTAuMC4wLjAAAAYVEhgBEgwGFRIYARII
-BhUSGAESEQYVEhgBEhQEBwESDAQHARIIBAcBEhEEBwESFAQgAQEOEwEADk15LkFwcGxpY2F0aW9u
-AAATAQAOTXkuV2ViU2VydmljZXMAABABAAtNeS5Db21wdXRlcgAADAEAB015LlVzZXIAAAQAARwc
-AwcBAgMHAQgGAAESFRFRBAcBEhUDBwEOBRABAB4ABAoBHgAEBwEeAAcgBAEODg4OYQEANFN5c3Rl
-bS5XZWIuU2VydmljZXMuUHJvdG9jb2xzLlNvYXBIdHRwQ2xpZW50UHJvdG9jb2wSQ3JlYXRlX19J
-bnN0YW5jZV9fE0Rpc3Bvc2VfX0luc3RhbmNlX18AAAAGFRIYARMABhUSGQETAAQKARMABSABARMA
-CAcDEwATABMABCABAQIFAQAAAAAEIAASYQYgAgEOEmEGBwISHRIdBAcBEiEIAQACAAAAAAAEAAEB
-HAQHARIgBCAAEnEEIAASdQUgARJ5HAMgABwEIAEBHAoAAxGAgRwRgIUcBCABAQgFBwISbQ4IAQAI
-AAAAAAAeAQABAFQCFldyYXBOb25FeGNlcHRpb25UaHJvd3MBRwEAGi5ORVRGcmFtZXdvcmssVmVy
-c2lvbj12NC4wAQBUDhRGcmFtZXdvcmtEaXNwbGF5TmFtZRAuTkVUIEZyYW1ld29yayA0DAEABzEu
-MC4wLjAAACkBACRlNGYzZWRhOS0zMmZjLTQ3OTYtOTQxZi1kYWIzNTQ2ZWIyMmYAAAUBAAEAABYB
-ABFDb3B5cmlnaHQgQCAgMjAxNQAAKAEAI1NUX2QyMjIzMWMyMzkwYjRiMTI5Njc4Y2NmMTlkMzI1
-ZGFhAAAAAAQ6AAAAAAAAAAAAAB46AAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQOgAAAAAAAAAA
-AAAAAF9Db3JEbGxNYWluAG1zY29yZWUuZGxsAAAAAAD/JQAgABAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAoqEzACAFQAAAAPAAARAm8lAAAKbyYAAApyMwAAcG8nAAAKbygAAApvFQAACnMpAAAKCgZvKgAA
+CgsCbyUAAApvJgAACnJRAABwbycAAAoHbysAAAoCbyUAAAoWbywAAAoqtAAAAM7K774BAAAAkQAA
+AGxTeXN0ZW0uUmVzb3VyY2VzLlJlc291cmNlUmVhZGVyLCBtc2NvcmxpYiwgVmVyc2lvbj00LjAu
+MC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkjU3lz
+dGVtLlJlc291cmNlcy5SdW50aW1lUmVzb3VyY2VTZXQCAAAAAAAAAAAAAABQQURQQURQtAAAAEJT
+SkIBAAEAAAAAAAwAAAB2NC4wLjMwMzE5AAAAAAUAbAAAAMAHAAAjfgAALAgAAFQJAAAjU3RyaW5n
+cwAAAACAEQAAeAAAACNVUwD4EQAAEAAAACNHVUlEAAAACBIAAJQDAAAjQmxvYgAAAAAAAAACAAAB
+Vx2iCQkPAAAA+iUzABYAAAEAAAArAAAACgAAAAwAAAAZAAAABAAAADkAAAACAAAANgAAAA8AAAAE
+AAAACAAAAAkAAAAJAAAAAQAAAAUAAAABAAAAAwAAAAMAAAACAAAAAAAsCQEAAAAAAAoASwEhAQoA
+fwFhAQYAjwGIAQoA5wEhAQYAZQKIAQoA5wK9AgYAHQMMAwYASgM1Aw4AsQOcAxIAMAQHBAYAUQSI
+AQ4AhARuBA4AnQRuBA4AygSyBAYA9AThBAoAMwUMBQoASwUTAA4AgAVjBQYAtQWVBQYA0wWIAQYA
+9wWIAQoAEAYTAAYAVAY1BgYAegZoBgYAoQaQBgYAtAbhBAYA2wbRBhIA6AYHBBYAQQchBxYAWQch
+BwYAhAeIARIAmgcHBAYA9AeVBQYAFAiVBQYATAgyCAYAZQhoBgYAggg1BgYAkAhoBgYAqwhoBgYA
+xghoBgYA3whoBgYA+AhoBgYAFQloBgAAAAABAAAAAAABAAEAAAAAACkANwAFAAEAAQAAAAAAXgA3
+AAkAAQACAAABEABpADcADQABAAMABQEAAHMAAAANAAUACAAFAQAAgQAAAA0ABQAPAAAAAACcAKgA
+DQAGABEAAAEQANkA5AAlAAgAFQABAAAACAHkACkACgAYAAIBAAATAQAALQAKABoAMQCqASAAMQDT
+AS0AMQD1AToAMQAaAkcAIQD2ApAAEQAtA50AEQBWA6EAEQDJA78AEQDRA8MABgZWBNkAVoBeBNwA
+VoBmBNwAUCAAAAAABhhbARMAAQBYIAAAAAAGGFsBEwABAGAgAAAAABEYlgEXAAEAjCAAAAAAEwid
+ARsAAQCkIAAAAAATCMMBKAABALwgAAAAABMI7AE1AAEA1CAAAAAAEwgKAkIAAQDsIAAAAABGAlAC
+YwABAAghAAAAAEYCWQJoAAIAHCEAAAAAgwBqAmwAAgA0IQAAAABGAnICcQACAEghAAAAABEAewJ4
+AAIAZCEAAAAAAQCZAoAAAwCAIQAAAAAGGFsBEwAEAIghAAAAAAMIrQKLAAQAvCEAAAAABhhbARMA
+BADQIQAAAAADGFsBEwAEANghAAAAABYIYgOlAAQAFCIAAAAAFgh2A6oABAAoIgAAAAAWCIIDrwAE
+ADAiAAAAABEYlgEXAAUARCIAAAAABhhbARMABQBMIgAAAAAWCN4DxgAFAKgiAAAAAAYYWwETAAUA
+sCIAAAAABgBMBBMABQAAAAEAVwIAAAEAkAIAAAEAkAIAAAEAjgMJAFsBEwBhAFsB6gBxAFsB+QAR
+AFsBEwB5AFsBEwAkAFsBEwAsAFsBEwA0AFsBEwA8AFsBEwAkAK0CiwAsAK0CiwA0AK0CiwA8AK0C
+iwCBAFsBEwCJAFsBEwCRAFsBSAGZAMQFkwEZAFACYwAZAFkCaAApAOUFoAEZAHICcQCpAAEGsAEZ
+AFsBEwCxAFsBwAFEAPYCkABMAN4DiwBMACsGPQJMAFsBEwC5AFsBTAIpAIMGVwI5AFsBXAJJAFsB
+EwDJAKkGeALJAK8GeALRAFsBEwBRAFsBEwBRAPoGggLhAEsHhwLpAGIHjALxAN4DkgLZAFsBSAHZ
+AGsHcQDxACsGlgLhAHUHmwL5AFsBTAIBAVsBEwAJAVsBmwIRAVsBEwAZAVsBSAEhAVsBSAEpAVsB
+SAExAVsBSAE5AVsBSAFBAVsBSAFJAVsBSAFRAVsBSAFZAVsBSAEIACwA4AAIADAA5QApAIMAdQEu
+ALMBagMuAMsBagMuAKsBUwMuAIMBrwIuAIsBzgIuAKMBUQIuAMMBUQIuAHsBpgIuALsBUQIuAJMB
+FgMuAJsBIwMuAOsAUQIuAGsBTQNAACsA5QBAABMA8ABDABMA8ABDABsA/wBJAIMATQFjABMA8ABj
+ABsA/wBpAIMAhgGAACsA5QCDAHsA5QCDAHMA5QCDABsA/wCJAIMAYQGgACsA5QCjAMMAyAGjABMA
+8ADAACsA5QDDABMA8ADDAOsAUQLJABMAbwLgACsA5QDpABMAbwIAASsA5QAAARMA8AAJARsB5QAg
+ARMA8AAgASsA5QAjAWsBUQIjAXMB5QBAASsA5QBAARMA8ABgASsA5QBgARMA8ACAASsA5QCgASsA
+5QDAARMA8ADAASsA5QDgASsA5QAAAisA5QAAAhMA8AA0ATkBPgFDAZgBnAGnAawBuwG7AUMCYwJq
+An0CoAIEAAEABgAFAAcABgAIAAgAAAB/AU8AAAA4AlQAAADnAVkAAABEAl4AAAAAA5gAAAAdA7UA
+AACUA7oAAACOA8sAAgAEAAMAAgAFAAUAAgAGAAcAAgAHAAkAAgAPAAsAAgASAA0AAgATAA8AAQAU
+AA8AAgAXABEAdQB1AIgAGAEfASYBLQEqAjECBIAAAAEAAAAAAAAAAAAAAAAA5AAAAAQAAAAAAAAA
+AAAAAAEACgAAAAAACgAAAAAAAAAAAAAACgATAAAAAAAEAAAAAAAAAAAAAAABAIgBAAAAAAwAAAAA
+AAAAAAAAANAA6AMAAAAADAAAAAAAAAAAAAAA0AACBwAAAAAAAAAAAQAAALwHAAAFAAQABgAEAAoA
+CQAAABAADACOAgAAEAAZAI4CAAAAABsAjgItALYBLQA4AgAAAAAAPE1vZHVsZT4AbXNjb3JsaWIA
+TWljcm9zb2Z0LlZpc3VhbEJhc2ljAE15QXBwbGljYXRpb24AU1RfZDIyMjMxYzIzOTBiNGIxMjk2
+NzhjY2YxOWQzMjVkYWEuTXkATXlDb21wdXRlcgBNeVByb2plY3QATXlXZWJTZXJ2aWNlcwBUaHJl
+YWRTYWZlT2JqZWN0UHJvdmlkZXJgMQBNeVJlc291cmNlcwBTVF9kMjIyMzFjMjM5MGI0YjEyOTY3
+OGNjZjE5ZDMyNWRhYS5NeS5SZXNvdXJjZXMATXlTZXR0aW5ncwBTVF9kMjIyMzFjMjM5MGI0YjEy
+OTY3OGNjZjE5ZDMyNWRhYQBTY3JpcHRNYWluAFNjcmlwdFJlc3VsdHMATWljcm9zb2Z0LlZpc3Vh
+bEJhc2ljLkFwcGxpY2F0aW9uU2VydmljZXMAQXBwbGljYXRpb25CYXNlAC5jdG9yAE1pY3Jvc29m
+dC5WaXN1YWxCYXNpYy5EZXZpY2VzAENvbXB1dGVyAFN5c3RlbQBPYmplY3QALmNjdG9yAGdldF9D
+b21wdXRlcgBtX0NvbXB1dGVyT2JqZWN0UHJvdmlkZXIAZ2V0X0FwcGxpY2F0aW9uAG1fQXBwT2Jq
+ZWN0UHJvdmlkZXIAVXNlcgBnZXRfVXNlcgBtX1VzZXJPYmplY3RQcm92aWRlcgBnZXRfV2ViU2Vy
+dmljZXMAbV9NeVdlYlNlcnZpY2VzT2JqZWN0UHJvdmlkZXIAQXBwbGljYXRpb24AV2ViU2Vydmlj
+ZXMARXF1YWxzAG8AR2V0SGFzaENvZGUAVHlwZQBHZXRUeXBlAFRvU3RyaW5nAENyZWF0ZV9fSW5z
+dGFuY2VfXwBUAGluc3RhbmNlAERpc3Bvc2VfX0luc3RhbmNlX18AZ2V0X0dldEluc3RhbmNlAE1p
+Y3Jvc29mdC5WaXN1YWxCYXNpYy5NeVNlcnZpY2VzLkludGVybmFsAENvbnRleHRWYWx1ZWAxAG1f
+Q29udGV4dABHZXRJbnN0YW5jZQBTeXN0ZW0uUmVzb3VyY2VzAFJlc291cmNlTWFuYWdlcgBfcmVz
+TWdyAFN5c3RlbS5HbG9iYWxpemF0aW9uAEN1bHR1cmVJbmZvAF9yZXNDdWx0dXJlAGdldF9SZXNv
+dXJjZU1hbmFnZXIAZ2V0X0N1bHR1cmUAc2V0X0N1bHR1cmUAVmFsdWUAQ3VsdHVyZQBTeXN0ZW0u
+Q29uZmlndXJhdGlvbgBBcHBsaWNhdGlvblNldHRpbmdzQmFzZQBtX1ZhbHVlAG1fU3luY09iamVj
+dABnZXRfVmFsdWUATWljcm9zb2Z0LlNxbFNlcnZlci5TY3JpcHRUYXNrAE1pY3Jvc29mdC5TcWxT
+ZXJ2ZXIuRHRzLlRhc2tzLlNjcmlwdFRhc2sAVlNUQVJUU2NyaXB0T2JqZWN0TW9kZWxCYXNlAE1h
+aW4ARW51bQB2YWx1ZV9fAFN1Y2Nlc3MARmFpbHVyZQBTeXN0ZW0uQ29tcG9uZW50TW9kZWwARWRp
+dG9yQnJvd3NhYmxlQXR0cmlidXRlAEVkaXRvckJyb3dzYWJsZVN0YXRlAFN5c3RlbS5Db2RlRG9t
+LkNvbXBpbGVyAEdlbmVyYXRlZENvZGVBdHRyaWJ1dGUAU3lzdGVtLkRpYWdub3N0aWNzAERlYnVn
+Z2VySGlkZGVuQXR0cmlidXRlAE1pY3Jvc29mdC5WaXN1YWxCYXNpYy5Db21waWxlclNlcnZpY2Vz
+AFN0YW5kYXJkTW9kdWxlQXR0cmlidXRlAEhpZGVNb2R1bGVOYW1lQXR0cmlidXRlAFN5c3RlbS5D
+b21wb25lbnRNb2RlbC5EZXNpZ24ASGVscEtleXdvcmRBdHRyaWJ1dGUAU3lzdGVtLlJ1bnRpbWUu
+Q29tcGlsZXJTZXJ2aWNlcwBSdW50aW1lSGVscGVycwBHZXRPYmplY3RWYWx1ZQBSdW50aW1lVHlw
+ZUhhbmRsZQBHZXRUeXBlRnJvbUhhbmRsZQBBY3RpdmF0b3IAQ3JlYXRlSW5zdGFuY2UATXlHcm91
+cENvbGxlY3Rpb25BdHRyaWJ1dGUAc2V0X1ZhbHVlAFN5c3RlbS5SdW50aW1lLkludGVyb3BTZXJ2
+aWNlcwBDb21WaXNpYmxlQXR0cmlidXRlAFN5c3RlbS5SZWZsZWN0aW9uAEFzc2VtYmx5AGdldF9B
+c3NlbWJseQBTeXN0ZW0uVGhyZWFkaW5nAE1vbml0b3IARW50ZXIARXhpdABEZWJ1Z2dlck5vblVz
+ZXJDb2RlQXR0cmlidXRlAFN5c3RlbS5JTwBTdHJlYW1SZWFkZXIAU2NyaXB0T2JqZWN0TW9kZWwA
+Z2V0X0R0cwBNaWNyb3NvZnQuU3FsU2VydmVyLk1hbmFnZWREVFMATWljcm9zb2Z0LlNxbFNlcnZl
+ci5EdHMuUnVudGltZQBWYXJpYWJsZXMAZ2V0X1ZhcmlhYmxlcwBWYXJpYWJsZQBnZXRfSXRlbQBS
+ZWFkVG9FbmQAc2V0X1Rhc2tSZXN1bHQAQ0xTQ29tcGxpYW50QXR0cmlidXRlAFNTSVNTY3JpcHRU
+YXNrRW50cnlQb2ludEF0dHJpYnV0ZQBTVF9kMjIyMzFjMjM5MGI0YjEyOTY3OGNjZjE5ZDMyNWRh
+YS5SZXNvdXJjZXMucmVzb3VyY2VzAENvbXBpbGF0aW9uUmVsYXhhdGlvbnNBdHRyaWJ1dGUAUnVu
+dGltZUNvbXBhdGliaWxpdHlBdHRyaWJ1dGUAU3lzdGVtLlJ1bnRpbWUuVmVyc2lvbmluZwBUYXJn
+ZXRGcmFtZXdvcmtBdHRyaWJ1dGUAQXNzZW1ibHlGaWxlVmVyc2lvbkF0dHJpYnV0ZQBHdWlkQXR0
+cmlidXRlAEFzc2VtYmx5VHJhZGVtYXJrQXR0cmlidXRlAEFzc2VtYmx5Q29weXJpZ2h0QXR0cmli
+dXRlAEFzc2VtYmx5UHJvZHVjdEF0dHJpYnV0ZQBBc3NlbWJseUNvbXBhbnlBdHRyaWJ1dGUAQXNz
+ZW1ibHlEZXNjcmlwdGlvbkF0dHJpYnV0ZQBBc3NlbWJseVRpdGxlQXR0cmlidXRlAFNUX2QyMjIz
+MWMyMzkwYjRiMTI5Njc4Y2NmMTlkMzI1ZGFhLmRsbAAAMU0AeQAuAFIAZQBzAG8AdQByAGMAZQBz
+AC4ATQB5AFIAZQBzAG8AdQByAGMAZQBzAAAdRgBvAGwAZABlAHIASQBuAGYAbwBGAGkAbABlAAAj
+UABhAGMAawBhAGcAZQBJAG4AZgBvAFgATQBMAFIAYQB3AAAAAAC+1gnknAJXR4LZbzGRJNgWAAi3
+elxWGTTgiQiwP19/EdUKOgMgAAEDAAABBAAAEgwHBhUSGAESDAQAABIIBwYVEhgBEggEAAASEQcG
+FRIYARIRBAAAEhQHBhUSGAESFAQIABIMBAgAEggECAASEQQIABIUBCABAhwDIAAIBCAAEhUDIAAO
+Ah4ABxABAR4AHgAHMAEBARAeAAITAAQgABMABwYVEhkBEwAEKAATAAMGEh0DBhIhBAAAEh0EAAAS
+IQUAAQESIQQIABIdBAgAEiEDBhIgAgYcBAAAEiAECAASIAiJhF3NgIDMkQIGCAMGESgEAAAAAAQB
+AAAABSABARE1CAEAAQAAAAAABSACAQ4OGAEACk15VGVtcGxhdGUIMTAuMC4wLjAAAAYVEhgBEgwG
+FRIYARIIBhUSGAESEQYVEhgBEhQEBwESDAQHARIIBAcBEhEEBwESFAQgAQEOEwEADk15LkFwcGxp
+Y2F0aW9uAAATAQAOTXkuV2ViU2VydmljZXMAABABAAtNeS5Db21wdXRlcgAADAEAB015LlVzZXIA
+AAQAARwcAwcBAgMHAQgGAAESFRFRBAcBEhUDBwEOBRABAB4ABAoBHgAEBwEeAAcgBAEODg4OYQEA
+NFN5c3RlbS5XZWIuU2VydmljZXMuUHJvdG9jb2xzLlNvYXBIdHRwQ2xpZW50UHJvdG9jb2wSQ3Jl
+YXRlX19JbnN0YW5jZV9fE0Rpc3Bvc2VfX0luc3RhbmNlX18AAAAGFRIYARMABhUSGQETAAQKARMA
+BSABARMACAcDEwATABMABCABAQIFAQAAAAAEIAASYQYgAgEOEmEGBwISHRIdBAcBEiEIAQACAAAA
+AAAEAAEBHAQHARIgBCAAEnEEIAASdQUgARJ5HAMgABwEIAEBHAQgAQEIBQcCEm0OCAEACAAAAAAA
+HgEAAQBUAhZXcmFwTm9uRXhjZXB0aW9uVGhyb3dzAUcBABouTkVURnJhbWV3b3JrLFZlcnNpb249
+djQuMAEAVA4URnJhbWV3b3JrRGlzcGxheU5hbWUQLk5FVCBGcmFtZXdvcmsgNAwBAAcxLjAuMC4w
+AAApAQAkZTRmM2VkYTktMzJmYy00Nzk2LTk0MWYtZGFiMzU0NmViMjJmAAAFAQABAAAWAQARQ29w
+eXJpZ2h0IEAgIDIwMTUAACgBACNTVF9kMjIyMzFjMjM5MGI0YjEyOTY3OGNjZjE5ZDMyNWRhYQAA
+AIw5AAAAAAAAAAAAAK45AAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAACgOQAAAAAAAAAAAAAAAAAA
+AAAAAAAAX0NvckRsbE1haW4AbXNjb3JlZS5kbGwAAAAAAP8lACAAEAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB
-ABAAAAAYAACAAAAAAAAAAAAAAAAAAAABAAEAAAAwAACAAAAAAAAAAAAAAAAAAAABAAAAAABIAAAA
-WEAAAIADAAAAAAAAAAAAAIADNAAAAFYAUwBfAFYARQBSAFMASQBPAE4AXwBJAE4ARgBPAAAAAAC9
-BO/+AAABAAAAAQAAAAAAAAABAAAAAAA/AAAAAAAAAAQAAAACAAAAAAAAAAAAAAAAAAAARAAAAAEA
-VgBhAHIARgBpAGwAZQBJAG4AZgBvAAAAAAAkAAQAAABUAHIAYQBuAHMAbABhAHQAaQBvAG4AAAAA
-AAAAsATgAgAAAQBTAHQAcgBpAG4AZwBGAGkAbABlAEkAbgBmAG8AAAC8AgAAAQAwADAAMAAwADAA
-NABiADAAAABwACQAAQBGAGkAbABlAEQAZQBzAGMAcgBpAHAAdABpAG8AbgAAAAAAUwBUAF8AZAAy
-ADIAMgAzADEAYwAyADMAOQAwAGIANABiADEAMgA5ADYANwA4AGMAYwBmADEAOQBkADMAMgA1AGQA
-YQBhAAAAMAAIAAEARgBpAGwAZQBWAGUAcgBzAGkAbwBuAAAAAAAxAC4AMAAuADAALgAwAAAAcAAo
-AAEASQBuAHQAZQByAG4AYQBsAE4AYQBtAGUAAABTAFQAXwBkADIAMgAyADMAMQBjADIAMwA5ADAA
-YgA0AGIAMQAyADkANgA3ADgAYwBjAGYAMQA5AGQAMwAyADUAZABhAGEALgBkAGwAbAAAAEgAEgAB
-AEwAZQBnAGEAbABDAG8AcAB5AHIAaQBnAGgAdAAAAEMAbwBwAHkAcgBpAGcAaAB0ACAAQAAgACAA
-MgAwADEANQAAAHgAKAABAE8AcgBpAGcAaQBuAGEAbABGAGkAbABlAG4AYQBtAGUAAABTAFQAXwBk
-ADIAMgAyADMAMQBjADIAMwA5ADAAYgA0AGIAMQAyADkANgA3ADgAYwBjAGYAMQA5AGQAMwAyADUA
-ZABhAGEALgBkAGwAbAAAAGgAJAABAFAAcgBvAGQAdQBjAHQATgBhAG0AZQAAAAAAUwBUAF8AZAAy
-ADIAMgAzADEAYwAyADMAOQAwAGIANABiADEAMgA5ADYANwA4AGMAYwBmADEAOQBkADMAMgA1AGQA
-YQBhAAAANAAIAAEAUAByAG8AZAB1AGMAdABWAGUAcgBzAGkAbwBuAAAAMQAuADAALgAwAC4AMAAA
-ADgACAABAEEAcwBzAGUAbQBiAGwAeQAgAFYAZQByAHMAaQBvAG4AAAAxAC4AMAAuADAALgAwAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAMAAAAMDoAAAAAAAAA
+AQAQAAAAGAAAgAAAAAAAAAAAAAAAAAAAAQABAAAAMAAAgAAAAAAAAAAAAAAAAAAAAQAAAAAASAAA
+AFhAAACAAwAAAAAAAAAAAACAAzQAAABWAFMAXwBWAEUAUgBTAEkATwBOAF8ASQBOAEYATwAAAAAA
+vQTv/gAAAQAAAAEAAAAAAAAAAQAAAAAAPwAAAAAAAAAEAAAAAgAAAAAAAAAAAAAAAAAAAEQAAAAB
+AFYAYQByAEYAaQBsAGUASQBuAGYAbwAAAAAAJAAEAAAAVAByAGEAbgBzAGwAYQB0AGkAbwBuAAAA
+AAAAALAE4AIAAAEAUwB0AHIAaQBuAGcARgBpAGwAZQBJAG4AZgBvAAAAvAIAAAEAMAAwADAAMAAw
+ADQAYgAwAAAAcAAkAAEARgBpAGwAZQBEAGUAcwBjAHIAaQBwAHQAaQBvAG4AAAAAAFMAVABfAGQA
+MgAyADIAMwAxAGMAMgAzADkAMABiADQAYgAxADIAOQA2ADcAOABjAGMAZgAxADkAZAAzADIANQBk
+AGEAYQAAADAACAABAEYAaQBsAGUAVgBlAHIAcwBpAG8AbgAAAAAAMQAuADAALgAwAC4AMAAAAHAA
+KAABAEkAbgB0AGUAcgBuAGEAbABOAGEAbQBlAAAAUwBUAF8AZAAyADIAMgAzADEAYwAyADMAOQAw
+AGIANABiADEAMgA5ADYANwA4AGMAYwBmADEAOQBkADMAMgA1AGQAYQBhAC4AZABsAGwAAABIABIA
+AQBMAGUAZwBhAGwAQwBvAHAAeQByAGkAZwBoAHQAAABDAG8AcAB5AHIAaQBnAGgAdAAgAEAAIAAg
+ADIAMAAxADUAAAB4ACgAAQBPAHIAaQBnAGkAbgBhAGwARgBpAGwAZQBuAGEAbQBlAAAAUwBUAF8A
+ZAAyADIAMgAzADEAYwAyADMAOQAwAGIANABiADEAMgA5ADYANwA4AGMAYwBmADEAOQBkADMAMgA1
+AGQAYQBhAC4AZABsAGwAAABoACQAAQBQAHIAbwBkAHUAYwB0AE4AYQBtAGUAAAAAAFMAVABfAGQA
+MgAyADIAMwAxAGMAMgAzADkAMABiADQAYgAxADIAOQA2ADcAOABjAGMAZgAxADkAZAAzADIANQBk
+AGEAYQAAADQACAABAFAAcgBvAGQAdQBjAHQAVgBlAHIAcwBpAG8AbgAAADEALgAwAC4AMAAuADAA
+AAA4AAgAAQBBAHMAcwBlAG0AYgBsAHkAIABWAGUAcgBzAGkAbwBuAAAAMQAuADAALgAwAC4AMAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMAAADAAAAMA5AAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -1447,7 +1673,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
         </ScriptProject>
       </DTS:ObjectData>
     </DTS:Executable>
@@ -1480,7 +1706,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint]"
       DTS:CreationName=""
-      DTS:DTSID="{658C7077-F8D8-4919-8761-C954CCE79F37}"
+      DTS:DTSID="{49E2B303-99E6-4588-A4A1-524B4605EFDF}"
       DTS:From="Package\import info-xml from package"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint"
@@ -1525,44 +1751,29 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
         <NodeLayout
           Size="223,42"
           Id="Package\Expression Task InfoXML Path"
-          TopLeft="150,31" />
-        <ContainerLayout
-          HeaderHeight="43"
-          IsExpanded="True"
-          PanelSize="215,55"
-          Size="215,98"
-          Id="Package\Foreach zip in package"
-          TopLeft="139,514" />
+          TopLeft="139,30" />
         <NodeLayout
-          Size="217,42"
-          Id="Package\import info-xml from package"
-          TopLeft="155,356" />
+          Size="228,42"
+          Id="Package\Foreach zip in package\extract temp dir name from file"
+          TopLeft="63,21" />
+        <NodeLayout
+          Size="247,42"
+          Id="Package\Foreach zip in package\create temp dir for current data zip"
+          TopLeft="54,103" />
         <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="263.5,398">
+          Id="Package\Foreach zip in package.PrecedenceConstraints[Constraint]"
+          TopLeft="177.25,63">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-17,116"
+              EndConnector="0,40"
               Start="0,0"
-              End="-17,108.5">
+              End="0,32.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,54" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,54"
-                    Point2="0,58"
-                    Point3="-4,58" />
-                  <mssgle:LineSegment
-                    End="-13,58" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-13,58"
-                    Point2="-17,58"
-                    Point3="-17,62" />
-                  <mssgle:LineSegment
-                    End="-17,108.5" />
+                    End="0,32.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1572,35 +1783,60 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <NodeLayout
+          Size="132,42"
+          Id="Package\Foreach zip in package\Unzip Task"
+          TopLeft="109,187" />
+        <EdgeLayout
+          Id="Package\Foreach zip in package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="176.25,145">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,42"
+              Start="0,0"
+              End="0,34.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="301,284"
+          Size="301,327"
+          Id="Package\Foreach zip in package"
+          TopLeft="125,501" />
+        <NodeLayout
+          Size="217,42"
+          Id="Package\import info-xml from package"
+          TopLeft="151,378" />
+        <NodeLayout
           Size="177,67"
           Id="Package\XML Task Transform info-xml"
           TopLeft="166,224" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="254.5,291">
+          TopLeft="257,291">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="9,65"
+              EndConnector="0,87"
               Start="0,0"
-              End="9,57.5">
+              End="0,79.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,28.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,28.5"
-                    Point2="0,32.5"
-                    Point3="4,32.5" />
-                  <mssgle:LineSegment
-                    End="5,32.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="5,32.5"
-                    Point2="9,32.5"
-                    Point3="9,36.5" />
-                  <mssgle:LineSegment
-                    End="9,57.5" />
+                    End="0,79.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1612,33 +1848,21 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
         <NodeLayout
           Size="202,42"
           Id="Package\Script Task Read InfoXML"
-          TopLeft="139,130" />
+          TopLeft="150,132" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="261.5,73">
+          TopLeft="250.75,72">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-21.5,57"
+              EndConnector="0,60"
               Start="0,0"
-              End="-21.5,49.5">
+              End="0,52.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,24.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,24.5"
-                    Point2="0,28.5"
-                    Point3="-4,28.5" />
-                  <mssgle:LineSegment
-                    End="-17.5,28.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-17.5,28.5"
-                    Point2="-21.5,28.5"
-                    Point3="-21.5,32.5" />
-                  <mssgle:LineSegment
-                    End="-21.5,49.5" />
+                    End="0,52.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1649,30 +1873,52 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="240,172">
+          TopLeft="252.75,174">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="14.5,52"
+              EndConnector="0,50"
               Start="0,0"
-              End="14.5,44.5">
+              End="0,42.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,22" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,22"
-                    Point2="0,26"
-                    Point3="4,26" />
+                    End="0,42.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="259.5,420">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="16,81"
+              Start="0,0"
+              End="16,73.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
                   <mssgle:LineSegment
-                    End="10.5,26" />
+                    End="0,36.5" />
                   <mssgle:CubicBezierSegment
-                    Point1="10.5,26"
-                    Point2="14.5,26"
-                    Point3="14.5,30" />
+                    Point1="0,36.5"
+                    Point2="0,40.5"
+                    Point3="4,40.5" />
                   <mssgle:LineSegment
-                    End="14.5,44.5" />
+                    End="12,40.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="12,40.5"
+                    Point2="16,40.5"
+                    Point3="16,44.5" />
+                  <mssgle:LineSegment
+                    End="16,73.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1688,11 +1934,11 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
     design-time-name="Package\import info-xml from package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="190,42"
           Id="Package\import info-xml from package\SQL Server Destination"
-          TopLeft="144,511" />
+          TopLeft="149,524" />
         <NodeLayout
           Size="136,42"
           Id="Package\import info-xml from package\XML Source"
@@ -1726,33 +1972,63 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
         <NodeLayout
           Size="156,42"
           Id="Package\import info-xml from package\Derived Column"
-          TopLeft="166,371" />
+          TopLeft="154,368" />
         <EdgeLayout
           Id="Package\import info-xml from package.Paths[Data Conversion Output]"
-          TopLeft="226,289">
+          TopLeft="229,289">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="18,82"
+              EndConnector="0,79"
               Start="0,0"
-              End="18,74.5">
+              End="0,71.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,37" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,37"
-                    Point2="0,41"
-                    Point3="4,41" />
+                    End="0,71.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="184,42"
+          Id="Package\import info-xml from package\Recordset Destination"
+          TopLeft="524,525" />
+        <NodeLayout
+          Size="122,42"
+          Id="Package\import info-xml from package\Multicast"
+          TopLeft="424,400" />
+        <EdgeLayout
+          Id="Package\import info-xml from package.Paths[Derived Column Output]"
+          TopLeft="310,389">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="114,32"
+              Start="0,0"
+              End="106.5,32">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
                   <mssgle:LineSegment
-                    End="14,41" />
+                    End="53,0" />
                   <mssgle:CubicBezierSegment
-                    Point1="14,41"
-                    Point2="18,41"
-                    Point3="18,45" />
+                    Point1="53,0"
+                    Point2="57,0"
+                    Point3="57,4" />
                   <mssgle:LineSegment
-                    End="18,74.5" />
+                    End="57,28" />
+                  <mssgle:CubicBezierSegment
+                    Point1="57,28"
+                    Point2="57,32"
+                    Point3="61,32" />
+                  <mssgle:LineSegment
+                    End="106.5,32" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1762,19 +2038,65 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\import info-xml from package.Paths[Derived Column Output]"
-          TopLeft="241.5,413">
+          Id="Package\import info-xml from package.Paths[Multicast Output 1]"
+          TopLeft="466,442">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,98"
+              EndConnector="-222,82"
               Start="0,0"
-              End="0,90.5">
+              End="-222,74.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,90.5" />
+                    End="0,29.4368932038835" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,29.4368932038835"
+                    Point2="0,33.4368932038835"
+                    Point3="-4,33.4368932038835" />
+                  <mssgle:LineSegment
+                    End="-218,33.4368932038835" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-218,33.4368932038835"
+                    Point2="-222,33.4368932038835"
+                    Point3="-222,37.4368932038835" />
+                  <mssgle:LineSegment
+                    End="-222,74.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\import info-xml from package.Paths[Multicast Output 2]"
+          TopLeft="504,442">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="112,83"
+              Start="0,0"
+              End="112,75.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.8446601941748" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,29.8446601941748"
+                    Point2="0,33.8446601941748"
+                    Point3="4,33.8446601941748" />
+                  <mssgle:LineSegment
+                    End="108,33.8446601941748" />
+                  <mssgle:CubicBezierSegment
+                    Point1="108,33.8446601941748"
+                    Point2="112,33.8446601941748"
+                    Point3="112,37.8446601941748" />
+                  <mssgle:LineSegment
+                    End="112,75.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>

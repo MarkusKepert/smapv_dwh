@@ -11,8 +11,8 @@
   DTS:LocaleID="1031"
   DTS:ObjectName="01ExtractSources"
   DTS:PackageType="5"
-  DTS:VersionBuild="45"
-  DTS:VersionGUID="{B3731E73-E17F-442A-A409-B87AB44B1D69}">
+  DTS:VersionBuild="49"
+  DTS:VersionGUID="{CD34FC5D-AD22-4F61-826C-F9C185F417B8}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -403,8 +403,8 @@
       <DTS:ForEachVariableMappings>
         <DTS:ForEachVariableMapping
           DTS:CreationName=""
-          DTS:DTSID="{1007897C-D8FE-425A-9146-70484ACD03CB}"
-          DTS:ObjectName="{1007897C-D8FE-425A-9146-70484ACD03CB}"
+          DTS:DTSID="{E8339943-461A-4B29-AB0D-B46B3F627861}"
+          DTS:ObjectName="{E8339943-461A-4B29-AB0D-B46B3F627861}"
           DTS:ValueIndex="0"
           DTS:VariableName="User::currentSourceFile" />
       </DTS:ForEachVariableMappings>
@@ -433,7 +433,7 @@
         <NodeLayout
           Size="175,42"
           Id="Package\foreach source zip\Execute Package 02"
-          TopLeft="375,291" />
+          TopLeft="384,315" />
         <NodeLayout
           Size="296,42"
           Id="Package\foreach source zip\extract temp dir name from zip file in variable"
@@ -456,30 +456,30 @@
           TopLeft="127,236.5" />
         <EdgeLayout
           Id="Package\foreach source zip.PrecedenceConstraints[Constraint]"
-          TopLeft="285,257.5">
+          TopLeft="206,278.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="90,48.8333333333333"
+              EndConnector="265.5,36.5"
               Start="0,0"
-              End="82.5,48.8333333333333">
+              End="265.5,29">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="48.0183486238532,0" />
+                    End="0,14.25" />
                   <mssgle:CubicBezierSegment
-                    Point1="48.0183486238532,0"
-                    Point2="52.0183486238532,0"
-                    Point3="52.0183486238532,4" />
+                    Point1="0,14.25"
+                    Point2="0,18.25"
+                    Point3="4,18.25" />
                   <mssgle:LineSegment
-                    End="52.0183486238532,44.8333333333333" />
+                    End="261.5,18.25" />
                   <mssgle:CubicBezierSegment
-                    Point1="52.0183486238532,44.8333333333333"
-                    Point2="52.0183486238532,48.8333333333333"
-                    Point3="56.0183486238532,48.8333333333333" />
+                    Point1="261.5,18.25"
+                    Point2="265.5,18.25"
+                    Point3="265.5,22.25" />
                   <mssgle:LineSegment
-                    End="82.5,48.8333333333333" />
+                    End="265.5,29" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -546,30 +546,30 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package\foreach source zip.PrecedenceConstraints[Constraint 3]"
-          TopLeft="375,317.666666666667">
+          TopLeft="384,336">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-76,47.3333333333333"
+              EndConnector="-85,29"
               Start="0,0"
-              End="-68.5,47.3333333333333">
+              End="-77.5,29">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="-28.0733944954128,0" />
+                    End="-38.5,0" />
                   <mssgle:CubicBezierSegment
-                    Point1="-28.0733944954128,0"
-                    Point2="-32.0733944954128,0"
-                    Point3="-32.0733944954128,4" />
+                    Point1="-38.5,0"
+                    Point2="-42.5,0"
+                    Point3="-42.5,4" />
                   <mssgle:LineSegment
-                    End="-32.0733944954128,43.3333333333333" />
+                    End="-42.5,25" />
                   <mssgle:CubicBezierSegment
-                    Point1="-32.0733944954128,43.3333333333333"
-                    Point2="-32.0733944954128,47.3333333333333"
-                    Point3="-36.0733944954128,47.3333333333333" />
+                    Point1="-42.5,25"
+                    Point2="-42.5,29"
+                    Point3="-46.5,29" />
                   <mssgle:LineSegment
-                    End="-68.5,47.3333333333333" />
+                    End="-77.5,29" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
