@@ -11,8 +11,8 @@
   DTS:LocaleID="1031"
   DTS:ObjectName="02ProcessSourceContent"
   DTS:PackageType="5"
-  DTS:VersionBuild="48"
-  DTS:VersionGUID="{1E82A6C1-C850-4494-B0DD-3AEF734752CE}">
+  DTS:VersionBuild="50"
+  DTS:VersionGUID="{CF7CD6B3-2586-4787-AB9D-71479D84C68C}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -2687,25 +2687,25 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
         <NodeLayout
           Size="217,42"
           Id="Package\import info-xml from package"
-          TopLeft="151,378" />
+          TopLeft="153,350" />
         <NodeLayout
           Size="177,67"
           Id="Package\XML Task Transform info-xml"
           TopLeft="166,224" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="257,291">
+          TopLeft="258,291">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,87"
+              EndConnector="0,59"
               Start="0,0"
-              End="0,79.5">
+              End="0,51.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,79.5" />
+                    End="0,51.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2764,30 +2764,30 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="259.5,420">
+          TopLeft="261.5,392">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="350.5,81"
+              EndConnector="348.5,109"
               Start="0,0"
-              End="350.5,73.5">
+              End="348.5,101.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,36.5" />
+                    End="0,50.5" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,36.5"
-                    Point2="0,40.5"
-                    Point3="4,40.5" />
+                    Point1="0,50.5"
+                    Point2="0,54.5"
+                    Point3="4,54.5" />
                   <mssgle:LineSegment
-                    End="346.5,40.5" />
+                    End="344.5,54.5" />
                   <mssgle:CubicBezierSegment
-                    Point1="346.5,40.5"
-                    Point2="350.5,40.5"
-                    Point3="350.5,44.5" />
+                    Point1="344.5,54.5"
+                    Point2="348.5,54.5"
+                    Point3="348.5,58.5" />
                   <mssgle:LineSegment
-                    End="350.5,73.5" />
+                    End="348.5,101.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
