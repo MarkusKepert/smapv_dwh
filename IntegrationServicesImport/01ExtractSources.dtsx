@@ -11,8 +11,8 @@
   DTS:LocaleID="1031"
   DTS:ObjectName="01ExtractSources"
   DTS:PackageType="5"
-  DTS:VersionBuild="40"
-  DTS:VersionGUID="{834F6A05-88D4-4822-8CDA-AA121179950C}">
+  DTS:VersionBuild="44"
+  DTS:VersionGUID="{981717A8-EDCC-409D-A231-23A1F0A646DC}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -99,7 +99,7 @@
       DTS:Namespace="User"
       DTS:ObjectName="currentLogID">
       <DTS:VariableValue
-        DTS:DataType="3">0</DTS:VariableValue>
+        DTS:DataType="20">0</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
@@ -208,6 +208,10 @@
                 <ParameterName>SourceDir</ParameterName>
                 <BindedVariableOrParameterName>User::currentTempDir</BindedVariableOrParameterName>
               </ParameterAssignment>
+              <ParameterAssignment>
+                <ParameterName>DSID_Log</ParameterName>
+                <BindedVariableOrParameterName>User::currentLogID</BindedVariableOrParameterName>
+              </ParameterAssignment>
             </ExecutePackageTask>
           </DTS:ObjectData>
         </DTS:Executable>
@@ -283,6 +287,7 @@
           DTS:refId="Package\foreach source zip\move zip in processsed dir"
           DTS:CreationName="Microsoft.FileSystemTask"
           DTS:Description="File System Task"
+          DTS:Disabled="True"
           DTS:DTSID="{FCBF6D80-E48E-4CB9-84FC-17E40ADCE817}"
           DTS:ExecutableType="Microsoft.FileSystemTask"
           DTS:LocaleID="-1"
@@ -440,7 +445,7 @@
         <NodeLayout
           Size="120,42"
           Id="Package\foreach source zip\log start"
-          TopLeft="260,13" />
+          TopLeft="165,16" />
         <NodeLayout
           Size="206,42"
           Id="Package\foreach source zip\move zip in processsed dir"
@@ -609,30 +614,30 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package\foreach source zip.PrecedenceConstraints[Constraint 5]"
-          TopLeft="320,55">
+          TopLeft="225,58">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-115,28.5"
+              EndConnector="-20,25.5"
               Start="0,0"
-              End="-115,21">
+              End="-20,18">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,10.25" />
+                    End="0,8.75" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,10.25"
-                    Point2="0,14.25"
-                    Point3="-4,14.25" />
+                    Point1="0,8.75"
+                    Point2="0,12.75"
+                    Point3="-4,12.75" />
                   <mssgle:LineSegment
-                    End="-111,14.25" />
+                    End="-16,12.75" />
                   <mssgle:CubicBezierSegment
-                    Point1="-111,14.25"
-                    Point2="-115,14.25"
-                    Point3="-115,18.25" />
+                    Point1="-16,12.75"
+                    Point2="-20,12.75"
+                    Point3="-20,16.75" />
                   <mssgle:LineSegment
-                    End="-115,21" />
+                    End="-20,18" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>

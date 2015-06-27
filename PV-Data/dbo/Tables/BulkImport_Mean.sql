@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[BulkImport] (
+﻿CREATE TABLE [dbo].[BulkImport_Mean] (
     [DSIDSYS]   BIGINT        IDENTITY (1, 1) NOT NULL,
     [TimeStamp] DATETIME      NOT NULL,
     [Key]       NVARCHAR (50) NOT NULL,
@@ -12,6 +12,7 @@
     [Location] NCHAR(10) NULL, 
     [ValueKey] NCHAR(50) NULL, 
     [InverterKey] NCHAR(20) NULL, 
+    [DSID_PackageInfo] BIGINT NOT NULL, 
     CONSTRAINT [PK_BulkImport] PRIMARY KEY CLUSTERED ([DSIDSYS] ASC)
 );
 

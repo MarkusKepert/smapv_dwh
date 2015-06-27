@@ -11,8 +11,8 @@
   DTS:LocaleID="1031"
   DTS:ObjectName="02ProcessSourceContent"
   DTS:PackageType="5"
-  DTS:VersionBuild="22"
-  DTS:VersionGUID="{75AFE7E6-FAD8-47B8-B7A6-6F96191D7EB9}">
+  DTS:VersionBuild="28"
+  DTS:VersionGUID="{0F0034BA-51ED-48B5-A308-2C260F35F934}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -49,6 +49,16 @@
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
   <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="20"
+      DTS:DTSID="{EDAB9C25-9F83-40C7-9FE5-57199941F468}"
+      DTS:ObjectName="DSID_Log"
+      DTS:Required="True">
+      <DTS:Property
+        DTS:DataType="20"
+        DTS:Name="ParameterValue">0</DTS:Property>
+    </DTS:PackageParameter>
     <DTS:PackageParameter
       DTS:CreationName=""
       DTS:DataType="8"
@@ -111,24 +121,24 @@
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
-      DTS:refId="Package\Foreach Loop Container"
+      DTS:refId="Package\Foreach zip in package"
       DTS:CreationName="STOCK:FOREACHLOOP"
       DTS:Description="Foreach Loop Container"
       DTS:DTSID="{E894A3E5-763C-4613-81DD-B69383465F92}"
       DTS:ExecutableType="STOCK:FOREACHLOOP"
       DTS:LocaleID="-1"
-      DTS:ObjectName="Foreach Loop Container">
+      DTS:ObjectName="Foreach zip in package">
       <DTS:Variables />
       <DTS:Executables />
     </DTS:Executable>
     <DTS:Executable
-      DTS:refId="Package\import info file from package"
+      DTS:refId="Package\import info-xml from package"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Data Flow Task"
       DTS:DTSID="{17a7d389-5134-44f0-91a0-c449f8a3a1cc}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
-      DTS:ObjectName="import info file from package"
+      DTS:ObjectName="import info-xml from package"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
       <DTS:ObjectData>
@@ -136,7 +146,7 @@
           version="1">
           <components>
             <component
-              refId="Package\import info file from package\Data Conversion"
+              refId="Package\import info-xml from package\Data Conversion"
               componentClassID="Microsoft.DataConvert"
               contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
               description="Data Conversion"
@@ -144,31 +154,31 @@
               usesDispositions="true">
               <inputs>
                 <input
-                  refId="Package\import info file from package\Data Conversion.Inputs[Data Conversion Input]"
+                  refId="Package\import info-xml from package\Data Conversion.Inputs[Data Conversion Input]"
                   name="Data Conversion Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\import info file from package\Data Conversion.Inputs[Data Conversion Input].Columns[SerialNumber]"
+                      refId="Package\import info-xml from package\Data Conversion.Inputs[Data Conversion Input].Columns[SerialNumber]"
                       cachedDataType="ui4"
                       cachedName="SerialNumber"
-                      lineageId="Package\import info file from package\XML Source.Outputs[Info].Columns[SerialNumber]" />
+                      lineageId="Package\import info-xml from package\XML Source.Outputs[Info].Columns[SerialNumber]" />
                   </inputColumns>
                   <externalMetadataColumns />
                 </input>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\import info file from package\Data Conversion.Outputs[Data Conversion Output]"
+                  refId="Package\import info-xml from package\Data Conversion.Outputs[Data Conversion Output]"
                   exclusionGroup="1"
                   name="Data Conversion Output"
-                  synchronousInputId="Package\import info file from package\Data Conversion.Inputs[Data Conversion Input]">
+                  synchronousInputId="Package\import info-xml from package\Data Conversion.Inputs[Data Conversion Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\import info file from package\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SerialNumber]"
+                      refId="Package\import info-xml from package\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SerialNumber]"
                       dataType="i4"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      lineageId="Package\import info file from package\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SerialNumber]"
+                      lineageId="Package\import info-xml from package\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SerialNumber]"
                       name="Copy of SerialNumber"
                       truncationRowDisposition="FailComponent">
                       <properties>
@@ -176,7 +186,7 @@
                           containsID="true"
                           dataType="System.Int32"
                           description="Specifies the input column used as the source of data for the conversion."
-                          name="SourceInputColumnLineageID">#{Package\import info file from package\XML Source.Outputs[Info].Columns[SerialNumber]}</property>
+                          name="SourceInputColumnLineageID">#{Package\import info-xml from package\XML Source.Outputs[Info].Columns[SerialNumber]}</property>
                         <property
                           dataType="System.Boolean"
                           description="Indicates whether the column uses the faster, locale-neutral parsing routines."
@@ -187,22 +197,22 @@
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\import info file from package\Data Conversion.Outputs[Data Conversion Error Output]"
+                  refId="Package\import info-xml from package\Data Conversion.Outputs[Data Conversion Error Output]"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="Data Conversion Error Output"
-                  synchronousInputId="Package\import info file from package\Data Conversion.Inputs[Data Conversion Input]">
+                  synchronousInputId="Package\import info-xml from package\Data Conversion.Inputs[Data Conversion Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\import info file from package\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      refId="Package\import info-xml from package\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\import info file from package\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      lineageId="Package\import info-xml from package\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\import info file from package\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      refId="Package\import info-xml from package\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\import info file from package\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\import info-xml from package\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -211,7 +221,102 @@
               </outputs>
             </component>
             <component
-              refId="Package\import info file from package\SQL Server Destination"
+              refId="Package\import info-xml from package\Derived Column"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\import info-xml from package\Derived Column.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\import info-xml from package\Derived Column.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\import info-xml from package\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\import info-xml from package\Derived Column.Outputs[Derived Column Output].Columns[dtCreate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\import info-xml from package\Derived Column.Outputs[Derived Column Output].Columns[dtCreate]"
+                      name="dtCreate"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[GETDATE]()</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">GETDATE()</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\import info-xml from package\Derived Column.Outputs[Derived Column Output].Columns[DSID_Log]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\import info-xml from package\Derived Column.Outputs[Derived Column Output].Columns[DSID_Log]"
+                      name="DSID_Log"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">@[$Package::DSID_Log]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">@[$Package::DSID_Log]</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\import info-xml from package\Derived Column.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\import info-xml from package\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\import info-xml from package\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\import info-xml from package\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\import info-xml from package\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\import info-xml from package\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\import info-xml from package\SQL Server Destination"
               componentClassID="Microsoft.SQLServerDestination"
               contactInfo="SQL Server Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;5"
               description="SQL Server Destination"
@@ -230,7 +335,7 @@
                   dataType="System.String"
                   description="The name of the database object to copy data into."
                   expressionType="Notify"
-                  name="BulkInsertTableName">[dbo].[BulkImport_Info]</property>
+                  name="BulkInsertTableName">[dbo].[BulkImport_PackageInfo]</property>
                 <property
                   dataType="System.Boolean"
                   description="Specifies that any constraints on the destination object are checked during the data copy operation. Corresponds to the bulk insert CHECK_CONSTRAINTS option."
@@ -282,7 +387,7 @@
               </properties>
               <connections>
                 <connection
-                  refId="Package\import info file from package\SQL Server Destination.Connections[OleDbConnection]"
+                  refId="Package\import info-xml from package\SQL Server Destination.Connections[OleDbConnection]"
                   connectionManagerID="Package.ConnectionManagers[PNC-DEV06\MSSQL2014.PV-TestImport]"
                   connectionManagerRefId="Package.ConnectionManagers[PNC-DEV06\MSSQL2014.PV-TestImport]"
                   description="The OLE DB runtime connection used to access the database."
@@ -290,83 +395,99 @@
               </connections>
               <inputs>
                 <input
-                  refId="Package\import info file from package\SQL Server Destination.Inputs[SQL Server Destination Input]"
+                  refId="Package\import info-xml from package\SQL Server Destination.Inputs[SQL Server Destination Input]"
                   hasSideEffects="true"
                   name="SQL Server Destination Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\import info file from package\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[MacAddress]"
+                      refId="Package\import info-xml from package\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[MacAddress]"
                       cachedDataType="wstr"
                       cachedLength="255"
                       cachedName="MacAddress"
-                      externalMetadataColumnId="Package\import info file from package\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[MacAddress]"
-                      lineageId="Package\import info file from package\XML Source.Outputs[Info].Columns[MacAddress]" />
+                      externalMetadataColumnId="Package\import info-xml from package\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[MacAddress]"
+                      lineageId="Package\import info-xml from package\XML Source.Outputs[Info].Columns[MacAddress]" />
                     <inputColumn
-                      refId="Package\import info file from package\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[Created]"
+                      refId="Package\import info-xml from package\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[Created]"
                       cachedDataType="dbTimeStamp"
                       cachedName="Created"
-                      externalMetadataColumnId="Package\import info file from package\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[Created]"
-                      lineageId="Package\import info file from package\XML Source.Outputs[Info].Columns[Created]" />
+                      externalMetadataColumnId="Package\import info-xml from package\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[Created]"
+                      lineageId="Package\import info-xml from package\XML Source.Outputs[Info].Columns[Created]" />
                     <inputColumn
-                      refId="Package\import info file from package\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[Version]"
+                      refId="Package\import info-xml from package\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[Version]"
                       cachedDataType="wstr"
                       cachedLength="255"
                       cachedName="Version"
-                      externalMetadataColumnId="Package\import info file from package\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[Version]"
-                      lineageId="Package\import info file from package\XML Source.Outputs[Info].Columns[Version]" />
+                      externalMetadataColumnId="Package\import info-xml from package\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[Version]"
+                      lineageId="Package\import info-xml from package\XML Source.Outputs[Info].Columns[Version]" />
                     <inputColumn
-                      refId="Package\import info file from package\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[OSVersion]"
+                      refId="Package\import info-xml from package\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[OSVersion]"
                       cachedDataType="wstr"
                       cachedLength="255"
                       cachedName="OSVersion"
-                      externalMetadataColumnId="Package\import info file from package\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[OSVersion]"
-                      lineageId="Package\import info file from package\XML Source.Outputs[Info].Columns[OSVersion]" />
+                      externalMetadataColumnId="Package\import info-xml from package\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[OSVersion]"
+                      lineageId="Package\import info-xml from package\XML Source.Outputs[Info].Columns[OSVersion]" />
                     <inputColumn
-                      refId="Package\import info file from package\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[Copy of SerialNumber]"
+                      refId="Package\import info-xml from package\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[Copy of SerialNumber]"
                       cachedDataType="i4"
                       cachedName="Copy of SerialNumber"
-                      externalMetadataColumnId="Package\import info file from package\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[SerialNumber]"
-                      lineageId="Package\import info file from package\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SerialNumber]" />
+                      externalMetadataColumnId="Package\import info-xml from package\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[SerialNumber]"
+                      lineageId="Package\import info-xml from package\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SerialNumber]" />
+                    <inputColumn
+                      refId="Package\import info-xml from package\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[dtCreate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="dtCreate"
+                      externalMetadataColumnId="Package\import info-xml from package\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[dtCreate]"
+                      lineageId="Package\import info-xml from package\Derived Column.Outputs[Derived Column Output].Columns[dtCreate]" />
+                    <inputColumn
+                      refId="Package\import info-xml from package\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[DSID_Log]"
+                      cachedDataType="i8"
+                      cachedName="DSID_Log"
+                      externalMetadataColumnId="Package\import info-xml from package\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[DSID_Log]"
+                      lineageId="Package\import info-xml from package\Derived Column.Outputs[Derived Column Output].Columns[DSID_Log]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\import info file from package\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[DSIDSYS]"
+                      refId="Package\import info-xml from package\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[DSIDSYS]"
                       dataType="i8"
                       name="DSIDSYS" />
                     <externalMetadataColumn
-                      refId="Package\import info file from package\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[Created]"
+                      refId="Package\import info-xml from package\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[Created]"
                       dataType="dbTimeStamp"
                       name="Created" />
                     <externalMetadataColumn
-                      refId="Package\import info file from package\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[dtCreate]"
+                      refId="Package\import info-xml from package\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[dtCreate]"
                       dataType="dbTimeStamp"
                       name="dtCreate" />
                     <externalMetadataColumn
-                      refId="Package\import info file from package\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[SerialNumber]"
+                      refId="Package\import info-xml from package\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[SerialNumber]"
                       dataType="i4"
                       name="SerialNumber" />
                     <externalMetadataColumn
-                      refId="Package\import info file from package\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[MacAddress]"
+                      refId="Package\import info-xml from package\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[MacAddress]"
                       dataType="wstr"
                       length="255"
                       name="MacAddress" />
                     <externalMetadataColumn
-                      refId="Package\import info file from package\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[Version]"
+                      refId="Package\import info-xml from package\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[Version]"
                       dataType="wstr"
                       length="255"
                       name="Version" />
                     <externalMetadataColumn
-                      refId="Package\import info file from package\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[OSVersion]"
+                      refId="Package\import info-xml from package\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[OSVersion]"
                       dataType="wstr"
                       length="255"
                       name="OSVersion" />
+                    <externalMetadataColumn
+                      refId="Package\import info-xml from package\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[DSID_Log]"
+                      dataType="i8"
+                      name="DSID_Log" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
             </component>
             <component
-              refId="Package\import info file from package\XML Source"
+              refId="Package\import info-xml from package\XML Source"
               componentClassID="Microsoft.ManagedComponentHost"
               contactInfo="Extracts data from an XML file. For example, extract catalog data from an XML file that represents catalogs and catalog items. Before using, specify the schema and generate an output for each XML element.;Microsoft Corporation;Microsoft SQL Server; Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
               description="Extracts data from an XML file. For example, extract catalog data from an XML file that represents catalogs and catalog items. Before using, specify the schema and generate an output for each XML element."
@@ -408,7 +529,7 @@
               </properties>
               <outputs>
                 <output
-                  refId="Package\import info file from package\XML Source.Outputs[Info]"
+                  refId="Package\import info-xml from package\XML Source.Outputs[Info]"
                   name="Info">
                   <properties>
                     <property
@@ -418,58 +539,58 @@
                   </properties>
                   <outputColumns>
                     <outputColumn
-                      refId="Package\import info file from package\XML Source.Outputs[Info].Columns[SerialNumber]"
+                      refId="Package\import info-xml from package\XML Source.Outputs[Info].Columns[SerialNumber]"
                       dataType="ui4"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\import info file from package\XML Source.Outputs[Info].ExternalColumns[SerialNumber]"
-                      lineageId="Package\import info file from package\XML Source.Outputs[Info].Columns[SerialNumber]"
+                      externalMetadataColumnId="Package\import info-xml from package\XML Source.Outputs[Info].ExternalColumns[SerialNumber]"
+                      lineageId="Package\import info-xml from package\XML Source.Outputs[Info].Columns[SerialNumber]"
                       name="SerialNumber"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\import info file from package\XML Source.Outputs[Info].Columns[MacAddress]"
+                      refId="Package\import info-xml from package\XML Source.Outputs[Info].Columns[MacAddress]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\import info file from package\XML Source.Outputs[Info].ExternalColumns[MacAddress]"
+                      externalMetadataColumnId="Package\import info-xml from package\XML Source.Outputs[Info].ExternalColumns[MacAddress]"
                       length="255"
-                      lineageId="Package\import info file from package\XML Source.Outputs[Info].Columns[MacAddress]"
+                      lineageId="Package\import info-xml from package\XML Source.Outputs[Info].Columns[MacAddress]"
                       name="MacAddress"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\import info file from package\XML Source.Outputs[Info].Columns[Created]"
+                      refId="Package\import info-xml from package\XML Source.Outputs[Info].Columns[Created]"
                       dataType="dbTimeStamp"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\import info file from package\XML Source.Outputs[Info].ExternalColumns[Created]"
-                      lineageId="Package\import info file from package\XML Source.Outputs[Info].Columns[Created]"
+                      externalMetadataColumnId="Package\import info-xml from package\XML Source.Outputs[Info].ExternalColumns[Created]"
+                      lineageId="Package\import info-xml from package\XML Source.Outputs[Info].Columns[Created]"
                       name="Created"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\import info file from package\XML Source.Outputs[Info].Columns[Version]"
+                      refId="Package\import info-xml from package\XML Source.Outputs[Info].Columns[Version]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\import info file from package\XML Source.Outputs[Info].ExternalColumns[Version]"
+                      externalMetadataColumnId="Package\import info-xml from package\XML Source.Outputs[Info].ExternalColumns[Version]"
                       length="255"
-                      lineageId="Package\import info file from package\XML Source.Outputs[Info].Columns[Version]"
+                      lineageId="Package\import info-xml from package\XML Source.Outputs[Info].Columns[Version]"
                       name="Version"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\import info file from package\XML Source.Outputs[Info].Columns[OSVersion]"
+                      refId="Package\import info-xml from package\XML Source.Outputs[Info].Columns[OSVersion]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\import info file from package\XML Source.Outputs[Info].ExternalColumns[OSVersion]"
+                      externalMetadataColumnId="Package\import info-xml from package\XML Source.Outputs[Info].ExternalColumns[OSVersion]"
                       length="255"
-                      lineageId="Package\import info file from package\XML Source.Outputs[Info].Columns[OSVersion]"
+                      lineageId="Package\import info-xml from package\XML Source.Outputs[Info].Columns[OSVersion]"
                       name="OSVersion"
                       truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\import info file from package\XML Source.Outputs[Info].ExternalColumns[SerialNumber]"
+                      refId="Package\import info-xml from package\XML Source.Outputs[Info].ExternalColumns[SerialNumber]"
                       dataType="ui4"
                       name="SerialNumber">
                       <properties>
@@ -479,7 +600,7 @@
                       </properties>
                     </externalMetadataColumn>
                     <externalMetadataColumn
-                      refId="Package\import info file from package\XML Source.Outputs[Info].ExternalColumns[MacAddress]"
+                      refId="Package\import info-xml from package\XML Source.Outputs[Info].ExternalColumns[MacAddress]"
                       dataType="wstr"
                       length="255"
                       name="MacAddress">
@@ -490,7 +611,7 @@
                       </properties>
                     </externalMetadataColumn>
                     <externalMetadataColumn
-                      refId="Package\import info file from package\XML Source.Outputs[Info].ExternalColumns[Created]"
+                      refId="Package\import info-xml from package\XML Source.Outputs[Info].ExternalColumns[Created]"
                       dataType="dbTimeStamp"
                       name="Created">
                       <properties>
@@ -500,7 +621,7 @@
                       </properties>
                     </externalMetadataColumn>
                     <externalMetadataColumn
-                      refId="Package\import info file from package\XML Source.Outputs[Info].ExternalColumns[Version]"
+                      refId="Package\import info-xml from package\XML Source.Outputs[Info].ExternalColumns[Version]"
                       dataType="wstr"
                       length="255"
                       name="Version">
@@ -511,7 +632,7 @@
                       </properties>
                     </externalMetadataColumn>
                     <externalMetadataColumn
-                      refId="Package\import info file from package\XML Source.Outputs[Info].ExternalColumns[OSVersion]"
+                      refId="Package\import info-xml from package\XML Source.Outputs[Info].ExternalColumns[OSVersion]"
                       dataType="wstr"
                       length="255"
                       name="OSVersion">
@@ -524,7 +645,7 @@
                   </externalMetadataColumns>
                 </output>
                 <output
-                  refId="Package\import info file from package\XML Source.Outputs[Info Error Output]"
+                  refId="Package\import info-xml from package\XML Source.Outputs[Info Error Output]"
                   isErrorOut="true"
                   name="Info Error Output">
                   <properties>
@@ -535,68 +656,68 @@
                   </properties>
                   <outputColumns>
                     <outputColumn
-                      refId="Package\import info file from package\XML Source.Outputs[Info Error Output].Columns[SerialNumber]"
+                      refId="Package\import info-xml from package\XML Source.Outputs[Info Error Output].Columns[SerialNumber]"
                       dataType="nText"
-                      externalMetadataColumnId="Package\import info file from package\XML Source.Outputs[Info Error Output].ExternalColumns[SerialNumber]"
-                      lineageId="Package\import info file from package\XML Source.Outputs[Info Error Output].Columns[SerialNumber]"
+                      externalMetadataColumnId="Package\import info-xml from package\XML Source.Outputs[Info Error Output].ExternalColumns[SerialNumber]"
+                      lineageId="Package\import info-xml from package\XML Source.Outputs[Info Error Output].Columns[SerialNumber]"
                       name="SerialNumber" />
                     <outputColumn
-                      refId="Package\import info file from package\XML Source.Outputs[Info Error Output].Columns[MacAddress]"
+                      refId="Package\import info-xml from package\XML Source.Outputs[Info Error Output].Columns[MacAddress]"
                       dataType="nText"
-                      externalMetadataColumnId="Package\import info file from package\XML Source.Outputs[Info Error Output].ExternalColumns[MacAddress]"
-                      lineageId="Package\import info file from package\XML Source.Outputs[Info Error Output].Columns[MacAddress]"
+                      externalMetadataColumnId="Package\import info-xml from package\XML Source.Outputs[Info Error Output].ExternalColumns[MacAddress]"
+                      lineageId="Package\import info-xml from package\XML Source.Outputs[Info Error Output].Columns[MacAddress]"
                       name="MacAddress" />
                     <outputColumn
-                      refId="Package\import info file from package\XML Source.Outputs[Info Error Output].Columns[Created]"
+                      refId="Package\import info-xml from package\XML Source.Outputs[Info Error Output].Columns[Created]"
                       dataType="nText"
-                      externalMetadataColumnId="Package\import info file from package\XML Source.Outputs[Info Error Output].ExternalColumns[Created]"
-                      lineageId="Package\import info file from package\XML Source.Outputs[Info Error Output].Columns[Created]"
+                      externalMetadataColumnId="Package\import info-xml from package\XML Source.Outputs[Info Error Output].ExternalColumns[Created]"
+                      lineageId="Package\import info-xml from package\XML Source.Outputs[Info Error Output].Columns[Created]"
                       name="Created" />
                     <outputColumn
-                      refId="Package\import info file from package\XML Source.Outputs[Info Error Output].Columns[Version]"
+                      refId="Package\import info-xml from package\XML Source.Outputs[Info Error Output].Columns[Version]"
                       dataType="nText"
-                      externalMetadataColumnId="Package\import info file from package\XML Source.Outputs[Info Error Output].ExternalColumns[Version]"
-                      lineageId="Package\import info file from package\XML Source.Outputs[Info Error Output].Columns[Version]"
+                      externalMetadataColumnId="Package\import info-xml from package\XML Source.Outputs[Info Error Output].ExternalColumns[Version]"
+                      lineageId="Package\import info-xml from package\XML Source.Outputs[Info Error Output].Columns[Version]"
                       name="Version" />
                     <outputColumn
-                      refId="Package\import info file from package\XML Source.Outputs[Info Error Output].Columns[OSVersion]"
+                      refId="Package\import info-xml from package\XML Source.Outputs[Info Error Output].Columns[OSVersion]"
                       dataType="nText"
-                      externalMetadataColumnId="Package\import info file from package\XML Source.Outputs[Info Error Output].ExternalColumns[OSVersion]"
-                      lineageId="Package\import info file from package\XML Source.Outputs[Info Error Output].Columns[OSVersion]"
+                      externalMetadataColumnId="Package\import info-xml from package\XML Source.Outputs[Info Error Output].ExternalColumns[OSVersion]"
+                      lineageId="Package\import info-xml from package\XML Source.Outputs[Info Error Output].Columns[OSVersion]"
                       name="OSVersion" />
                     <outputColumn
-                      refId="Package\import info file from package\XML Source.Outputs[Info Error Output].Columns[ErrorCode]"
+                      refId="Package\import info-xml from package\XML Source.Outputs[Info Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\import info file from package\XML Source.Outputs[Info Error Output].Columns[ErrorCode]"
+                      lineageId="Package\import info-xml from package\XML Source.Outputs[Info Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\import info file from package\XML Source.Outputs[Info Error Output].Columns[ErrorColumn]"
+                      refId="Package\import info-xml from package\XML Source.Outputs[Info Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\import info file from package\XML Source.Outputs[Info Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\import info-xml from package\XML Source.Outputs[Info Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\import info file from package\XML Source.Outputs[Info Error Output].ExternalColumns[SerialNumber]"
+                      refId="Package\import info-xml from package\XML Source.Outputs[Info Error Output].ExternalColumns[SerialNumber]"
                       dataType="nText"
                       name="SerialNumber" />
                     <externalMetadataColumn
-                      refId="Package\import info file from package\XML Source.Outputs[Info Error Output].ExternalColumns[MacAddress]"
+                      refId="Package\import info-xml from package\XML Source.Outputs[Info Error Output].ExternalColumns[MacAddress]"
                       dataType="nText"
                       name="MacAddress" />
                     <externalMetadataColumn
-                      refId="Package\import info file from package\XML Source.Outputs[Info Error Output].ExternalColumns[Created]"
+                      refId="Package\import info-xml from package\XML Source.Outputs[Info Error Output].ExternalColumns[Created]"
                       dataType="nText"
                       name="Created" />
                     <externalMetadataColumn
-                      refId="Package\import info file from package\XML Source.Outputs[Info Error Output].ExternalColumns[Version]"
+                      refId="Package\import info-xml from package\XML Source.Outputs[Info Error Output].ExternalColumns[Version]"
                       dataType="nText"
                       name="Version" />
                     <externalMetadataColumn
-                      refId="Package\import info file from package\XML Source.Outputs[Info Error Output].ExternalColumns[OSVersion]"
+                      refId="Package\import info-xml from package\XML Source.Outputs[Info Error Output].ExternalColumns[OSVersion]"
                       dataType="nText"
                       name="OSVersion" />
                   </externalMetadataColumns>
@@ -606,15 +727,20 @@
           </components>
           <paths>
             <path
-              refId="Package\import info file from package.Paths[Data Conversion Output]"
-              endId="Package\import info file from package\SQL Server Destination.Inputs[SQL Server Destination Input]"
+              refId="Package\import info-xml from package.Paths[Data Conversion Output]"
+              endId="Package\import info-xml from package\Derived Column.Inputs[Derived Column Input]"
               name="Data Conversion Output"
-              startId="Package\import info file from package\Data Conversion.Outputs[Data Conversion Output]" />
+              startId="Package\import info-xml from package\Data Conversion.Outputs[Data Conversion Output]" />
             <path
-              refId="Package\import info file from package.Paths[Info]"
-              endId="Package\import info file from package\Data Conversion.Inputs[Data Conversion Input]"
+              refId="Package\import info-xml from package.Paths[Derived Column Output]"
+              endId="Package\import info-xml from package\SQL Server Destination.Inputs[SQL Server Destination Input]"
+              name="Derived Column Output"
+              startId="Package\import info-xml from package\Derived Column.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\import info-xml from package.Paths[Info]"
+              endId="Package\import info-xml from package\Data Conversion.Inputs[Data Conversion Input]"
               name="Info"
-              startId="Package\import info file from package\XML Source.Outputs[Info]" />
+              startId="Package\import info-xml from package\XML Source.Outputs[Info]" />
           </paths>
         </pipeline>
       </DTS:ObjectData>
@@ -1326,13 +1452,13 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
-      DTS:refId="Package\XML Task"
+      DTS:refId="Package\XML Task Transform info-xml"
       DTS:CreationName="Microsoft.XMLTask"
       DTS:Description="XML Task"
       DTS:DTSID="{B5496F5B-5C11-4AC6-BAF6-6E75DD9BF0B1}"
       DTS:ExecutableType="Microsoft.XMLTask"
       DTS:LocaleID="-1"
-      DTS:ObjectName="XML Task"
+      DTS:ObjectName="XML Task Transform info-xml"
       DTS:TaskContact="XML Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
       DTS:ThreadHint="0">
       <DTS:Variables />
@@ -1355,10 +1481,10 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
       DTS:refId="Package.PrecedenceConstraints[Constraint]"
       DTS:CreationName=""
       DTS:DTSID="{658C7077-F8D8-4919-8761-C954CCE79F37}"
-      DTS:From="Package\import info file from package"
+      DTS:From="Package\import info-xml from package"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint"
-      DTS:To="Package\Foreach Loop Container" />
+      DTS:To="Package\Foreach zip in package" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
       DTS:CreationName=""
@@ -1371,10 +1497,10 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
       DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
       DTS:CreationName=""
       DTS:DTSID="{BDB00B96-952D-4A04-8AEF-D45C62E74423}"
-      DTS:From="Package\XML Task"
+      DTS:From="Package\XML Task Transform info-xml"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 2"
-      DTS:To="Package\import info file from package" />
+      DTS:To="Package\import info-xml from package" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
       DTS:CreationName=""
@@ -1382,7 +1508,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
       DTS:From="Package\Script Task Read InfoXML"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 3"
-      DTS:To="Package\XML Task" />
+      DTS:To="Package\XML Task Transform info-xml" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
@@ -1397,46 +1523,46 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="157,42"
+          Size="223,42"
           Id="Package\Expression Task InfoXML Path"
-          TopLeft="98,21" />
+          TopLeft="150,31" />
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
           PanelSize="215,55"
           Size="215,98"
-          Id="Package\Foreach Loop Container"
-          TopLeft="103,480" />
+          Id="Package\Foreach zip in package"
+          TopLeft="139,514" />
         <NodeLayout
           Size="217,42"
-          Id="Package\import info file from package"
-          TopLeft="79,307" />
+          Id="Package\import info-xml from package"
+          TopLeft="155,356" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="187.5,349">
+          TopLeft="263.5,398">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="23,131"
+              EndConnector="-17,116"
               Start="0,0"
-              End="23,123.5">
+              End="-17,108.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,61.5" />
+                    End="0,54" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,61.5"
-                    Point2="0,65.5"
-                    Point3="4,65.5" />
+                    Point1="0,54"
+                    Point2="0,58"
+                    Point3="-4,58" />
                   <mssgle:LineSegment
-                    End="19,65.5" />
+                    End="-13,58" />
                   <mssgle:CubicBezierSegment
-                    Point1="19,65.5"
-                    Point2="23,65.5"
-                    Point3="23,69.5" />
+                    Point1="-13,58"
+                    Point2="-17,58"
+                    Point3="-17,62" />
                   <mssgle:LineSegment
-                    End="23,123.5" />
+                    End="-17,108.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1446,23 +1572,35 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <NodeLayout
-          Size="126,42"
-          Id="Package\XML Task"
-          TopLeft="123,207" />
+          Size="177,67"
+          Id="Package\XML Task Transform info-xml"
+          TopLeft="166,224" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="186.75,249">
+          TopLeft="254.5,291">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,58"
+              EndConnector="9,65"
               Start="0,0"
-              End="0,50.5">
+              End="9,57.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,50.5" />
+                    End="0,28.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,28.5"
+                    Point2="0,32.5"
+                    Point3="4,32.5" />
+                  <mssgle:LineSegment
+                    End="5,32.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="5,32.5"
+                    Point2="9,32.5"
+                    Point3="9,36.5" />
+                  <mssgle:LineSegment
+                    End="9,57.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1474,33 +1612,33 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
         <NodeLayout
           Size="202,42"
           Id="Package\Script Task Read InfoXML"
-          TopLeft="135,116" />
+          TopLeft="139,130" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="176.5,63">
+          TopLeft="261.5,73">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="59.5,53"
+              EndConnector="-21.5,57"
               Start="0,0"
-              End="59.5,45.5">
+              End="-21.5,49.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,22.5" />
+                    End="0,24.5" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,22.5"
-                    Point2="0,26.5"
-                    Point3="4,26.5" />
+                    Point1="0,24.5"
+                    Point2="0,28.5"
+                    Point3="-4,28.5" />
                   <mssgle:LineSegment
-                    End="55.5,26.5" />
+                    End="-17.5,28.5" />
                   <mssgle:CubicBezierSegment
-                    Point1="55.5,26.5"
-                    Point2="59.5,26.5"
-                    Point3="59.5,30.5" />
+                    Point1="-17.5,28.5"
+                    Point2="-21.5,28.5"
+                    Point3="-21.5,32.5" />
                   <mssgle:LineSegment
-                    End="59.5,45.5" />
+                    End="-21.5,49.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1511,30 +1649,30 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="236,158">
+          TopLeft="240,172">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-50,49"
+              EndConnector="14.5,52"
               Start="0,0"
-              End="-50,41.5">
+              End="14.5,44.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,20.5" />
+                    End="0,22" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,20.5"
-                    Point2="0,24.5"
-                    Point3="-4,24.5" />
+                    Point1="0,22"
+                    Point2="0,26"
+                    Point3="4,26" />
                   <mssgle:LineSegment
-                    End="-46,24.5" />
+                    End="10.5,26" />
                   <mssgle:CubicBezierSegment
-                    Point1="-46,24.5"
-                    Point2="-50,24.5"
-                    Point3="-50,28.5" />
+                    Point1="10.5,26"
+                    Point2="14.5,26"
+                    Point3="14.5,30" />
                   <mssgle:LineSegment
-                    End="-50,41.5" />
+                    End="14.5,44.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1547,48 +1685,74 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
     </LayoutInfo>
   </Package>
   <TaskHost
-    design-time-name="Package\import info file from package">
+    design-time-name="Package\import info-xml from package">
     <LayoutInfo>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="190,42"
-          Id="Package\import info file from package\SQL Server Destination"
-          TopLeft="144,458" />
+          Id="Package\import info-xml from package\SQL Server Destination"
+          TopLeft="144,511" />
         <NodeLayout
           Size="136,42"
-          Id="Package\import info file from package\XML Source"
+          Id="Package\import info-xml from package\XML Source"
           TopLeft="158,87" />
         <NodeLayout
-          Size="158,42"
-          Id="Package\import info file from package\Data Conversion"
-          TopLeft="159,248" />
+          Size="158,61"
+          Id="Package\import info-xml from package\Data Conversion"
+          TopLeft="147,228" />
         <EdgeLayout
-          Id="Package\import info file from package.Paths[Info]"
+          Id="Package\import info-xml from package.Paths[Info]"
           TopLeft="226,129">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="12,119"
+              EndConnector="0,99"
               Start="0,0"
-              End="12,111.5">
+              End="0,91.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,55.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,55.5"
-                    Point2="0,59.5"
-                    Point3="4,59.5" />
+                    End="0,91.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="156,42"
+          Id="Package\import info-xml from package\Derived Column"
+          TopLeft="166,371" />
+        <EdgeLayout
+          Id="Package\import info-xml from package.Paths[Data Conversion Output]"
+          TopLeft="226,289">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="18,82"
+              Start="0,0"
+              End="18,74.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
                   <mssgle:LineSegment
-                    End="8,59.5" />
+                    End="0,37" />
                   <mssgle:CubicBezierSegment
-                    Point1="8,59.5"
-                    Point2="12,59.5"
-                    Point3="12,63.5" />
+                    Point1="0,37"
+                    Point2="0,41"
+                    Point3="4,41" />
                   <mssgle:LineSegment
-                    End="12,111.5" />
+                    End="14,41" />
+                  <mssgle:CubicBezierSegment
+                    Point1="14,41"
+                    Point2="18,41"
+                    Point3="18,45" />
+                  <mssgle:LineSegment
+                    End="18,74.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1598,19 +1762,19 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\import info file from package.Paths[Data Conversion Output]"
-          TopLeft="238.5,290">
+          Id="Package\import info-xml from package.Paths[Derived Column Output]"
+          TopLeft="241.5,413">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,168"
+              EndConnector="0,98"
               Start="0,0"
-              End="0,160.5">
+              End="0,90.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,160.5" />
+                    End="0,90.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1623,7 +1787,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\import info file from package\SQL Server Destination">
+    design-time-name="Package\import info-xml from package\SQL Server Destination">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
