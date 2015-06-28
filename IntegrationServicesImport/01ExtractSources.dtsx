@@ -11,8 +11,8 @@
   DTS:LocaleID="1031"
   DTS:ObjectName="01ExtractSources"
   DTS:PackageType="5"
-  DTS:VersionBuild="49"
-  DTS:VersionGUID="{CD34FC5D-AD22-4F61-826C-F9C185F417B8}">
+  DTS:VersionBuild="52"
+  DTS:VersionGUID="{71190710-4826-410D-9E2A-BDD4AC7818F5}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -47,16 +47,6 @@
         <DTS:ConnectionManager
           DTS:FileUsageType="2"
           DTS:ConnectionString="C:\PVDATA\new" />
-      </DTS:ObjectData>
-    </DTS:ConnectionManager>
-    <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[PNC-DEV06\MSSQL2014.PV-TestImport]"
-      DTS:CreationName="OLEDB"
-      DTS:DTSID="{82ACA70F-ECDD-4678-9F12-41EF550BE2C7}"
-      DTS:ObjectName="PNC-DEV06\MSSQL2014.PV-TestImport">
-      <DTS:ObjectData>
-        <DTS:ConnectionManager
-          DTS:ConnectionString="Data Source=PNC-DEV06\MSSQL2014;Initial Catalog=PV-TestImport;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -244,7 +234,7 @@
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
-              SQLTask:Connection="{82ACA70F-ECDD-4678-9F12-41EF550BE2C7}"
+              SQLTask:Connection="{CFACC099-2DCD-4B05-ABC5-FDFFB8446AA2}"
               SQLTask:SqlStatementSource="update BulkImportLog set dtImportEnd=getdate() where DSIDSYS=?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
               <SQLTask:ParameterBinding
                 SQLTask:ParameterName="0"
@@ -268,7 +258,7 @@
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
-              SQLTask:Connection="{82ACA70F-ECDD-4678-9F12-41EF550BE2C7}"
+              SQLTask:Connection="{CFACC099-2DCD-4B05-ABC5-FDFFB8446AA2}"
               SQLTask:SqlStatementSource="Insert into BulkImportLog (SourceFileName,dtImportStart) Values (?,getdate())&#xA;&#xA;SELECT SCOPE_IDENTITY() As LastID"
               SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
               <SQLTask:ResultBinding
