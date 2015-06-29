@@ -26,7 +26,7 @@
           <SSIS:Property SSIS:Name="CreatorComputerName">PNC-DEV06</SSIS:Property>
           <SSIS:Property SSIS:Name="Description">
           </SSIS:Property>
-          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAATbrXSzA2kkCD595gi2vRsQAAAAACAAAAAAADZgAAwAAAABAAAAC7p+Bj47lXIEJeEcjjjKBeAAAAAASAAACgAAAAEAAAAGMNra2F3YFibiRd9ueFq5iIAAAAzbfmLLq7Oe34BiaAzr5O4MtXqM/70Db1/Xh2H1lrKXueREDsifYfI9qitaVLQCk1+sgaGuPlLP7M9vrof3i9rmJYrfBr3zIPWP1AcFs0t5lsYQGXEjhI8rXnG45UtmO9sfyPUp3wQPQvUpq+J89k77BvyBPeR32jk6gfJtj8jaJV7IPwQPT2FhQAAACUDZl27gGhSoHkyDpvCIb5lYQxrA==</SSIS:Property>
+          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAATbrXSzA2kkCD595gi2vRsQAAAAACAAAAAAADZgAAwAAAABAAAAAFwk4CDT7AHxsu0Rww9SR9AAAAAASAAACgAAAAEAAAAP5ZjMwEeJeM4RAEFgFyQeqIAAAAlA7zuXuD9JgWqeJLDJN/L+J1L2SWS7f1erijz3a9Cgx6/oQjCgjGdb176mzilAraEgn1X4SW4uqgF92uYE0xqBqAXIxU/L5CX1F7QVlu2OtLjRpo5s0vcirdL8MtqmdI5cKnoHuTUxcX/ECDvBVTsdDNLr4xTEDiORHzDIrXf90iXb0aGSuy3xQAAACN2Ow9+Ckp00WH8JuVlyEGrqYV7g==</SSIS:Property>
           <SSIS:Property SSIS:Name="FormatVersion">1</SSIS:Property>
         </SSIS:Properties>
         <SSIS:Packages>
@@ -136,10 +136,10 @@
                 <SSIS:Property SSIS:Name="Name">01ExtractSources</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionBuild">52</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">54</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{71190710-4826-410D-9E2A-BDD4AC7818F5}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{2C23362E-0991-4B73-92CC-577BB3C00F1F}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
@@ -289,10 +289,10 @@
                 <SSIS:Property SSIS:Name="Name">03PvMeanDataimport</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionBuild">30</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">31</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{B988356D-00FB-4349-9609-B5E4B3564A18}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{8EFA2A59-A779-426D-BA81-28A234F45B64}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
@@ -322,16 +322,30 @@
                 <SSIS:Property SSIS:Name="Name">04PvLogDataimport</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionBuild">30</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">35</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{A417E468-C083-443F-9808-BF8194F92583}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{C92119F7-C11B-49FB-8C0F-823EB43D572A}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
                 <SSIS:Property SSIS:Name="ProtectionLevel">1</SSIS:Property>
               </SSIS:Properties>
               <SSIS:Parameters>
+                <SSIS:Parameter SSIS:Name="DataFlowTask_XML_SourceXMLData">
+                  <SSIS:Properties>
+                    <SSIS:Property SSIS:Name="ID">{0BA5A230-851E-455D-92D9-29CDCFC6764C}</SSIS:Property>
+                    <SSIS:Property SSIS:Name="CreationName">
+                    </SSIS:Property>
+                    <SSIS:Property SSIS:Name="Description">
+                    </SSIS:Property>
+                    <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">0</SSIS:Property>
+                    <SSIS:Property SSIS:Name="DataType">9</SSIS:Property>
+                  </SSIS:Properties>
+                </SSIS:Parameter>
                 <SSIS:Parameter SSIS:Name="SourceDir">
                   <SSIS:Properties>
                     <SSIS:Property SSIS:Name="ID">{DB18501E-08E3-45FA-ACE3-29EEED3EE1BB}</SSIS:Property>
