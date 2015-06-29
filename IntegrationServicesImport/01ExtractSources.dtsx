@@ -11,8 +11,8 @@
   DTS:LocaleID="1031"
   DTS:ObjectName="01ExtractSources"
   DTS:PackageType="5"
-  DTS:VersionBuild="52"
-  DTS:VersionGUID="{71190710-4826-410D-9E2A-BDD4AC7818F5}">
+  DTS:VersionBuild="54"
+  DTS:VersionGUID="{2C23362E-0991-4B73-92CC-577BB3C00F1F}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -165,7 +165,6 @@
           DTS:CreationName="Microsoft.FileSystemTask"
           DTS:DelayValidation="True"
           DTS:Description="File System Task"
-          DTS:Disabled="True"
           DTS:DTSID="{682BD305-1C54-4893-B530-9C390A1596F2}"
           DTS:ExecutableType="Microsoft.FileSystemTask"
           DTS:LocaleID="-1"
@@ -259,7 +258,7 @@
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
               SQLTask:Connection="{CFACC099-2DCD-4B05-ABC5-FDFFB8446AA2}"
-              SQLTask:SqlStatementSource="Insert into BulkImportLog (SourceFileName,dtImportStart) Values (?,getdate())&#xA;&#xA;SELECT SCOPE_IDENTITY() As LastID"
+              SQLTask:SqlStatementSource="Insert into BulkImportLog (SourceFileName,dtImportStart,SourceFileType) Values (?,getdate(),1)&#xA;&#xA;SELECT SCOPE_IDENTITY() As LastID"
               SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
               <SQLTask:ResultBinding
                 SQLTask:ResultName="LastID"
@@ -277,7 +276,6 @@
           DTS:refId="Package\foreach source zip\move zip in processsed dir"
           DTS:CreationName="Microsoft.FileSystemTask"
           DTS:Description="File System Task"
-          DTS:Disabled="True"
           DTS:DTSID="{FCBF6D80-E48E-4CB9-84FC-17E40ADCE817}"
           DTS:ExecutableType="Microsoft.FileSystemTask"
           DTS:LocaleID="-1"

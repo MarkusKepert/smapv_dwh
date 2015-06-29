@@ -67,6 +67,7 @@
     <Build Include="dbo\Tables\BulkImport_Mean.sql" />
     <Build Include="dbo\Tables\BulkImportLog.sql" />
     <Build Include="dbo\Tables\BulkImport_Log.sql" />
+    <Build Include="dbo\Tables\BulkImportLog_FileType.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="PV-Data.publish.xml" />
@@ -75,5 +76,8 @@
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="PV-Data.refactorlog" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Script.PostDeployment_AddFileTypes.sql" />
   </ItemGroup>
 </Project>

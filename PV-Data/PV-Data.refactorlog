@@ -28,4 +28,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="DSIDSYS" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="97d7697c-7e65-41a4-b3f4-22a73affb6c7" ChangeDateTime="06/29/2015 12:01:03">
+    <Property Name="ElementName" Value="[dbo].[BulkImportLog_FileType].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[BulkImportLog_FileType]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DSIDSYS" />
+  </Operation>
 </Operations>
