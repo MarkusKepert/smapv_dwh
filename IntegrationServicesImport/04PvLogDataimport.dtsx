@@ -11,8 +11,8 @@
   DTS:LocaleID="1031"
   DTS:ObjectName="04PvLogDataimport"
   DTS:PackageType="5"
-  DTS:VersionBuild="34"
-  DTS:VersionGUID="{E14B5988-90C6-46E6-A481-D9A6C85FAC68}">
+  DTS:VersionBuild="37"
+  DTS:VersionGUID="{B27ADBD1-7541-48A2-AF74-8181CAD4081B}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -105,23 +105,21 @@
       <DTS:Variables />
       <DTS:Executables>
         <DTS:Executable
-          DTS:refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data"
+          DTS:refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB"
           DTS:CreationName="Microsoft.Pipeline"
           DTS:Description="Data Flow Task"
-          DTS:DTSID="{85C97AEF-7D42-417F-AAF4-32F11DC5FEE1}"
+          DTS:DTSID="{EF844E01-FDBA-4935-ACEF-4E8428B37F76}"
           DTS:ExecutableType="Microsoft.Pipeline"
           DTS:LocaleID="-1"
-          DTS:ObjectName="DataFlow Task Log Data"
+          DTS:ObjectName="Data Flow Task Insert Log Data in DB"
           DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
           <DTS:Variables />
-          <DTS:PropertyExpression
-            DTS:Name="[XML log data].[XMLData]">@[$Package::DataFlowTask_XMLSourceXMLData]</DTS:PropertyExpression>
           <DTS:ObjectData>
             <pipeline
               version="1">
               <components>
                 <component
-                  refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\Data Conversion"
+                  refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\Data Conversion"
                   componentClassID="Microsoft.DataConvert"
                   contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
                   description="Data Conversion"
@@ -129,49 +127,56 @@
                   usesDispositions="true">
                   <inputs>
                     <input
-                      refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\Data Conversion.Inputs[Data Conversion Input]"
+                      refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\Data Conversion.Inputs[Data Conversion Input]"
                       name="Data Conversion Input">
                       <inputColumns>
                         <inputColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\Data Conversion.Inputs[Data Conversion Input].Columns[MessageCode]"
-                          cachedDataType="ui2"
-                          cachedName="MessageCode"
-                          lineageId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].Columns[MessageCode]" />
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\Data Conversion.Inputs[Data Conversion Input].Columns[Message]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="Message"
+                          lineageId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].Columns[Message]" />
                         <inputColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\Data Conversion.Inputs[Data Conversion Input].Columns[DSID_Log]"
-                          cachedDataType="i4"
-                          cachedName="DSID_Log"
-                          lineageId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\Derived Column add dtcreate.Outputs[Derived Column Output].Columns[DSID_Log]" />
-                        <inputColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\Data Conversion.Inputs[Data Conversion Input].Columns[DSID_PackageInfo]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\Data Conversion.Inputs[Data Conversion Input].Columns[DSID_PackageInfo]"
                           cachedDataType="i4"
                           cachedName="DSID_PackageInfo"
-                          lineageId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\Derived Column add dtcreate.Outputs[Derived Column Output].Columns[DSID_PackageInfo]" />
+                          lineageId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\Derived Column.Outputs[Derived Column Output].Columns[DSID_PackageInfo]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\Data Conversion.Inputs[Data Conversion Input].Columns[DSID_Log]"
+                          cachedDataType="i4"
+                          cachedName="DSID_Log"
+                          lineageId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\Derived Column.Outputs[Derived Column Output].Columns[DSID_Log]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\Data Conversion.Inputs[Data Conversion Input].Columns[MessageCode]"
+                          cachedDataType="ui2"
+                          cachedName="MessageCode"
+                          lineageId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].Columns[MessageCode]" />
                       </inputColumns>
                       <externalMetadataColumns />
                     </input>
                   </inputs>
                   <outputs>
                     <output
-                      refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\Data Conversion.Outputs[Data Conversion Output]"
+                      refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\Data Conversion.Outputs[Data Conversion Output]"
                       exclusionGroup="1"
                       name="Data Conversion Output"
-                      synchronousInputId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\Data Conversion.Inputs[Data Conversion Input]">
+                      synchronousInputId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\Data Conversion.Inputs[Data Conversion Input]">
                       <outputColumns>
                         <outputColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of MessageCode]"
-                          dataType="i4"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Message]"
+                          dataType="wstr"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          lineageId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of MessageCode]"
-                          name="Copy of MessageCode"
+                          length="255"
+                          lineageId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Message]"
+                          name="Copy of Message"
                           truncationRowDisposition="FailComponent">
                           <properties>
                             <property
                               containsID="true"
                               dataType="System.Int32"
                               description="Specifies the input column used as the source of data for the conversion."
-                              name="SourceInputColumnLineageID">#{Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].Columns[MessageCode]}</property>
+                              name="SourceInputColumnLineageID">#{Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].Columns[Message]}</property>
                             <property
                               dataType="System.Boolean"
                               description="Indicates whether the column uses the faster, locale-neutral parsing routines."
@@ -179,31 +184,11 @@
                           </properties>
                         </outputColumn>
                         <outputColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of DSID_Log]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of DSID_PackageInfo]"
                           dataType="i8"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          lineageId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of DSID_Log]"
-                          name="Copy of DSID_Log"
-                          truncationRowDisposition="FailComponent">
-                          <properties>
-                            <property
-                              containsID="true"
-                              dataType="System.Int32"
-                              description="Specifies the input column used as the source of data for the conversion."
-                              name="SourceInputColumnLineageID">#{Package\Foreach Loop Source Dir\DataFlow Task Log Data\Derived Column add dtcreate.Outputs[Derived Column Output].Columns[DSID_Log]}</property>
-                            <property
-                              dataType="System.Boolean"
-                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
-                              name="FastParse">false</property>
-                          </properties>
-                        </outputColumn>
-                        <outputColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of DSID_PackageInfo]"
-                          dataType="i8"
-                          errorOrTruncationOperation="Conversion"
-                          errorRowDisposition="FailComponent"
-                          lineageId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of DSID_PackageInfo]"
+                          lineageId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of DSID_PackageInfo]"
                           name="Copy of DSID_PackageInfo"
                           truncationRowDisposition="FailComponent">
                           <properties>
@@ -211,7 +196,47 @@
                               containsID="true"
                               dataType="System.Int32"
                               description="Specifies the input column used as the source of data for the conversion."
-                              name="SourceInputColumnLineageID">#{Package\Foreach Loop Source Dir\DataFlow Task Log Data\Derived Column add dtcreate.Outputs[Derived Column Output].Columns[DSID_PackageInfo]}</property>
+                              name="SourceInputColumnLineageID">#{Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\Derived Column.Outputs[Derived Column Output].Columns[DSID_PackageInfo]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of DSID_Log]"
+                          dataType="i8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of DSID_Log]"
+                          name="Copy of DSID_Log"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\Derived Column.Outputs[Derived Column Output].Columns[DSID_Log]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of MessageCode]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of MessageCode]"
+                          name="Copy of MessageCode"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].Columns[MessageCode]}</property>
                             <property
                               dataType="System.Boolean"
                               description="Indicates whether the column uses the faster, locale-neutral parsing routines."
@@ -222,22 +247,22 @@
                       <externalMetadataColumns />
                     </output>
                     <output
-                      refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\Data Conversion.Outputs[Data Conversion Error Output]"
+                      refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\Data Conversion.Outputs[Data Conversion Error Output]"
                       exclusionGroup="1"
                       isErrorOut="true"
                       name="Data Conversion Error Output"
-                      synchronousInputId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\Data Conversion.Inputs[Data Conversion Input]">
+                      synchronousInputId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\Data Conversion.Inputs[Data Conversion Input]">
                       <outputColumns>
                         <outputColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
                           dataType="i4"
-                          lineageId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                          lineageId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
                           name="ErrorCode"
                           specialFlags="1" />
                         <outputColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
                           dataType="i4"
-                          lineageId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                          lineageId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
                           name="ErrorColumn"
                           specialFlags="2" />
                       </outputColumns>
@@ -246,15 +271,15 @@
                   </outputs>
                 </component>
                 <component
-                  refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\Derived Column add dtcreate"
+                  refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\Derived Column"
                   componentClassID="Microsoft.DerivedColumn"
                   contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
                   description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
-                  name="Derived Column add dtcreate"
+                  name="Derived Column"
                   usesDispositions="true">
                   <inputs>
                     <input
-                      refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\Derived Column add dtcreate.Inputs[Derived Column Input]"
+                      refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\Derived Column.Inputs[Derived Column Input]"
                       description="Input to the Derived Column Transformation"
                       name="Derived Column Input">
                       <externalMetadataColumns />
@@ -262,18 +287,18 @@
                   </inputs>
                   <outputs>
                     <output
-                      refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\Derived Column add dtcreate.Outputs[Derived Column Output]"
+                      refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\Derived Column.Outputs[Derived Column Output]"
                       description="Default Output of the Derived Column Transformation"
                       exclusionGroup="1"
                       name="Derived Column Output"
-                      synchronousInputId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\Derived Column add dtcreate.Inputs[Derived Column Input]">
+                      synchronousInputId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\Derived Column.Inputs[Derived Column Input]">
                       <outputColumns>
                         <outputColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\Derived Column add dtcreate.Outputs[Derived Column Output].Columns[dtCreate]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\Derived Column.Outputs[Derived Column Output].Columns[dtCreate]"
                           dataType="dbTimeStamp"
                           errorOrTruncationOperation="Computation"
                           errorRowDisposition="FailComponent"
-                          lineageId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\Derived Column add dtcreate.Outputs[Derived Column Output].Columns[dtCreate]"
+                          lineageId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\Derived Column.Outputs[Derived Column Output].Columns[dtCreate]"
                           name="dtCreate"
                           truncationRowDisposition="FailComponent">
                           <properties>
@@ -291,33 +316,11 @@
                           </properties>
                         </outputColumn>
                         <outputColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\Derived Column add dtcreate.Outputs[Derived Column Output].Columns[DSID_Log]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\Derived Column.Outputs[Derived Column Output].Columns[DSID_PackageInfo]"
                           dataType="i4"
                           errorOrTruncationOperation="Computation"
                           errorRowDisposition="FailComponent"
-                          lineageId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\Derived Column add dtcreate.Outputs[Derived Column Output].Columns[DSID_Log]"
-                          name="DSID_Log"
-                          truncationRowDisposition="FailComponent">
-                          <properties>
-                            <property
-                              containsID="true"
-                              dataType="System.String"
-                              description="Derived Column Expression"
-                              name="Expression">1</property>
-                            <property
-                              containsID="true"
-                              dataType="System.String"
-                              description="Derived Column Friendly Expression"
-                              expressionType="Notify"
-                              name="FriendlyExpression">1</property>
-                          </properties>
-                        </outputColumn>
-                        <outputColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\Derived Column add dtcreate.Outputs[Derived Column Output].Columns[DSID_PackageInfo]"
-                          dataType="i4"
-                          errorOrTruncationOperation="Computation"
-                          errorRowDisposition="FailComponent"
-                          lineageId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\Derived Column add dtcreate.Outputs[Derived Column Output].Columns[DSID_PackageInfo]"
+                          lineageId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\Derived Column.Outputs[Derived Column Output].Columns[DSID_PackageInfo]"
                           name="DSID_PackageInfo"
                           truncationRowDisposition="FailComponent">
                           <properties>
@@ -325,36 +328,58 @@
                               containsID="true"
                               dataType="System.String"
                               description="Derived Column Expression"
-                              name="Expression">1</property>
+                              name="Expression">0</property>
                             <property
                               containsID="true"
                               dataType="System.String"
                               description="Derived Column Friendly Expression"
                               expressionType="Notify"
-                              name="FriendlyExpression">1</property>
+                              name="FriendlyExpression">0</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\Derived Column.Outputs[Derived Column Output].Columns[DSID_Log]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\Derived Column.Outputs[Derived Column Output].Columns[DSID_Log]"
+                          name="DSID_Log"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">0</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">0</property>
                           </properties>
                         </outputColumn>
                       </outputColumns>
                       <externalMetadataColumns />
                     </output>
                     <output
-                      refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\Derived Column add dtcreate.Outputs[Derived Column Error Output]"
+                      refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\Derived Column.Outputs[Derived Column Error Output]"
                       description="Error Output of the Derived Column Transformation"
                       exclusionGroup="1"
                       isErrorOut="true"
                       name="Derived Column Error Output"
-                      synchronousInputId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\Derived Column add dtcreate.Inputs[Derived Column Input]">
+                      synchronousInputId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\Derived Column.Inputs[Derived Column Input]">
                       <outputColumns>
                         <outputColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\Derived Column add dtcreate.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
                           dataType="i4"
-                          lineageId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\Derived Column add dtcreate.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          lineageId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
                           name="ErrorCode"
                           specialFlags="1" />
                         <outputColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\Derived Column add dtcreate.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
                           dataType="i4"
-                          lineageId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\Derived Column add dtcreate.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          lineageId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
                           name="ErrorColumn"
                           specialFlags="2" />
                       </outputColumns>
@@ -363,7 +388,7 @@
                   </outputs>
                 </component>
                 <component
-                  refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\SQL Server Destination"
+                  refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\SQL Server Destination"
                   componentClassID="Microsoft.SQLServerDestination"
                   contactInfo="SQL Server Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;5"
                   description="SQL Server Destination"
@@ -434,7 +459,7 @@
                   </properties>
                   <connections>
                     <connection
-                      refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\SQL Server Destination.Connections[OleDbConnection]"
+                      refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\SQL Server Destination.Connections[OleDbConnection]"
                       connectionManagerID="{CFACC099-2DCD-4B05-ABC5-FDFFB8446AA2}:external"
                       connectionManagerRefId="Project.ConnectionManagers[PNC-DEV06_MSSQL2014.PV-TestImport]"
                       description="The OLE DB runtime connection used to access the database."
@@ -442,171 +467,171 @@
                   </connections>
                   <inputs>
                     <input
-                      refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\SQL Server Destination.Inputs[SQL Server Destination Input]"
+                      refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\SQL Server Destination.Inputs[SQL Server Destination Input]"
                       hasSideEffects="true"
                       name="SQL Server Destination Input">
                       <inputColumns>
                         <inputColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[Key]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[Key]"
                           cachedDataType="dbTimeStamp"
                           cachedName="Key"
-                          externalMetadataColumnId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[Key]"
-                          lineageId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].Columns[Key]" />
+                          externalMetadataColumnId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[Key]"
+                          lineageId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].Columns[Key]" />
                         <inputColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[DateTime]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[DateTime]"
                           cachedDataType="dbTimeStamp"
                           cachedName="DateTime"
-                          externalMetadataColumnId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[DateTime]"
-                          lineageId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].Columns[DateTime]" />
+                          externalMetadataColumnId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[DateTime]"
+                          lineageId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].Columns[DateTime]" />
                         <inputColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[EventType]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[EventType]"
                           cachedDataType="wstr"
                           cachedLength="255"
                           cachedName="EventType"
-                          externalMetadataColumnId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[EventType]"
-                          lineageId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].Columns[EventType]" />
+                          externalMetadataColumnId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[EventType]"
+                          lineageId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].Columns[EventType]" />
                         <inputColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[AccessLevel]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[AccessLevel]"
                           cachedDataType="wstr"
                           cachedLength="255"
                           cachedName="AccessLevel"
-                          externalMetadataColumnId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[AccessLevel]"
-                          lineageId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].Columns[AccessLevel]" />
+                          externalMetadataColumnId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[AccessLevel]"
+                          lineageId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].Columns[AccessLevel]" />
                         <inputColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[Category]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[Category]"
                           cachedDataType="wstr"
                           cachedLength="255"
                           cachedName="Category"
-                          externalMetadataColumnId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[Category]"
-                          lineageId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].Columns[Category]" />
+                          externalMetadataColumnId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[Category]"
+                          lineageId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].Columns[Category]" />
                         <inputColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[Device]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[Device]"
                           cachedDataType="wstr"
                           cachedLength="255"
                           cachedName="Device"
-                          externalMetadataColumnId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[Device]"
-                          lineageId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].Columns[Device]" />
+                          externalMetadataColumnId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[Device]"
+                          lineageId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].Columns[Device]" />
                         <inputColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[Module]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[Module]"
                           cachedDataType="wstr"
                           cachedLength="255"
                           cachedName="Module"
-                          externalMetadataColumnId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[Module]"
-                          lineageId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].Columns[Module]" />
+                          externalMetadataColumnId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[Module]"
+                          lineageId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].Columns[Module]" />
                         <inputColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[MessageArgs]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[MessageArgs]"
                           cachedDataType="wstr"
                           cachedLength="255"
                           cachedName="MessageArgs"
-                          externalMetadataColumnId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[MessageArgs]"
-                          lineageId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].Columns[MessageArgs]" />
+                          externalMetadataColumnId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[MessageArgs]"
+                          lineageId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].Columns[MessageArgs]" />
                         <inputColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[Message]"
-                          cachedDataType="wstr"
-                          cachedLength="255"
-                          cachedName="Message"
-                          externalMetadataColumnId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[Message]"
-                          lineageId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].Columns[Message]" />
-                        <inputColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[dtCreate]"
-                          cachedDataType="dbTimeStamp"
-                          cachedName="dtCreate"
-                          externalMetadataColumnId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[dtCreate]"
-                          lineageId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\Derived Column add dtcreate.Outputs[Derived Column Output].Columns[dtCreate]" />
-                        <inputColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[Copy of MessageCode]"
-                          cachedDataType="i4"
-                          cachedName="Copy of MessageCode"
-                          externalMetadataColumnId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[MessageCode]"
-                          lineageId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of MessageCode]" />
-                        <inputColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[Copy of DSID_PackageInfo]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[Copy of DSID_PackageInfo]"
                           cachedDataType="i8"
                           cachedName="Copy of DSID_PackageInfo"
-                          externalMetadataColumnId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[DSID_PackageInfo]"
-                          lineageId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of DSID_PackageInfo]" />
+                          externalMetadataColumnId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[DSID_PackageInfo]"
+                          lineageId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of DSID_PackageInfo]" />
                         <inputColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[Copy of DSID_Log]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[Copy of DSID_Log]"
                           cachedDataType="i8"
                           cachedName="Copy of DSID_Log"
-                          externalMetadataColumnId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[DSID_Log]"
-                          lineageId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of DSID_Log]" />
+                          externalMetadataColumnId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[DSID_Log]"
+                          lineageId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of DSID_Log]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[Copy of Message]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="Copy of Message"
+                          externalMetadataColumnId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[Message]"
+                          lineageId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Message]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[Copy of MessageCode]"
+                          cachedDataType="i4"
+                          cachedName="Copy of MessageCode"
+                          externalMetadataColumnId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[MessageCode]"
+                          lineageId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of MessageCode]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[dtCreate]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="dtCreate"
+                          externalMetadataColumnId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[dtCreate]"
+                          lineageId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\Derived Column.Outputs[Derived Column Output].Columns[dtCreate]" />
                       </inputColumns>
                       <externalMetadataColumns
                         isUsed="True">
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[DSIDSYS]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[DSIDSYS]"
                           dataType="i8"
                           name="DSIDSYS" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[dtCreate]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[dtCreate]"
                           dataType="dbTimeStamp"
                           name="dtCreate" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[DSID_PackageInfo]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[DSID_PackageInfo]"
                           dataType="i8"
                           name="DSID_PackageInfo" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[Key]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[DSID_Log]"
+                          dataType="i8"
+                          name="DSID_Log" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[Key]"
                           dataType="dbTimeStamp"
                           name="Key" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[DateTime]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[DateTime]"
                           dataType="dbTimeStamp"
                           name="DateTime" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[EventType]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[EventType]"
                           dataType="wstr"
                           length="255"
                           name="EventType" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[AccessLevel]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[AccessLevel]"
                           dataType="wstr"
                           length="255"
                           name="AccessLevel" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[Category]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[Category]"
                           dataType="wstr"
                           length="255"
                           name="Category" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[Device]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[Device]"
                           dataType="wstr"
                           length="255"
                           name="Device" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[Module]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[Module]"
                           dataType="wstr"
                           length="255"
                           name="Module" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[MessageCode]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[MessageCode]"
                           dataType="i4"
                           name="MessageCode" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[MessageArgs]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[MessageArgs]"
                           dataType="wstr"
                           length="255"
                           name="MessageArgs" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[Message]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[Message]"
                           dataType="wstr"
                           length="255"
                           name="Message" />
-                        <externalMetadataColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[DSID_Log]"
-                          dataType="i8"
-                          name="DSID_Log" />
                       </externalMetadataColumns>
                     </input>
                   </inputs>
                 </component>
                 <component
-                  refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data"
+                  refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data"
                   componentClassID="Microsoft.ManagedComponentHost"
                   contactInfo="Extracts data from an XML file. For example, extract catalog data from an XML file that represents catalogs and catalog items. Before using, specify the schema and generate an output for each XML element.;Microsoft Corporation;Microsoft SQL Server; Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
                   description="Extracts data from an XML file. For example, extract catalog data from an XML file that represents catalogs and catalog items. Before using, specify the schema and generate an output for each XML element."
-                  name="XML log data"
+                  name="XML Source log data"
                   usesDispositions="true"
                   validateExternalMetadata="False"
                   version="2">
@@ -622,7 +647,7 @@
                     <property
                       dataType="System.String"
                       description="The variable used by the XML source adapter to specify XML data."
-                      name="XMLDataVariable">User::logDataXmlRaw</property>
+                      name="XMLDataVariable">User::logDataXmlProcessed</property>
                     <property
                       dataType="System.Int32"
                       description="Defines how the XML source adapter gets XML data."
@@ -640,11 +665,11 @@
                       dataType="System.Int32"
                       description="Defines how XML integer types are mapped."
                       name="XMLIntegerMapping"
-                      typeConverter="Microsoft.SqlServer.Dts.Pipeline.XmlSourceAdapter+XMLIntegerMappingConverter">1</property>
+                      typeConverter="Microsoft.SqlServer.Dts.Pipeline.XmlSourceAdapter+XMLIntegerMappingConverter">0</property>
                   </properties>
                   <outputs>
                     <output
-                      refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox]"
+                      refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox]"
                       name="WebBox">
                       <properties>
                         <property
@@ -654,126 +679,126 @@
                       </properties>
                       <outputColumns>
                         <outputColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].Columns[InfoCreated]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].Columns[InfoCreated]"
                           dataType="dbTimeStamp"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].ExternalColumns[InfoCreated]"
-                          lineageId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].Columns[InfoCreated]"
+                          externalMetadataColumnId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].ExternalColumns[InfoCreated]"
+                          lineageId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].Columns[InfoCreated]"
                           name="InfoCreated"
                           truncationRowDisposition="FailComponent" />
                         <outputColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].Columns[InfoCulture]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].Columns[InfoCulture]"
                           dataType="wstr"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].ExternalColumns[InfoCulture]"
+                          externalMetadataColumnId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].ExternalColumns[InfoCulture]"
                           length="255"
-                          lineageId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].Columns[InfoCulture]"
+                          lineageId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].Columns[InfoCulture]"
                           name="InfoCulture"
                           truncationRowDisposition="FailComponent" />
                         <outputColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].Columns[Key]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].Columns[Key]"
                           dataType="dbTimeStamp"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].ExternalColumns[Key]"
-                          lineageId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].Columns[Key]"
+                          externalMetadataColumnId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].ExternalColumns[Key]"
+                          lineageId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].Columns[Key]"
                           name="Key"
                           truncationRowDisposition="FailComponent" />
                         <outputColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].Columns[DateTime]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].Columns[DateTime]"
                           dataType="dbTimeStamp"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].ExternalColumns[DateTime]"
-                          lineageId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].Columns[DateTime]"
+                          externalMetadataColumnId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].ExternalColumns[DateTime]"
+                          lineageId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].Columns[DateTime]"
                           name="DateTime"
                           truncationRowDisposition="FailComponent" />
                         <outputColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].Columns[EventType]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].Columns[EventType]"
                           dataType="wstr"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].ExternalColumns[EventType]"
+                          externalMetadataColumnId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].ExternalColumns[EventType]"
                           length="255"
-                          lineageId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].Columns[EventType]"
+                          lineageId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].Columns[EventType]"
                           name="EventType"
                           truncationRowDisposition="FailComponent" />
                         <outputColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].Columns[AccessLevel]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].Columns[AccessLevel]"
                           dataType="wstr"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].ExternalColumns[AccessLevel]"
+                          externalMetadataColumnId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].ExternalColumns[AccessLevel]"
                           length="255"
-                          lineageId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].Columns[AccessLevel]"
+                          lineageId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].Columns[AccessLevel]"
                           name="AccessLevel"
                           truncationRowDisposition="FailComponent" />
                         <outputColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].Columns[Category]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].Columns[Category]"
                           dataType="wstr"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].ExternalColumns[Category]"
+                          externalMetadataColumnId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].ExternalColumns[Category]"
                           length="255"
-                          lineageId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].Columns[Category]"
+                          lineageId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].Columns[Category]"
                           name="Category"
                           truncationRowDisposition="FailComponent" />
                         <outputColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].Columns[Device]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].Columns[Device]"
                           dataType="wstr"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].ExternalColumns[Device]"
+                          externalMetadataColumnId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].ExternalColumns[Device]"
                           length="255"
-                          lineageId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].Columns[Device]"
+                          lineageId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].Columns[Device]"
                           name="Device"
                           truncationRowDisposition="FailComponent" />
                         <outputColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].Columns[Module]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].Columns[Module]"
                           dataType="wstr"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].ExternalColumns[Module]"
+                          externalMetadataColumnId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].ExternalColumns[Module]"
                           length="255"
-                          lineageId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].Columns[Module]"
+                          lineageId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].Columns[Module]"
                           name="Module"
                           truncationRowDisposition="FailComponent" />
                         <outputColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].Columns[MessageCode]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].Columns[MessageCode]"
                           dataType="ui2"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].ExternalColumns[MessageCode]"
-                          lineageId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].Columns[MessageCode]"
+                          externalMetadataColumnId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].ExternalColumns[MessageCode]"
+                          lineageId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].Columns[MessageCode]"
                           name="MessageCode"
                           truncationRowDisposition="FailComponent" />
                         <outputColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].Columns[MessageArgs]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].Columns[MessageArgs]"
                           dataType="wstr"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].ExternalColumns[MessageArgs]"
+                          externalMetadataColumnId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].ExternalColumns[MessageArgs]"
                           length="255"
-                          lineageId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].Columns[MessageArgs]"
+                          lineageId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].Columns[MessageArgs]"
                           name="MessageArgs"
                           truncationRowDisposition="FailComponent" />
                         <outputColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].Columns[Message]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].Columns[Message]"
                           dataType="wstr"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].ExternalColumns[Message]"
+                          externalMetadataColumnId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].ExternalColumns[Message]"
                           length="255"
-                          lineageId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].Columns[Message]"
+                          lineageId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].Columns[Message]"
                           name="Message"
                           truncationRowDisposition="FailComponent" />
                       </outputColumns>
                       <externalMetadataColumns
                         isUsed="True">
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].ExternalColumns[InfoCreated]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].ExternalColumns[InfoCreated]"
                           dataType="dbTimeStamp"
                           name="InfoCreated">
                           <properties>
@@ -783,7 +808,7 @@
                           </properties>
                         </externalMetadataColumn>
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].ExternalColumns[InfoCulture]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].ExternalColumns[InfoCulture]"
                           dataType="wstr"
                           length="255"
                           name="InfoCulture">
@@ -794,7 +819,7 @@
                           </properties>
                         </externalMetadataColumn>
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].ExternalColumns[Key]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].ExternalColumns[Key]"
                           dataType="dbTimeStamp"
                           name="Key">
                           <properties>
@@ -804,7 +829,7 @@
                           </properties>
                         </externalMetadataColumn>
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].ExternalColumns[DateTime]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].ExternalColumns[DateTime]"
                           dataType="dbTimeStamp"
                           name="DateTime">
                           <properties>
@@ -814,7 +839,7 @@
                           </properties>
                         </externalMetadataColumn>
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].ExternalColumns[EventType]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].ExternalColumns[EventType]"
                           dataType="wstr"
                           length="255"
                           name="EventType">
@@ -825,7 +850,7 @@
                           </properties>
                         </externalMetadataColumn>
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].ExternalColumns[AccessLevel]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].ExternalColumns[AccessLevel]"
                           dataType="wstr"
                           length="255"
                           name="AccessLevel">
@@ -836,7 +861,7 @@
                           </properties>
                         </externalMetadataColumn>
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].ExternalColumns[Category]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].ExternalColumns[Category]"
                           dataType="wstr"
                           length="255"
                           name="Category">
@@ -847,7 +872,7 @@
                           </properties>
                         </externalMetadataColumn>
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].ExternalColumns[Device]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].ExternalColumns[Device]"
                           dataType="wstr"
                           length="255"
                           name="Device">
@@ -858,7 +883,7 @@
                           </properties>
                         </externalMetadataColumn>
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].ExternalColumns[Module]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].ExternalColumns[Module]"
                           dataType="wstr"
                           length="255"
                           name="Module">
@@ -869,7 +894,7 @@
                           </properties>
                         </externalMetadataColumn>
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].ExternalColumns[MessageCode]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].ExternalColumns[MessageCode]"
                           dataType="ui2"
                           name="MessageCode">
                           <properties>
@@ -879,7 +904,7 @@
                           </properties>
                         </externalMetadataColumn>
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].ExternalColumns[MessageArgs]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].ExternalColumns[MessageArgs]"
                           dataType="wstr"
                           length="255"
                           name="MessageArgs">
@@ -890,7 +915,7 @@
                           </properties>
                         </externalMetadataColumn>
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox].ExternalColumns[Message]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox].ExternalColumns[Message]"
                           dataType="wstr"
                           length="255"
                           name="Message">
@@ -903,7 +928,7 @@
                       </externalMetadataColumns>
                     </output>
                     <output
-                      refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox Error Output]"
+                      refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox Error Output]"
                       isErrorOut="true"
                       name="WebBox Error Output">
                       <properties>
@@ -914,138 +939,138 @@
                       </properties>
                       <outputColumns>
                         <outputColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox Error Output].Columns[InfoCreated]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox Error Output].Columns[InfoCreated]"
                           dataType="nText"
-                          externalMetadataColumnId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox Error Output].ExternalColumns[InfoCreated]"
-                          lineageId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox Error Output].Columns[InfoCreated]"
+                          externalMetadataColumnId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox Error Output].ExternalColumns[InfoCreated]"
+                          lineageId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox Error Output].Columns[InfoCreated]"
                           name="InfoCreated" />
                         <outputColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox Error Output].Columns[InfoCulture]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox Error Output].Columns[InfoCulture]"
                           dataType="nText"
-                          externalMetadataColumnId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox Error Output].ExternalColumns[InfoCulture]"
-                          lineageId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox Error Output].Columns[InfoCulture]"
+                          externalMetadataColumnId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox Error Output].ExternalColumns[InfoCulture]"
+                          lineageId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox Error Output].Columns[InfoCulture]"
                           name="InfoCulture" />
                         <outputColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox Error Output].Columns[Key]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox Error Output].Columns[Key]"
                           dataType="nText"
-                          externalMetadataColumnId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox Error Output].ExternalColumns[Key]"
-                          lineageId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox Error Output].Columns[Key]"
+                          externalMetadataColumnId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox Error Output].ExternalColumns[Key]"
+                          lineageId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox Error Output].Columns[Key]"
                           name="Key" />
                         <outputColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox Error Output].Columns[DateTime]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox Error Output].Columns[DateTime]"
                           dataType="nText"
-                          externalMetadataColumnId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox Error Output].ExternalColumns[DateTime]"
-                          lineageId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox Error Output].Columns[DateTime]"
+                          externalMetadataColumnId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox Error Output].ExternalColumns[DateTime]"
+                          lineageId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox Error Output].Columns[DateTime]"
                           name="DateTime" />
                         <outputColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox Error Output].Columns[EventType]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox Error Output].Columns[EventType]"
                           dataType="nText"
-                          externalMetadataColumnId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox Error Output].ExternalColumns[EventType]"
-                          lineageId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox Error Output].Columns[EventType]"
+                          externalMetadataColumnId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox Error Output].ExternalColumns[EventType]"
+                          lineageId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox Error Output].Columns[EventType]"
                           name="EventType" />
                         <outputColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox Error Output].Columns[AccessLevel]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox Error Output].Columns[AccessLevel]"
                           dataType="nText"
-                          externalMetadataColumnId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox Error Output].ExternalColumns[AccessLevel]"
-                          lineageId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox Error Output].Columns[AccessLevel]"
+                          externalMetadataColumnId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox Error Output].ExternalColumns[AccessLevel]"
+                          lineageId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox Error Output].Columns[AccessLevel]"
                           name="AccessLevel" />
                         <outputColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox Error Output].Columns[Category]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox Error Output].Columns[Category]"
                           dataType="nText"
-                          externalMetadataColumnId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox Error Output].ExternalColumns[Category]"
-                          lineageId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox Error Output].Columns[Category]"
+                          externalMetadataColumnId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox Error Output].ExternalColumns[Category]"
+                          lineageId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox Error Output].Columns[Category]"
                           name="Category" />
                         <outputColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox Error Output].Columns[Device]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox Error Output].Columns[Device]"
                           dataType="nText"
-                          externalMetadataColumnId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox Error Output].ExternalColumns[Device]"
-                          lineageId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox Error Output].Columns[Device]"
+                          externalMetadataColumnId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox Error Output].ExternalColumns[Device]"
+                          lineageId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox Error Output].Columns[Device]"
                           name="Device" />
                         <outputColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox Error Output].Columns[Module]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox Error Output].Columns[Module]"
                           dataType="nText"
-                          externalMetadataColumnId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox Error Output].ExternalColumns[Module]"
-                          lineageId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox Error Output].Columns[Module]"
+                          externalMetadataColumnId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox Error Output].ExternalColumns[Module]"
+                          lineageId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox Error Output].Columns[Module]"
                           name="Module" />
                         <outputColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox Error Output].Columns[MessageCode]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox Error Output].Columns[MessageCode]"
                           dataType="nText"
-                          externalMetadataColumnId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox Error Output].ExternalColumns[MessageCode]"
-                          lineageId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox Error Output].Columns[MessageCode]"
+                          externalMetadataColumnId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox Error Output].ExternalColumns[MessageCode]"
+                          lineageId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox Error Output].Columns[MessageCode]"
                           name="MessageCode" />
                         <outputColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox Error Output].Columns[MessageArgs]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox Error Output].Columns[MessageArgs]"
                           dataType="nText"
-                          externalMetadataColumnId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox Error Output].ExternalColumns[MessageArgs]"
-                          lineageId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox Error Output].Columns[MessageArgs]"
+                          externalMetadataColumnId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox Error Output].ExternalColumns[MessageArgs]"
+                          lineageId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox Error Output].Columns[MessageArgs]"
                           name="MessageArgs" />
                         <outputColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox Error Output].Columns[Message]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox Error Output].Columns[Message]"
                           dataType="nText"
-                          externalMetadataColumnId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox Error Output].ExternalColumns[Message]"
-                          lineageId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox Error Output].Columns[Message]"
+                          externalMetadataColumnId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox Error Output].ExternalColumns[Message]"
+                          lineageId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox Error Output].Columns[Message]"
                           name="Message" />
                         <outputColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox Error Output].Columns[ErrorCode]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox Error Output].Columns[ErrorCode]"
                           dataType="i4"
-                          lineageId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox Error Output].Columns[ErrorCode]"
+                          lineageId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox Error Output].Columns[ErrorCode]"
                           name="ErrorCode"
                           specialFlags="1" />
                         <outputColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox Error Output].Columns[ErrorColumn]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox Error Output].Columns[ErrorColumn]"
                           dataType="i4"
-                          lineageId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox Error Output].Columns[ErrorColumn]"
+                          lineageId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox Error Output].Columns[ErrorColumn]"
                           name="ErrorColumn"
                           specialFlags="2" />
                       </outputColumns>
                       <externalMetadataColumns
                         isUsed="True">
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox Error Output].ExternalColumns[InfoCreated]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox Error Output].ExternalColumns[InfoCreated]"
                           dataType="nText"
                           name="InfoCreated" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox Error Output].ExternalColumns[InfoCulture]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox Error Output].ExternalColumns[InfoCulture]"
                           dataType="nText"
                           name="InfoCulture" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox Error Output].ExternalColumns[Key]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox Error Output].ExternalColumns[Key]"
                           dataType="nText"
                           name="Key" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox Error Output].ExternalColumns[DateTime]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox Error Output].ExternalColumns[DateTime]"
                           dataType="nText"
                           name="DateTime" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox Error Output].ExternalColumns[EventType]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox Error Output].ExternalColumns[EventType]"
                           dataType="nText"
                           name="EventType" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox Error Output].ExternalColumns[AccessLevel]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox Error Output].ExternalColumns[AccessLevel]"
                           dataType="nText"
                           name="AccessLevel" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox Error Output].ExternalColumns[Category]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox Error Output].ExternalColumns[Category]"
                           dataType="nText"
                           name="Category" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox Error Output].ExternalColumns[Device]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox Error Output].ExternalColumns[Device]"
                           dataType="nText"
                           name="Device" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox Error Output].ExternalColumns[Module]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox Error Output].ExternalColumns[Module]"
                           dataType="nText"
                           name="Module" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox Error Output].ExternalColumns[MessageCode]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox Error Output].ExternalColumns[MessageCode]"
                           dataType="nText"
                           name="MessageCode" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox Error Output].ExternalColumns[MessageArgs]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox Error Output].ExternalColumns[MessageArgs]"
                           dataType="nText"
                           name="MessageArgs" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox Error Output].ExternalColumns[Message]"
+                          refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox Error Output].ExternalColumns[Message]"
                           dataType="nText"
                           name="Message" />
                       </externalMetadataColumns>
@@ -1055,20 +1080,20 @@
               </components>
               <paths>
                 <path
-                  refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data.Paths[Data Conversion Output]"
-                  endId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\SQL Server Destination.Inputs[SQL Server Destination Input]"
+                  refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB.Paths[Data Conversion Output]"
+                  endId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\SQL Server Destination.Inputs[SQL Server Destination Input]"
                   name="Data Conversion Output"
-                  startId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\Data Conversion.Outputs[Data Conversion Output]" />
+                  startId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\Data Conversion.Outputs[Data Conversion Output]" />
                 <path
-                  refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data.Paths[Derived Column Output]"
-                  endId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\Data Conversion.Inputs[Data Conversion Input]"
+                  refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB.Paths[Derived Column Output]"
+                  endId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\Data Conversion.Inputs[Data Conversion Input]"
                   name="Derived Column Output"
-                  startId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\Derived Column add dtcreate.Outputs[Derived Column Output]" />
+                  startId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\Derived Column.Outputs[Derived Column Output]" />
                 <path
-                  refId="Package\Foreach Loop Source Dir\DataFlow Task Log Data.Paths[WebBox]"
-                  endId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\Derived Column add dtcreate.Inputs[Derived Column Input]"
+                  refId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB.Paths[WebBox]"
+                  endId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\Derived Column.Inputs[Derived Column Input]"
                   name="WebBox"
-                  startId="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data.Outputs[WebBox]" />
+                  startId="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data.Outputs[WebBox]" />
               </paths>
             </pipeline>
           </DTS:ObjectData>
@@ -1311,34 +1336,35 @@
   </resheader>
 </root>]]></ProjectItem>
               <ProjectItem
-                Name="Properties\Settings.Designer.cs"
-                Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
-// <auto-generated>
-//     This code was generated by a tool.
+                Name="Properties\AssemblyInfo.cs"
+                Encoding="UTF8"><![CDATA[using System.Reflection;
+using System.Runtime.CompilerServices;
+
 //
-//     Changes to this file may cause incorrect behavior and will be lost if
-//     the code is regenerated.
-// </auto-generated>
-//------------------------------------------------------------------------------
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+//
+[assembly: AssemblyTitle("ST_984b071d53f040aab74160c214dfa581")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("ST_984b071d53f040aab74160c214dfa581")]
+[assembly: AssemblyCopyright("Copyright @  2015")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+//
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
 
-[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_984b071d53f040aab74160c214dfa581.Properties.Settings.get_Default():ST_984b071d53f040aab74160c214dfa581.Properties.Sett" +
-    "ings")]
-
-namespace ST_984b071d53f040aab74160c214dfa581.Properties {
-    
-    
-    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
-        
-        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-        private static Settings defaultInstance = new Settings();
-        
-        public static Settings Default {
-            get {
-                return defaultInstance;
-            }
-        }
-    }
-}]]></ProjectItem>
+[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
               <ProjectItem
                 Name="ScriptMain.cs"
                 Encoding="UTF8"><![CDATA[#region Help:  Introduction to the script task
@@ -1486,35 +1512,34 @@ namespace ST_984b071d53f040aab74160c214dfa581
 	</msb:ItemGroup>
 </c:Project>]]></ProjectItem>
               <ProjectItem
-                Name="Properties\AssemblyInfo.cs"
-                Encoding="UTF8"><![CDATA[using System.Reflection;
-using System.Runtime.CompilerServices;
+                Name="Properties\Settings.Designer.cs"
+                Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
 
-//
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
-//
-[assembly: AssemblyTitle("ST_984b071d53f040aab74160c214dfa581")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ST_984b071d53f040aab74160c214dfa581")]
-[assembly: AssemblyCopyright("Copyright @  2015")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
-//
-// Version information for an assembly consists of the following four values:
-//
-//      Major Version
-//      Minor Version 
-//      Build Number
-//      Revision
-//
-// You can specify all the values or you can default the Revision and Build Numbers 
-// by using the '*' as shown below:
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_984b071d53f040aab74160c214dfa581.Properties.Settings.get_Default():ST_984b071d53f040aab74160c214dfa581.Properties.Sett" +
+    "ings")]
 
-[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
+namespace ST_984b071d53f040aab74160c214dfa581.Properties {
+    
+    
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+        
+        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+        private static Settings defaultInstance = new Settings();
+        
+        public static Settings Default {
+            get {
+                return defaultInstance;
+            }
+        }
+    }
+}]]></ProjectItem>
               <ProjectItem
                 Name="Properties\Settings.settings"
                 Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
@@ -1749,11 +1774,11 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
         <DTS:PrecedenceConstraint
           DTS:refId="Package\Foreach Loop Source Dir.PrecedenceConstraints[Constraint 1]"
           DTS:CreationName=""
-          DTS:DTSID="{4B412EAB-0774-423A-9BAE-BFF41E47466F}"
+          DTS:DTSID="{42E5F1F4-5E57-4C76-9E79-B3A1B3DDB981}"
           DTS:From="Package\Foreach Loop Source Dir\XML Task transformlog xml"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 1"
-          DTS:To="Package\Foreach Loop Source Dir\DataFlow Task Log Data" />
+          DTS:To="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB" />
       </DTS:PrecedenceConstraints>
       <DTS:ForEachVariableMappings>
         <DTS:ForEachVariableMapping
@@ -1777,10 +1802,6 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
     <LayoutInfo>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="196,42"
-          Id="Package\Foreach Loop Source Dir\DataFlow Task Log Data"
-          TopLeft="28.5,249.5" />
         <NodeLayout
           Size="167,52"
           Id="Package\Foreach Loop Source Dir\Script Task Load data File"
@@ -1811,20 +1832,36 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <NodeLayout
+          Size="220,77"
+          Id="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB"
+          TopLeft="34,262" />
         <EdgeLayout
           Id="Package\Foreach Loop Source Dir.PrecedenceConstraints[Constraint 1]"
-          TopLeft="127.75,187">
+          TopLeft="129,187">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,62.5"
+              EndConnector="15,75"
               Start="0,0"
-              End="0,55">
+              End="15,67.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,55" />
+                    End="0,33.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,33.5"
+                    Point2="0,37.5"
+                    Point3="4,37.5" />
+                  <mssgle:LineSegment
+                    End="11,37.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="11,37.5"
+                    Point2="15,37.5"
+                    Point3="15,41.5" />
+                  <mssgle:LineSegment
+                    End="15,67.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1836,92 +1873,104 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="246,416"
-          Size="246,459"
+          PanelSize="288,416"
+          Size="288,459"
           Id="Package\Foreach Loop Source Dir"
-          TopLeft="484,89" />
+          TopLeft="536,129" />
       </GraphLayout>
     </LayoutInfo>
   </Package>
   <TaskHost
-    design-time-name="Package\Foreach Loop Source Dir\DataFlow Task Log Data">
+    design-time-name="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB">
     <LayoutInfo>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="142,42"
-          Id="Package\Foreach Loop Source Dir\DataFlow Task Log Data\XML log data"
-          TopLeft="272,161" />
+          Size="239,93"
+          Id="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\XML Source log data"
+          TopLeft="504,137" />
         <NodeLayout
           Size="156,42"
-          Id="Package\Foreach Loop Source Dir\DataFlow Task Log Data\Derived Column add dtcreate"
-          TopLeft="260,294" />
+          Id="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\Derived Column"
+          TopLeft="541,331" />
         <NodeLayout
           Size="158,42"
-          Id="Package\Foreach Loop Source Dir\DataFlow Task Log Data\Data Conversion"
-          TopLeft="253,430" />
+          Id="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\Data Conversion"
+          TopLeft="540,517" />
+        <EdgeLayout
+          Id="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB.Paths[Derived Column Output]"
+          TopLeft="619,373">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,144"
+              Start="0,0"
+              End="0,136.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,136.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB.Paths[WebBox]"
+          TopLeft="621.25,230">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,101"
+              Start="0,0"
+              End="0,93.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,93.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <NodeLayout
           Size="190,42"
-          Id="Package\Foreach Loop Source Dir\DataFlow Task Log Data\SQL Server Destination"
-          TopLeft="233,543" />
+          Id="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\SQL Server Destination"
+          TopLeft="563,731" />
         <EdgeLayout
-          Id="Package\Foreach Loop Source Dir\DataFlow Task Log Data.Paths[WebBox]"
-          TopLeft="340.5,203">
+          Id="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB.Paths[Data Conversion Output]"
+          TopLeft="619,559">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,91"
+              EndConnector="39,172"
               Start="0,0"
-              End="0,83.5">
+              End="39,164.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,83.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Foreach Loop Source Dir\DataFlow Task Log Data.Paths[Derived Column Output]"
-          TopLeft="335,336">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,94"
-              Start="0,0"
-              End="0,86.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
+                    End="0,82" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,82"
+                    Point2="0,86"
+                    Point3="4,86" />
                   <mssgle:LineSegment
-                    End="0,86.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Foreach Loop Source Dir\DataFlow Task Log Data.Paths[Data Conversion Output]"
-          TopLeft="330,472">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,71"
-              Start="0,0"
-              End="0,63.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
+                    End="35,86" />
+                  <mssgle:CubicBezierSegment
+                    Point1="35,86"
+                    Point2="39,86"
+                    Point3="39,90" />
                   <mssgle:LineSegment
-                    End="0,63.5" />
+                    End="39,164.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1934,7 +1983,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Foreach Loop Source Dir\DataFlow Task Log Data\SQL Server Destination">
+    design-time-name="Package\Foreach Loop Source Dir\Data Flow Task Insert Log Data in DB\SQL Server Destination">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
