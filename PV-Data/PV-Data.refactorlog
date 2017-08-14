@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="70670c08-8090-4895-98b6-cb894647c496" ChangeDateTime="03/13/2015 12:40:30">
+    <Property Name="ElementName" Value="[dbo].[BulkImportPackageInfo].[Created]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[BulkImportPackageInfo]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="dtCreated" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="23d050eb-b517-4166-9a8d-a728815d3d19" ChangeDateTime="06/26/2015 20:58:50">
+    <Property Name="ElementName" Value="[dbo].[BulkImport_Info].[Created]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[BulkImport_Info]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="dtCreate" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="64a8978b-af29-42ad-ba85-673502ba8e92" ChangeDateTime="06/27/2015 20:49:02">
+    <Property Name="ElementName" Value="[dbo].[BulkImport_Log].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[BulkImport_Log]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DSIDSYS" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="f4d45fee-148b-48ef-a09f-c95286258c0c" ChangeDateTime="06/27/2015 20:52:25">
+    <Property Name="ElementName" Value="[dbo].[BulkImportLog].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[BulkImportLog]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DSIDSYS" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="97d7697c-7e65-41a4-b3f4-22a73affb6c7" ChangeDateTime="06/29/2015 12:01:03">
+    <Property Name="ElementName" Value="[dbo].[BulkImportLog_FileType].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[BulkImportLog_FileType]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DSIDSYS" />
+  </Operation>
+</Operations>
